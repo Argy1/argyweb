@@ -1,0 +1,16 @@
+{
+    "why": [
+        {
+            "title": "Easy to Use",
+            "description": "Kompleksitas pencatatan dan penyusunan laporan keuangan dikemas menjadi sesuatu yang sederhana dan mudah tanpa mengurangi kelengkapan, akurasi, dan keamanan."
+        },
+        {
+            "title": "Flexible",
+            "description": "Sistem kami dirancang untuk dapat diterapkan dalam berbagai jenis dan bentuk usaha, serta berbagai skala bisnis. Serta dapat menangani data lintas cabang, lintas perusahaan dan lintas periode."
+        },
+        {
+            "title": "Reliable",
+            "description": "Aplikasi kami menggunakan sistem database modern yang handal dengan skalabilitas serta konkurensi tinggi yang dapat menjamin konsistensi dan integritas data secara handal dan terpercaya."
+        }
+    ]
+}

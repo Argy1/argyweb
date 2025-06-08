@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* --------------------------------------- */
+/* light theme */
+:root {
+  --bg: #ffffff;
+  --fg: #111827;
+}
+
+/* dark theme */
+.dark {
+  --bg: #111827;
+  --fg: #f9fafb;
+}
+
+/* apply to body */
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+/* --------------------------------------- */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* @tailwind base;
+@tailwind components; */
+@tailwind utilities;
+
+@theme {
+    --font-sans: "Poppins", sans-serif;
+    --aspect-cinema: 21/9;
+}
+
+.mask-radial-gradient {
+    -webkit-mask-image: radial-gradient(100% 100% at 100% 0,#fff,#0000);
+    mask-image: radial-gradient(100% 100% at 100% 0,#fff,#0000);
+}
