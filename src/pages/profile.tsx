@@ -22,7 +22,9 @@ export default function Profile() {
             Halo 👋, saya <span className="text-blue-500">Argy</span>
           </h1>
           <p className="text-lg">
-            Front-end developer & tech enthusiast yang tinggal di <b>Bekasi</b>.
+            Front-end developer &amp; tech enthusiast yang tinggal di <b>Bekasi</b>. 
+            Gemar membangun antarmuka web yang bersih, responsif dan penuh interaksi seru. 
+            Saat tidak menatap kode, saya sibuk dengan Anime atau Mobil.
           </p>
           <div className="flex items-center gap-4">
             <a
@@ -93,7 +95,7 @@ export default function Profile() {
         {[
           { icon: <Star />, title: "10K+", desc: "Baris kode tahun ini" },
           { icon: <LayersIntersect />, title: "3", desc: "Proyek side-project selesai" },
-          { icon: <FourPointedStar />, title: "∞", desc: "Cangkir kopi ☕" },
+          { icon: <FourPointedStar />, title: "∞", desc: "Cangkir Coklat ☕" },
         ].map(({ icon, title, desc }) => (
           <motion.div
             key={title}
