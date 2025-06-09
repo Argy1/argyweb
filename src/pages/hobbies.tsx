@@ -4,10 +4,10 @@ import { FourPointedStar } from "@/components/icons/filled";
 import { motion } from "motion/react";
 
 const hobbies = [
-  { icon: <Mask />, title: "Cosplay", desc: "Eksplorasi karakter & komunitas anime." },
-  { icon: <Music />, title: "Musik", desc: "Mendengarkan lagu anime favorit." },
-  { icon: <Gamepad />, title: "Gaming", desc: "Puzzle & indie story-driven." },
-  { icon: <Car />, title: "Otomotif", desc: "Road trip & fotografi mobil." },
+  { icon: <Mask />, title: "Cosplay", desc: "Mengeksplorasi karakter dan kostum, kreasi DIY, serta komunitas anime/manga." },
+  { icon: <Music />, title: "Musik", desc: "Mendengarkan lagu anime kesukaanku." },
+  { icon: <Gamepad />, title: "Gaming", desc: "Racing & Open World Games." },
+  { icon: <Car />, title: "Otomotif", desc: "Mengoleksi dan memfotografi mobil, serta road trip ke lokasi unik." },
 ];
 
 export default function Hobbies() {
