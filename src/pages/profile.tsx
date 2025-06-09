@@ -30,7 +30,7 @@ export default function Profile() {
             alt="Foto Profil"
             width={640}
             height={640}
-            className="rounded-full w-full object-cover aspect-square border-8 border-white dark:border-gray-900"
+            className="rounded-full w-full object-cover aspect-square border-8 border-blue dark:border-gray-900"
           />
         </motion.div>
 
