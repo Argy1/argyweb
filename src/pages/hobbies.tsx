@@ -27,7 +27,7 @@ const hobbies = [
 
 export default function Hobbies() {
   return (
-    <section className="px-8 md:px-24 pt-36 pb-24 bg-white dark:bg-gray-900 space-y-16">
+    <section className="px-8 md:px-24 pt-36 pb-24 space-y-24">
       <h1 className="text-4xl font-semibold text-gray-900 dark:text-gray-50 flex items-center gap-2">
         <FourPointedStar /> Hobi &amp; Kesenangan
       </h1>
