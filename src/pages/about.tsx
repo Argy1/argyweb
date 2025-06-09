@@ -14,7 +14,7 @@ export default function About() {
         <p className="leading-relaxed">
           Situs ini dibangun sebagai laboratorium pribadi untuk berbagi karya,
           eksperimen, dan catatan perjalanan saya di dunia teknologi. Semua
-          komponen dibuat <strong>tanpa template</strong>, memanfaatkan Next.js,
+          komponen dibuat dengan memanfaatkan Next.js,
           TypeScript, dan Tailwind CSS. Animasi digerakkan dengan Motion One;
           tema disimpan di localStorage.
         </p>
