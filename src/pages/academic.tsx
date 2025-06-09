@@ -6,17 +6,17 @@ const timeline = [
   {
     year: "2024 — Sekarang",
     title: "IPB University",
-    desc: "Mengembangkan website dengan Next.js & Tailwind.",
+    desc: "Mulai Mengembangkan dan membuat website based on next.js, Tailwind dan Typescript.",
   },
   {
-    year: "2022 — 2024",
+    year: "2023 — 2024",
     title: "Universitas Indonesia",
-    desc: "Belajar aljabar linear dan gerbang logika.",
+    desc: "Belajar aljabar linear elementer dan gerbang logika.",
   },
   {
-    year: "2019 — 2022",
+    year: "2020 — 2023",
     title: "SMAN 2 Tambun Selatan",
-    desc: "Belajar HTML, CSS, dan menjadi wakil ketua ekskul ICT.",
+    desc: "Belajar HTML, CSS, dan menjadi wakil ketua ekskul komputer (ICT).",
   },
 ];
 
