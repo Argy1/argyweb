@@ -1,4 +1,3 @@
-// src/pages/contact.tsx
 "use client";
 
 import { useState } from "react";
@@ -14,10 +13,11 @@ export default function Contact() {
     setStatus("loading");
 
     const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
+      name: formData.get("name")?.toString() ?? "",
+      email: formData.get("email")?.toString() ?? "",
+      message: formData.get("message")?.toString() ?? "",
     };
 
     try {
