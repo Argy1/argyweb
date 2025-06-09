@@ -33,8 +33,9 @@ export default function About() {
         <h2 className="text-3xl font-semibold text-center">
           Sedang buka kolaborasi!
         </h2>
-        <p className="max-w-xl text-center">
-          Jika kamu punya ide aplikasi, riset, atau proyek seru lain — mari ngobrol.
+        <p className="max-w-xl text-center">Jika kamu punya ide aplikasi, riset, atau proyek seru lain — mari
+          ngobrol. Saya terbuka untuk freelance, kontribusi open-source, hingga
+          sekadar diskusi kopi virtual ☕.
         </p>
         <a
           href="mailto:tokichimikuni51@gmail.com"
