@@ -1,8 +1,7 @@
+// src/pages/profile.tsx
 import { motion } from "motion/react";
 import Image from "next/image";
-import {
-  Mail, Phone, Sparkles, Star, LayersIntersect,
-} from "@/components/icons/outline";
+import { Mail, Phone, Sparkles, Star, LayersIntersect } from "@/components/icons/outline";
 import { FourPointedStar } from "@/components/icons/filled";
 
 const skills = [
@@ -19,16 +18,12 @@ export default function Profile() {
       {/* Hero */}
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <div className="space-y-6">
-          <h1 className="text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
+          <h1 className="text-5xl font-bold leading-tight">
             Halo 👋, saya <span className="text-blue-500">Argy</span>
           </h1>
-          <p className="text-gray-700 dark:text-gray-300 text-lg">
-            Front-end developer &amp; tech enthusiast yang tinggal di <b>Bekasi</b>. 
-            Gemar membangun antarmuka web yang bersih, responsif dan penuh interaksi seru. 
-            Saat tidak menatap kode, saya sibuk dengan Anime atau Mobil.
+          <p className="text-lg">
+            Front-end developer & tech enthusiast yang tinggal di <b>Bekasi</b>.
           </p>
-
-          {/* Kontak */}
           <div className="flex items-center gap-4">
             <a
               href="mailto:tokichimikuni51@gmail.com"
@@ -38,36 +33,39 @@ export default function Profile() {
             </a>
             <a
               href="tel:+6281380091046"
-              className="inline-flex items-center gap-2 border border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800 text-blue-500 dark:text-blue-300 px-4 py-2 rounded-full"
+              className="inline-flex items-center gap-2 border border-blue-500 px-4 py-2 rounded-full text-blue-500 hover:bg-blue-50"
             >
               <Phone className="w-5 h-5" /> Call
             </a>
           </div>
         </div>
 
-        {/* Foto */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", damping: 20 }}
           viewport={{ once: true }}
+          className="
+            relative mx-auto w-72 h-72 md:w-96 md:h-96
+            rounded-full overflow-hidden shadow-2xl
+            border-8 border-[var(--bg)]
+          "
         >
           <Image
-            src="/img/profile.jpg" /* ganti foto */
+            src="/asset/foto.jpg"
             alt="Foto Profil"
-            width={640}
-            height={640}
-            className="rounded-full w-full object-cover aspect-square"
+            layout="fill"
+            objectFit="cover"
+            priority
           />
         </motion.div>
       </div>
 
       {/* Skills */}
       <div className="space-y-8">
-        <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50 flex items-center gap-2">
+        <h2 className="text-3xl font-semibold flex items-center gap-2">
           <Sparkles /> Keahlian
         </h2>
-
         <div className="space-y-6">
           {skills.map(({ name, level }) => (
             <div key={name} className="space-y-2">
@@ -75,7 +73,7 @@ export default function Profile() {
                 <span>{name}</span>
                 <span>{level}%</span>
               </div>
-              <div className="w-full h-3 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+              <div className="w-full h-3 rounded-full bg-gray-200 overflow-hidden">
                 <motion.div
                   className="h-full bg-gradient-to-r from-blue-500 to-blue-300"
                   style={{ width: `${level}%` }}
@@ -90,40 +88,27 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Fun fact cards */}
+      {/* Fun Fact */}
       <div className="grid md:grid-cols-3 gap-8">
         {[
-          {
-            icon: <Star />,
-            title: "10K+",
-            desc: "Baris kode tahun ini",
-          },
-          {
-            icon: <LayersIntersect />,
-            title: "3",
-            desc: "Proyek side-project selesai",
-          },
-          {
-            icon: <FourPointedStar />,
-            title: "∞",
-            desc: "Cangkir kopi ☕",
-          },
+          { icon: <Star />, title: "10K+", desc: "Baris kode tahun ini" },
+          { icon: <LayersIntersect />, title: "3", desc: "Proyek side-project selesai" },
+          { icon: <FourPointedStar />, title: "∞", desc: "Cangkir kopi ☕" },
         ].map(({ icon, title, desc }) => (
           <motion.div
             key={title}
             whileHover={{ y: -4, rotate: -1 }}
-            className="p-8 rounded-3xl border bg-white dark:bg-gray-800/50
-                       border-gray-200 dark:border-gray-700
-                       flex flex-col gap-4 text-center"
+            transition={{ type: "spring", damping: 15, mass: 0.5 }}
+            className="
+              p-8 rounded-3xl border
+              bg-[var(--bg)] border-gray-200 hover:shadow-lg transition
+              text-center
+            "
           >
             <span className="text-blue-500">{icon}</span>
-            <h3 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">
-              {title}
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">{desc}</p>
+            <h3 className="text-3xl font-semibold">{title}</h3>
+            <p className="opacity-90">{desc}</p>
           </motion.div>
         ))}
       </div>
     </section>
-  );
-}
