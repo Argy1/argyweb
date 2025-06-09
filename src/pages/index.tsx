@@ -6,9 +6,15 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-       <section className="flex flex-col items-center justify-center
--                          min-h-screen bg-[var(--bg)]
--                          p-8 md:p-36 space-y-8">
+       <section
+        className="
+          flex flex-col items-center justify-center
+          min-h-screen bg-[var(--bg)]
+          pt-20       
+          px-8        
+          md:pt-36    
+          md:px-36    
+        space-y-8">
         <h1 className="text-4xl md:text-6xl font-black text-center leading-tight
                        text-gray-900 dark:text-gray-50">
           <span className="text-blue-500">Hi, I’m Argy</span><br />
