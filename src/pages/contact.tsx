@@ -179,3 +179,5 @@ export default function Contact() {
         Dibuat dengan <span className="text-red-500">❤</span> di Bekasi — See you on inbox!
       </p>
     </section>
+  );
+}
