@@ -16,9 +16,9 @@ export default function Contact() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const data = {
-      name: formData.get("name")?.toString() ?? "",
-      email: formData.get("email")?.toString() ?? "",
-      message: formData.get("message")?.toString() ?? "",
+      name: formData.get("name")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+      message: formData.get("message")?.toString() || "",
     };
 
     try {
@@ -39,19 +39,19 @@ export default function Contact() {
 
   return (
     <section className="px-8 md:px-24 pt-36 pb-24 bg-[var(--bg)] text-[var(--fg)] space-y-24">
-      {/* Hero / Intro */}
-      <div className="text-center space-y-6">
-        <h1 className="text-5xl font-bold flex justify-center gap-3">
-          <span className="text-[var(--fg)]">Kontak</span>
+      {/* Hero */}
+      <div className="text-center space-y-4">
+        <h1 className="text-5xl font-bold flex justify-center gap-2">
+          <span>Kontak</span>
           <span className="text-blue-500">Saya</span>
         </h1>
         <p className="max-w-xl mx-auto">
-          Ada ide keren atau sekadar ingin bertanya? Kirim pesan via form, email,
-          atau platform favoritmu—aku akan membalas secepatnya 🚀
+          Ada ide keren atau sekadar ingin bertanya? Kirim pesan via form, email, atau
+          platform favoritmu—aku akan membalas secepatnya 🚀
         </p>
       </div>
 
-      {/* Info Singkat */}
+      {/* Quick Info */}
       <div className="grid md:grid-cols-3 gap-6">
         {[
           {
@@ -77,9 +77,8 @@ export default function Contact() {
             key={title}
             href={link}
             whileHover={{ y: -4, rotate: -1 }}
-            className="flex items-center gap-4 p-4 rounded-3xl border
-                       bg-[var(--bg)] border-gray-300 dark:border-gray-700
-                       transition"
+            className="flex items-center gap-4 p-4 rounded-2xl border
+                       bg-[var(--bg)] border-gray-300 dark:border-gray-700 transition"
           >
             {icon}
             <div>
@@ -90,7 +89,7 @@ export default function Contact() {
         ))}
       </div>
 
-      {/* Form + Map */}
+      {/* Form & Map */}
       <div className="grid md:grid-cols-2 gap-12">
         {/* Form */}
         <motion.form
@@ -111,7 +110,9 @@ export default function Contact() {
               required
               placeholder="John Doe"
               className="mt-1 block w-full rounded-lg border px-3 py-2
-                         bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600
+                         bg-gray-50 dark:bg-gray-700
+                         text-gray-900 dark:text-gray-100
+                         border-gray-300 dark:border-gray-600
                          focus:ring-2 focus:ring-blue-400 outline-none"
             />
           </label>
@@ -124,7 +125,9 @@ export default function Contact() {
               required
               placeholder="john@example.com"
               className="mt-1 block w-full rounded-lg border px-3 py-2
-                         bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600
+                         bg-gray-50 dark:bg-gray-700
+                         text-gray-900 dark:text-gray-100
+                         border-gray-300 dark:border-gray-600
                          focus:ring-2 focus:ring-blue-400 outline-none"
             />
           </label>
@@ -137,7 +140,9 @@ export default function Contact() {
               required
               placeholder="Tulis pesanmu di sini..."
               className="mt-1 block w-full rounded-lg border px-3 py-2
-                         bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600
+                         bg-gray-50 dark:bg-gray-700
+                         text-gray-900 dark:text-gray-100
+                         border-gray-300 dark:border-gray-600
                          focus:ring-2 focus:ring-blue-400 outline-none"
             />
           </label>
@@ -161,8 +166,8 @@ export default function Contact() {
           transition={{ type: "spring", damping: 20 }}
           className="space-y-6"
         >
-          {/* Embed Google Maps */}
-          <div className="overflow-hidden rounded-2xl border-2 border-gray-300 dark:border-gray-700">
+          <div className="overflow-hidden rounded-2xl border-2
+                          border-gray-300 dark:border-gray-700">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.157768589624!2d107.0267150757242!3d-6.241582993748429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698fa23f0ae9c5%3A0x77cf1b22ad5151a!2sTaman%20Raya%20Bekasi!5e0!3m2!1sid!2sid!4v1717816629285!5m2!1sid!2sid"
               className="w-full h-64"
@@ -172,8 +177,7 @@ export default function Contact() {
             />
           </div>
 
-          {/* Mini-CTA */}
-          <div className="p-6 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-300 text-white">
+          <div className="p-6 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-300 text-white relative overflow-hidden">
             <FourPointedStar className="absolute -top-4 -left-4 w-12 h-12 opacity-20" />
             <h3 className="text-xl font-semibold">Ajak Ngopi?</h3>
             <p className="mt-1 text-white/90">
@@ -189,7 +193,6 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      {/* Footer-ish */}
       <p className="text-center text-sm text-gray-500 dark:text-gray-400">
         Dibuat dengan <span className="text-red-500">❤</span> di Bekasi —{" "}
         <span className="italic">See you in inbox!</span>
