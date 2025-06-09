@@ -1,22 +1,17 @@
-// src/components/layouts/main-layout.tsx
-import Navbar from "@/components/partials/navbar";
-import Footer from "@/components/partials/footer";
+// src/pages/_document.tsx
+import { Html, Head, Main, NextScript } from "next/document";
 
-// src/components/layouts/main-layout.tsx
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+export default function Document() {
   return (
-    <>
-      <Navbar />
-      <main
-        className="
-          min-h-screen
-          bg-white text-gray-900
-          dark:bg-gray-900 dark:text-gray-100
-        "
-      >
-        {children}
-      </main>
-      <Footer />
-    </>
+    <Html lang="en">
+      <Head>
+        {/* ← pastikan ada ini supaya mobile responsive */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
   );
 }
