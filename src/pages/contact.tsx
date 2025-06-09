@@ -150,7 +150,7 @@ export default function Contact() {
           <div className="overflow-hidden rounded-3xl border-4 border-gray-200 grow">
             <iframe
               className="w-full h-full min-h-[300px]"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12...etc"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25305.123456789!2d107.0267151!3d-6.241583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698fa23f0ae9c5%3A0x77cf1b22ad5151a!2sTaman%20Raya%20Bekasi!5e0!3m2!1sid!2sid!4v1717816629285!5m2!1sid!2sid"
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
