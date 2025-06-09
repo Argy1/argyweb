@@ -15,7 +15,7 @@ export default function Home() {
           Welcome to my personal playground!
         </h1>
         <p className="max-w-xl text-center text-gray-600 dark:text-gray-400">
-          Sekilas tentang saya, mata kuliah, dan hobi seru yang ingin saya bagikan.
+          Sekilas tentang saya, Pengalaman akademik, dan hobi seru yang ingin aku bagikan.
         </p>
         <div className="flex space-x-6">
           <Link href="/profile"
