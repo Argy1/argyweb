@@ -1,78 +1,50 @@
-// src/components/partials/navbar.tsx
+// src/components/partials/footer.tsx
 import Link from "next/link";
-import NavLink from "../nav-link";
-import { useRouter } from "next/router";
-import { Menu, X, Sun, Moon } from "@/components/icons/outline";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { useTheme } from "@/context/ThemeContext";
+import { WhatsApp, Phone, Mail } from "@/components/icons/outline";
 
-export default function Navbar() {
-  const { theme, toggle } = useTheme();
-  const pathname = useRouter().pathname;
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Tutup mobile menu ketika pindah halaman
-  useEffect(() => setIsMenuOpen(false), [pathname]);
-
+export default function Footer() {
   return (
-    <>
-      <header className="fixed top-0 w-full z-10">
-        <div className="relative flex items-center justify-between px-6 py-4
-+                 bg-white/50 backdrop-blur border-b border-gray-100
-+                 dark:bg-gray-800/50 dark:border-gray-700">
-          {/* Logo / Nama */}
-          <Link href="/" className="uppercase font-bold text-xl text-blue-500 dark:text-blue-300">
-            Argy Fawwaz
-          </Link>
-
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8 text-sm">
-            {[
-              { href: "/", label: "Home" },
-              { href: "/profile", label: "Profile" },
-              { href: "/academic", label: "Academic" },
-              { href: "/hobbies", label: "Hobbies" },
-              { href: "/about", label: "About" },
-              { href: "/contact", label: "Contact" },
-            ].map(({ href, label }) => (
-              <NavLink key={href} href={href} active={href} label={label} />
-            ))}
-          </nav>
-
-          {/* Right side controls */}
+    <footer
+      className="
+        bg-[var(--bg)]
+        text-[var(--fg)]
+        px-8 md:px-24 py-16
+        border-t border-gray-200 dark:border-gray-700
+      "
+    >
+      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+        {/* Personal Info */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Argy</h2>
+          <p>
+            Mahasiswa / Web Developer / Hobi Cosplay &amp; Otomotif.  
+            Senang membuat UI interaktif dan belajar teknologi baru setiap hari.
+          </p>
           <div className="flex items-center space-x-4">
-            {/* Theme toggle */}
-            <button
-              onClick={toggle}
-              aria-label="Toggle theme"
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            <a
+              href="https://wa.me/6281380091046"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-blue-500"
             >
-              {theme === "light" ? <Moon /> : <Sun />}
-            </button>
-
-            {/* Hamburger (mobile) */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700"
+              <WhatsApp className="w-6 h-6" />
+            </a>
+            <a href="tel:+6281380091046" className="hover:text-blue-500">
+              <Phone className="w-6 h-6" />
+            </a>
+            <a
+              href="mailto:tokichimikuni51@gmail.com"
+              className="hover:text-blue-500"
             >
-              {isMenuOpen ? <X /> : <Menu />}
-            </button>
+              <Mail className="w-6 h-6" />
+            </a>
           </div>
         </div>
-      </header>
 
-      {/* Mobile slide-down menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ type: "spring", damping: 20 }}
-            className="fixed inset-0 z-20 bg-white dark:bg-gray-900
-                       flex flex-col items-center pt-32 space-y-12 text-2xl"
-          >
+        {/* Navigation Links */}
+        <div>
+          <h3 className="text-xl font-semibold">Navigasi</h3>
+          <ul className="mt-4 space-y-2">
             {[
               { href: "/", label: "Home" },
               { href: "/profile", label: "Profile" },
@@ -81,11 +53,19 @@ export default function Navbar() {
               { href: "/about", label: "About" },
               { href: "/contact", label: "Contact" },
             ].map(({ href, label }) => (
-              <NavLink key={href} href={href} active={href} label={label} />
+              <li key={href}>
+                <Link href={href} className="hover:text-blue-500">
+                  {label}
+                </Link>
+              </li>
             ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+          </ul>
+        </div>
+      </div>
+
+      <div className="mt-12 text-center text-sm text-[var(--fg)]/70">
+        © {new Date().getFullYear()} Argy.py. All rights reserved.
+      </div>
+    </footer>
   );
 }
