@@ -15,7 +15,7 @@ const skills = [
 
 export default function Profile() {
   return (
-    <section className="px-8 md:px-24 pt-36 pb-24 bg-white dark:bg-gray-900 space-y-24">
+    <section className="px-8 md:px-24 pt-36 pb-24 space-y-24">
       {/* Hero */}
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <div className="space-y-6">
