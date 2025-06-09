@@ -8,12 +8,12 @@ const timeline = [
     desc: "Mulai Mengembangkan dan membuat website based on next.js, Tailwind dan Typescript.",
   },
   {
-    year: "2022 — 2024",
+    year: "2023 — 2024",
     title: "Universitas Indonesia (UI)",
     desc: "Belajar aljabar linear elementer dan gerbang logika.",
   },
   {
-    year: "2019 — 2022",
+    year: "2020 — 2023",
     title: "SMAN 2 Tambun Selatan",
     desc: "Mulai belajar HTML, CSS, dan menjadi wakil ketua ekskul komputer (ICT).",
   },
