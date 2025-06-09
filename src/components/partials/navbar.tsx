@@ -12,57 +12,65 @@ export default function Navbar() {
   const pathname = useRouter().pathname;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Tutup mobile menu ketika pindah halaman
+  // Tutup mobile menu ketika path berubah
   useEffect(() => setIsMenuOpen(false), [pathname]);
 
   return (
-    <>
-      <header className="fixed top-0 w-full z-10">
-        <div className="relative flex items-center justify-between px-6 py-4
-+                 bg-white/50 backdrop-blur border-b border-gray-100
-+                 dark:bg-gray-800/50 dark:border-gray-700">
-          {/* Logo / Nama */}
-          <Link href="/" className="uppercase font-bold text-xl text-blue-500 dark:text-blue-300">
-            Argy Fawwaz
-          </Link>
+    // header selalu pakai var(--bg) sebagai background
+    <header className="fixed top-0 w-full z-10 bg-[var(--bg)]">
+      <div
+        className="
+          relative flex items-center justify-between
+          px-6 py-4
+          bg-[var(--bg)]/60      /* 60% opacity, ikut var saat light/dark */
+          backdrop-blur          /* glassmorphism */
+          border-b border-gray-200 dark:border-gray-700
+        "
+      >
+        {/* Logo */}
+        <Link
+          href="/"
+          className="uppercase font-bold text-xl text-blue-500"
+        >
+          Argy Fawwaz
+        </Link>
 
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8 text-sm">
-            {[
-              { href: "/", label: "Home" },
-              { href: "/profile", label: "Profile" },
-              { href: "/academic", label: "Academic" },
-              { href: "/hobbies", label: "Hobbies" },
-              { href: "/about", label: "About" },
-              { href: "/contact", label: "Contact" },
-            ].map(({ href, label }) => (
-              <NavLink key={href} href={href} active={href} label={label} />
-            ))}
-          </nav>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-8 text-sm">
+          {[
+            { href: "/", label: "Home" },
+            { href: "/profile", label: "Profile" },
+            { href: "/academic", label: "Academic" },
+            { href: "/hobbies", label: "Hobbies" },
+            { href: "/about", label: "About" },
+            { href: "/contact", label: "Contact" },
+          ].map(({ href, label }) => (
+            <NavLink key={href} href={href} label={label} active={href} />
+          ))}
+        </nav>
 
-          {/* Right side controls */}
-          <div className="flex items-center space-x-4">
-            {/* Theme toggle */}
-            <button
-              onClick={toggle}
-              aria-label="Toggle theme"
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              {theme === "light" ? <Moon /> : <Sun />}
-            </button>
+        {/* Controls */}
+        <div className="flex items-center space-x-4">
+          {/* Theme toggle */}
+          <button
+            onClick={toggle}
+            aria-label="Toggle theme"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            {theme === "light" ? <Moon /> : <Sun />}
+          </button>
 
-            {/* Hamburger (mobile) */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700"
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </button>
-          </div>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-lg border border-gray-300 dark:border-gray-600"
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
         </div>
-      </header>
+      </div>
 
-      {/* Mobile slide-down menu */}
+      {/* Mobile slide-down */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -70,8 +78,11 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ type: "spring", damping: 20 }}
-            className="fixed inset-0 z-20 bg-white dark:bg-gray-900
-                       flex flex-col items-center pt-32 space-y-12 text-2xl"
+            className="
+              fixed inset-0 z-20
+              bg-[var(--bg)]
+              flex flex-col items-center pt-32 space-y-12 text-2xl
+            "
           >
             {[
               { href: "/", label: "Home" },
@@ -81,11 +92,11 @@ export default function Navbar() {
               { href: "/about", label: "About" },
               { href: "/contact", label: "Contact" },
             ].map(({ href, label }) => (
-              <NavLink key={href} href={href} active={href} label={label} />
+              <NavLink key={href} href={href} label={label} active={href} />
             ))}
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
