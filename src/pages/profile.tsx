@@ -54,7 +54,7 @@ export default function Profile() {
           "
         >
           <Image
-            src="/asset/foto.jpg"
+            src="/img/fotoprofile.jpg"
             alt="Foto Profil"
             layout="fill"
             objectFit="cover"
