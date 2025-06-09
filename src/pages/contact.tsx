@@ -14,11 +14,10 @@ export default function Contact() {
     setStatus("loading");
 
     const form = e.currentTarget;
-    const formData = new FormData(form);
     const data = {
-      name: String(formData.get("name") ?? ""),
-      email: String(formData.get("email") ?? ""),
-      message: String(formData.get("message") ?? ""),
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value,
     };
 
     try {
@@ -92,7 +91,7 @@ export default function Contact() {
         ))}
       </div>
 
-      {/* Form & Map */}
+      {/* Form + Map */}
       <div className="grid md:grid-cols-2 gap-12">
         {/* Form */}
         <motion.form
@@ -109,7 +108,10 @@ export default function Contact() {
           </h2>
 
           <div className="space-y-2">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Nama
             </label>
             <input
@@ -124,7 +126,10 @@ export default function Contact() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Email
             </label>
             <input
@@ -140,7 +145,10 @@ export default function Contact() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Pesan
             </label>
             <textarea
@@ -167,7 +175,7 @@ export default function Contact() {
           </button>
         </motion.form>
 
-        {/* Map & Mini-CTA */}
+        {/* Map & CTA */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
@@ -203,7 +211,7 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      {/* Footer-ish tagline */}
+      {/* Penutup */}
       <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
         Dibuat dengan <span className="text-red-500">❤</span> di Bekasi —{" "}
         <span className="italic">See you in inbox!</span>
