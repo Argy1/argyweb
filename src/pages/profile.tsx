@@ -26,7 +26,7 @@ export default function Profile() {
           className="order-1 md:order-2"
         >
           <Image
-            src="/img/profile.jpg"
+            src="/img/fotoprofile.jpg"
             alt="Foto Profil"
             width={640}
             height={640}
