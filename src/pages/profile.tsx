@@ -7,9 +7,9 @@ import { FourPointedStar } from "@/components/icons/filled";
 const skills = [
   { name: "HTML / CSS", level: 90 },
   { name: "JavaScript / TypeScript", level: 85 },
-  { name: "React / Next.js", level: 80 },
-  { name: "Tailwind CSS", level: 80 },
-  { name: "UI / UX Design", level: 70 },
+  { name: "React / Next.js", level: 60 },       // ← diubah jadi 60%
+  { name: "Tailwind CSS", level: 55 },          // ← diubah jadi 55%
+  { name: "UI / UX Design", level: 50 },        // ← diubah jadi 50%
 ];
 
 export default function Profile() {
@@ -17,7 +17,7 @@ export default function Profile() {
     <section className="px-8 md:px-24 pt-36 pb-24 bg-[var(--bg)] text-[var(--fg)] space-y-24">
       {/* Hero: Foto & Teks */}
       <div className="grid md:grid-cols-2 gap-16 items-center">
-        {/* FOTO: Order 1 di mobile, 2 di desktop */}
+        {/* FOTO */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function Profile() {
           />
         </motion.div>
 
-        {/* TEKS: Order 2 di mobile, 1 di desktop */}
+        {/* TEKS */}
         <div className="space-y-6 order-2 md:order-1">
           <h1 className="text-5xl font-bold leading-tight">
             Halo <span className="wave">👋</span>, saya{" "}
@@ -78,6 +78,7 @@ export default function Profile() {
               <div className="w-full h-3 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
                 <motion.div
                   className="h-full bg-gradient-to-r from-blue-500 to-blue-300"
+                  style={{ width: `${level}%` }}
                   initial={{ width: 0 }}
                   whileInView={{ width: `${level}%` }}
                   transition={{ duration: 1 }}
