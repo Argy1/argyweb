@@ -14,10 +14,11 @@ export default function Contact() {
     setStatus("loading");
 
     const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      message: String(formData.get("message") ?? ""),
     };
 
     try {
@@ -91,7 +92,7 @@ export default function Contact() {
         ))}
       </div>
 
-      {/* Contact Form & Map */}
+      {/* Form & Map */}
       <div className="grid md:grid-cols-2 gap-12">
         {/* Form */}
         <motion.form
@@ -166,7 +167,7 @@ export default function Contact() {
           </button>
         </motion.form>
 
-        {/* Map & mini-CTA */}
+        {/* Map & Mini-CTA */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
