@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       {/* Ringkasan */}
-      <section className="px-8 md:px-24 py-24 bg-white dark:bg-gray-900
+      <section className="px-8 md:px-24 pt-36 pb-24 space-y-24
                           rounded-b-[4rem] border-b-[12px] border-b-blue-100 dark:border-b-gray-800
                           relative overflow-hidden">
         <Topography className="absolute inset-x-0 top-0 pointer-events-none
