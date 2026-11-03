@@ -97,6 +97,7 @@ export default async function AboutPage({ params }: Props) {
 
       <section data-chip-section="about-stack" aria-labelledby="stack-title" className="pt-20 pb-5 lg:pt-[120px]">
         <div className="wrap">
+          <ChipAnchor id="about-stack" stage />
           <div className="mb-9 flex items-end justify-between gap-6">
             <ChipAnchor id="about-stack" className="-ml-[5vw]" />
             <div className="ml-auto text-right">
@@ -131,6 +132,7 @@ export default async function AboutPage({ params }: Props) {
 
       <section data-chip-section="about-journey" aria-labelledby="journey-title" className="pt-20 pb-5 lg:pt-[120px]">
         <div className="wrap">
+          <ChipAnchor id="about-journey" stage />
           <div className="mb-9 flex items-end justify-between gap-6">
             <div>
               <span className="eyebrow">{t("journeyEyebrow")}</span>

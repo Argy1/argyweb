@@ -31,7 +31,7 @@ export function WorkGridView({
 
   return (
     <>
-      <div className="mb-7 flex items-start justify-between gap-6">
+      <div className="mb-7 flex flex-col items-stretch gap-4 md:flex-row md:items-start md:justify-between md:gap-6">
         <div role="group" aria-label={t("filterLabel")} className="flex flex-wrap gap-2">
           {options.map((key) => (
             <button
@@ -46,7 +46,7 @@ export function WorkGridView({
             </button>
           ))}
         </div>
-        <ChipAnchor id="work-grid" opacity={0.9} className="-mt-2" />
+        <ChipAnchor id="work-grid" opacity={0.9} className="mx-auto md:mx-0 md:-mt-2" />
       </div>
       <p className="sr-only" aria-live="polite">
         {t("resultCount", { count: visible.length })}

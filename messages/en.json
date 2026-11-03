@@ -24,6 +24,9 @@
     "langLabel": "Language",
     "themeLabel": "Toggle light/dark theme",
     "askLabel": "Ask AI",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "menuLabel": "Navigation menu",
     "logoLabel": "argy · Home"
   },
   "hero": {

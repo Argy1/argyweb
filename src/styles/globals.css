@@ -488,7 +488,14 @@
   }
 }
 
-/* Ukuran anchor per breakpoint. Mobile < 768, tablet 768–1023, desktop ≥ 1024. */
+/* Ukuran anchor per breakpoint. Mobile < 768, tablet 768–1023, desktop ≥ 1024.
+   < 1024px = mode "stage": tiap section penting punya anchor kosong di alur layout (rata tengah, di atas
+   judulnya), jadi chip ikut turun antar section seperti di desktop dan tetap tidak menutupi teks.
+   ≥ 1024px = mode gutter: anchor kecil di tepi/kolom kosong. Satu section boleh punya dua anchor dengan id
+   sama (stage + gutter); CSS menyembunyikan salah satunya dan anchorTracker memakai yang terlihat. */
+:root {
+  --stage-w: min(40vw, 22svh);
+}
 [data-chip-anchor="intro"] {
   width: min(66vw, 34svh);
 }
@@ -503,17 +510,45 @@
 [data-chip-anchor="about-hero"] {
   width: min(50vw, 30svh);
 }
-[data-chip-anchor="home-work"],
+/* Anchor stage, dan anchor satu-elemen yang juga dipakai di HP/tablet. Anchor stage ditarik 48px ke atas
+   ke dalam padding section (padding itu memang kosong), supaya halaman tidak terlalu bertambah panjang. */
+.chip-stage,
 [data-chip-anchor="home-about"],
-[data-chip-anchor="contact"],
+[data-chip-anchor="contact"] {
+  width: var(--stage-w);
+}
+.chip-stage {
+  margin-inline: auto;
+  margin-top: -48px;
+  margin-bottom: 8px;
+}
 [data-chip-anchor="work-grid"],
-[data-chip-anchor="project-body"],
-[data-chip-anchor="contact-form"],
-[data-chip-anchor="about-stack"],
-[data-chip-anchor="about-journey"] {
+[data-chip-anchor="project-body"] {
+  width: min(30vw, 18svh);
+}
+/* Anchor khusus desktop (gutter) tidak tampil di < 1024px. */
+[data-chip-anchor="home-work"]:not(.chip-stage),
+[data-chip-anchor="about-stack"]:not(.chip-stage),
+[data-chip-anchor="about-journey"]:not(.chip-stage),
+[data-chip-anchor="contact-form"]:not(.chip-stage) {
   display: none;
 }
+/* Mode Ringan (dan prefers-reduced-motion, yang mengunci Ringan) di HP: chip hanya di hero (hemat baterai). */
+@media (max-width: 767px) {
+  html[data-fx="lite"] :is(
+      .chip-stage,
+      [data-chip-anchor="home-about"],
+      [data-chip-anchor="contact"],
+      [data-chip-anchor="work-grid"],
+      [data-chip-anchor="project-body"]
+    ) {
+    display: none;
+  }
+}
 @media (min-width: 768px) {
+  :root {
+    --stage-w: min(30vw, 28svh);
+  }
   [data-chip-anchor="intro"] {
     width: min(46vw, 46svh);
   }
@@ -528,27 +563,22 @@
   [data-chip-anchor="about-hero"] {
     width: 36vw;
   }
-  [data-chip-anchor="home-work"] {
-    display: block;
-    width: 16vw;
-  }
-  [data-chip-anchor="home-about"] {
-    display: block;
-    width: min(32vw, 30svh);
-  }
   [data-chip-anchor="contact"] {
-    display: block;
     width: 14vw;
   }
 }
 @media (min-width: 1024px) {
+  .chip-stage {
+    display: none;
+  }
   [data-chip-anchor="intro"] {
     width: min(30vw, 460px, 52svh);
   }
   [data-chip-anchor="home-hero"] {
     width: min(30vw, 520px, 62svh);
   }
-  [data-chip-anchor="home-work"] {
+  [data-chip-anchor="home-work"]:not(.chip-stage) {
+    display: block;
     width: 12vw;
   }
   [data-chip-anchor="home-about"] {
@@ -566,13 +596,15 @@
     width: min(28vw, 420px, 56svh);
   }
   [data-chip-anchor="work-grid"],
-  [data-chip-anchor="project-body"],
-  [data-chip-anchor="contact-form"] {
+  [data-chip-anchor="project-body"] {
+    width: min(8vw, 120px);
+  }
+  [data-chip-anchor="contact-form"]:not(.chip-stage) {
     display: block;
     width: min(8vw, 120px);
   }
-  [data-chip-anchor="about-stack"],
-  [data-chip-anchor="about-journey"] {
+  [data-chip-anchor="about-stack"]:not(.chip-stage),
+  [data-chip-anchor="about-journey"]:not(.chip-stage) {
     display: block;
     width: min(12vw, 180px);
   }

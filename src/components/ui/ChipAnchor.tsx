@@ -22,6 +22,11 @@ interface ChipAnchorProps {
   opacity?: number;
   /** Tampilkan gambar statis chip bila WebGL tidak tersedia. */
   fallback?: boolean;
+  /**
+   * Anchor "stage" untuk HP dan tablet (< 1024px): ruang kosong rata tengah di atas judul section, supaya
+   * chip ikut turun antar section seperti di desktop. Disembunyikan di ≥ 1024px dan di mode Ringan (HP).
+   */
+  stage?: boolean;
   className?: string;
 }
 
@@ -29,12 +34,13 @@ interface ChipAnchorProps {
  * Ruang kosong nyata di layout tempat chip 3D "parkir". Ukurannya diatur CSS per breakpoint
  * (globals.css), jadi chip otomatis responsif dan tidak pernah berada di belakang teks.
  */
-export function ChipAnchor({ id, opacity, fallback = false, className }: ChipAnchorProps) {
+export function ChipAnchor({ id, opacity, fallback = false, stage = false, className }: ChipAnchorProps) {
+  const base = stage ? "chip-anchor chip-stage" : "chip-anchor";
   return (
     <div
       data-chip-anchor={id}
       data-chip-opacity={opacity}
-      className={className ? `chip-anchor ${className}` : "chip-anchor"}
+      className={className ? `${base} ${className}` : base}
       aria-hidden="true"
     >
       {fallback && (

@@ -168,7 +168,7 @@ export default async function ProjectPage({ params }: Props) {
                 </AskAIButton>
               </aside>
             </div>
-            <ChipAnchor id="project-body" className="ml-auto" />
+            <ChipAnchor id="project-body" className="mx-auto mt-6 lg:mt-0 lg:mr-0 lg:ml-auto" />
 
             {(gallery.length > 0 || !cover) && (
               <>

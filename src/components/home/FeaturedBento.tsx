@@ -24,6 +24,7 @@ export async function FeaturedBento() {
   return (
     <section data-chip-section="home-work" aria-labelledby="work-title" className="pt-20 pb-5 lg:pt-[120px]">
       <div className="wrap">
+        <ChipAnchor id="home-work" stage />
         <div className="mb-9 grid items-end gap-x-[30px] gap-y-4 md:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <span className="eyebrow">{t("workEyebrow")}</span>
