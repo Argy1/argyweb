@@ -613,6 +613,15 @@
 /* Animasi teks "scramble / decode": CSS-nya dibawa mesin sendiri (src/lib/scrambleEngine.ts, ensureStyle),
    sengaja tidak di sini supaya tidak tergantung pada pipeline/cache CSS build. */
 
+/* Area putar chip (components/three/ChipGrab.tsx): posisi/touch-action ditulis inline di komponen; ini hanya kosmetik. */
+.chip-grab[data-grab] {
+  cursor: grabbing;
+}
+.chip-grab:focus-visible {
+  outline: 3px solid var(--glow);
+  outline-offset: 4px;
+}
+
 /* Latar sirkuit hidup (components/background/engine.ts) menggambar grid-nya sendiri; grid CSS dimatikan
    setelah frame pertama. Tanpa JS / reduced motion, grid CSS statis tetap tampil. */
 html[data-bg="live"] body.bg-circuit {

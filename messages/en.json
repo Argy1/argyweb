@@ -29,6 +29,9 @@
     "menuLabel": "Navigation menu",
     "logoLabel": "argy · Home"
   },
+  "chip": {
+    "label": "3D CPU chip. Drag or press the arrow keys to rotate it."
+  },
   "hero": {
     "hello": "Hi, I'm Argy",
     "h1a": "I build web apps that feel ",

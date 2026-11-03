@@ -8,6 +8,7 @@ import { invalidateAnchors, startAnchorTracking, stopAnchorTracking } from "./an
 import { navClickedRecently } from "@/components/background/signals";
 import { notifyRouteCommitted } from "@/lib/pageTransition";
 import { useFxStore } from "@/lib/fxStore";
+import { ChipGrab } from "./ChipGrab";
 import { chipMotion, useChipStore } from "./chipStore";
 
 const ChipCanvas = dynamic(() => import("./ChipCanvas"), { ssr: false });
@@ -78,5 +79,10 @@ export function ChipStage() {
   }, [pathname]);
 
   if (webgl !== "on") return null;
-  return <ChipCanvas dark={resolvedTheme === "dark"} />;
+  return (
+    <>
+      <ChipCanvas dark={resolvedTheme === "dark"} />
+      <ChipGrab />
+    </>
+  );
 }

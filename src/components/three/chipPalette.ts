@@ -9,6 +9,7 @@ export const chipPalette = {
   dieGrid: "#8C7BFF",
   lid: "#E1E5EC",
   engraveDark: "#292E3D",
+  solder: "#C9CED8",
   lightKey: "#FFE2B0",
   lightFill: "#5B8CFF",
   white: "#FFFFFF",
