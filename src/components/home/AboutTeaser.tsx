@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { NavLink } from "@/components/ui/NavLink";
 import { Stats } from "@/components/about/Stats";
 import { ChipAnchor } from "@/components/ui/ChipAnchor";
+import { Scramble } from "@/components/ui/Scramble";
 
 export async function AboutTeaser() {
   const t = await getTranslations("home");
@@ -14,9 +15,13 @@ export async function AboutTeaser() {
           <span className="eyebrow" id="about-teaser">
             {t("aboutEyebrow")}
           </span>
-          <p className="mt-3.5 mb-[22px] font-display text-[clamp(28px,3.4vw,44px)] leading-[1.12] font-bold tracking-[-0.03em] text-balance">
+          <Scramble
+            as="p"
+            id="about-quote"
+            className="mt-3.5 mb-[22px] font-display text-[clamp(28px,3.4vw,44px)] leading-[1.12] font-bold tracking-[-0.03em] text-balance"
+          >
             {t("quote")}
-          </p>
+          </Scramble>
           <div className="prose-body">
             <p>{tAbout("bio1")}</p>
           </div>

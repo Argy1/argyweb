@@ -221,3 +221,22 @@ test("pengaman: bila gaya lapisan tidak berlaku, animasi dibatalkan dan judul te
   const text = await page.locator(HERO).evaluate((el) => (el.textContent ?? "").replace(/\s+/g, " ").trim());
   expect(text).toBe(HERO_ID);
 });
+
+test("H1 halaman Tentang ('Kenalan dengan Argy') beranimasi dan berakhir dengan teks yang benar", async ({ page }) => {
+  await seeIntro(page);
+  await page.goto("/id/tentang", { waitUntil: "load" });
+  const h1 = page.locator("#about-title");
+  await expect(h1).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
+  await expect(h1).toHaveText("Kenalan dengan Argy");
+  await expect(page.locator("#about-title .scr-layer")).toHaveCount(0);
+});
+
+test("kalimat 'Saya suka mengubah masalah nyata…' di Beranda beranimasi", async ({ page }) => {
+  await seeIntro(page);
+  await page.goto("/id", { waitUntil: "load" });
+  await page.waitForTimeout(1200);
+  const quote = page.locator("#about-quote");
+  await quote.scrollIntoViewIfNeeded();
+  await expect(quote).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
+  await expect(quote).toHaveText("Saya suka mengubah masalah nyata jadi produk yang orang senang pakai.");
+});

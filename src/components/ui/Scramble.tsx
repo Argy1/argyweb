@@ -5,7 +5,7 @@ import { registerScramble } from "@/lib/scrambleEngine";
 
 interface ScrambleProps {
   /** Tag yang dirender. `span` dibuat `inline-block` supaya posisi lapisan karakter akurat (juga di dalam tautan). */
-  as?: "h1" | "h2" | "h3" | "span";
+  as?: "h1" | "h2" | "h3" | "p" | "span";
   id?: string;
   className?: string;
   children: ReactNode;

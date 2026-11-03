@@ -18,7 +18,7 @@ pnpm dev                      # http://localhost:3000 → /id
 | `pnpm lint` | ESLint |
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm build` / `pnpm start` | build & jalankan produksi |
-| `pnpm test:e2e` | Playwright, 115 tes: `visual.spec.ts` (5 halaman × 2 bahasa × 2 tema × 360/768/1280/1440 px, cek scroll horizontal & teks di zona chip, screenshot ke `tests/__screenshots__/`), `fx.spec.ts` (efek, transisi, kursor), `flows.spec.ts` (filter, kontak, CV, salin email), `mobile.spec.ts` (menu ☰, kapsul header, anchor chip di HP), `scramble.spec.ts` (animasi teks judul) |
+| `pnpm test:e2e` | Playwright, 118 tes: `visual.spec.ts` (5 halaman × 2 bahasa × 2 tema × 360/768/1280/1440 px, cek scroll horizontal & teks di zona chip, screenshot ke `tests/__screenshots__/`), `fx.spec.ts` (efek, transisi, kursor), `flows.spec.ts` (filter, kontak, CV, salin email), `mobile.spec.ts` (menu ☰, kapsul header, anchor chip di HP), `scramble.spec.ts` (animasi teks judul) |
 
 Playwright memakai Chrome yang terpasang (`channel: "chrome"`). Untuk menguji server yang sudah jalan: `BASE_URL=http://localhost:3000 pnpm test:e2e`. Tambahkan `?chipdebug` di URL untuk melihat kotak anchor chip.
 

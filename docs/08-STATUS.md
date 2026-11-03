@@ -11,7 +11,7 @@ Terakhir diperbarui: 2026-11-03.
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
 - 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
 - Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
-- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **115 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 13); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
+- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **118 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul)); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
 
 ## 2. Tumpukan teknologi (versi saat ini)
 
@@ -24,7 +24,7 @@ pnpm install
 cp .env.example .env.local     # isi key sesuai §4
 pnpm dev                        # http://localhost:3000 → /id
 pnpm lint && pnpm typecheck && pnpm build
-pnpm test:e2e                   # 115 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10 + scramble 13)
+pnpm test:e2e                   # 118 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul))
 ```
 
 Catatan penting untuk pengujian:
@@ -157,8 +157,9 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 **2026-11-03 (perbaikan insiden: animasi judul rusak di produksi)**:
 - Gejala (dilaporkan Argy dari HP): di produksi karakter acak tampil sebagai teks **tambahan** setelah judul ("alive.Ibuildwebappsthat?" + satu baris simbol), layout melompat, terasa berat. Penyebab: CSS produksi tidak memuat aturan `.scr-*` (cache build Vercel menyajikan CSS lama), jadi lapisan karakter acak mengalir inline dan teks asli tidak transparan. Terkonfirmasi dengan mengambil CSS produksi (`.scr-layer`, `.scr-run`, `.scr-ch`: 0 kemunculan, sedangkan `chip-stage` ada).
 - Perbaikan: mesin membawa CSS sendiri + gaya inline + pengaman pembatalan; CSS `.scr-*` dihapus dari `globals.css`; batas beban perangkat sentuh dan total karakter. Karakter acak = jumlah huruf asli (diuji).
-- Tes baru (3, total scramble 13): jumlah slot = huruf asli, regresi "semua CSS situs hilang" (judul tidak tumbuh), pengaman bila gaya lapisan dipatahkan. Tes putar ulang diberi jeda longgar (frame lambat di mesin tanpa GPU membuat pemberitahuan IntersectionObserver terlambat).
+- Tes baru (3, total scramble 16 (termasuk penjaga cakupan judul)): jumlah slot = huruf asli, regresi "semua CSS situs hilang" (judul tidak tumbuh), pengaman bila gaya lapisan dipatahkan. Tes putar ulang diberi jeda longgar (frame lambat di mesin tanpa GPU membuat pemberitahuan IntersectionObserver terlambat).
 - Tes `fx.spec.ts` "transisi halaman" ternyata **sudah tidak stabil sebelum animasi judul ada** (gagal 3 dari 6 di `e3d9cfb`, 1 dari 4 di `main`): pembersihan `data-vt` kadang lewat dari jeda tetap 1,2 dtk di mesin tanpa GPU. Diganti `expect.poll` dengan batas 8 dtk (properti yang sama diuji: `data-vt` akhirnya hilang).
+- Judul yang terlewat: H1 halaman Tentang ("Kenalan dengan Argy") tidak ikut dipasangi `<Scramble>`, dan kalimat besar di Beranda ("Saya suka mengubah masalah nyata…", `<p>`) belum termasuk cakupan. Keduanya kini beranimasi (`<Scramble as="p">` ditambahkan). **Tes penjaga cakupan** `tests/scramble-coverage.spec.ts` (tanpa browser) gagal bila ada `<h1>`/`<h2>`/`<h3>` tanpa `<Scramble>` kecuali `sr-only` dan 404 tingkat akar; diuji gagal pada kode lama dan lolos pada kode baru.
 - Pelajaran: verifikasi pasca-deploy sebelumnya hanya memeriksa teks halaman dan `READY`, tidak memeriksa CSS yang disajikan. Lihat §9.
 
 **2026-11-03 (penutupan: gabung ke `main`, pembersihan branch, dokumentasi)**:
