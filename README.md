@@ -18,7 +18,7 @@ pnpm dev                      # http://localhost:3000 → /id
 | `pnpm lint` | ESLint |
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm build` / `pnpm start` | build & jalankan produksi |
-| `pnpm test:e2e` | Playwright, 112 tes: `visual.spec.ts` (5 halaman × 2 bahasa × 2 tema × 360/768/1280/1440 px, cek scroll horizontal & teks di zona chip, screenshot ke `tests/__screenshots__/`), `fx.spec.ts` (efek, transisi, kursor), `flows.spec.ts` (filter, kontak, CV, salin email), `mobile.spec.ts` (menu ☰, kapsul header, anchor chip di HP), `scramble.spec.ts` (animasi teks judul) |
+| `pnpm test:e2e` | Playwright, 126 tes: `visual.spec.ts` (5 halaman × 2 bahasa × 2 tema × 360/768/1280/1440 px, cek scroll horizontal & teks di zona chip, screenshot ke `tests/__screenshots__/`), `fx.spec.ts` (efek, transisi, kursor), `flows.spec.ts` (filter, kontak, CV, salin email), `mobile.spec.ts` (menu ☰, kapsul header, anchor chip di HP), `scramble.spec.ts` (animasi teks judul) |
 
 Playwright memakai Chrome yang terpasang (`channel: "chrome"`). Untuk menguji server yang sudah jalan: `BASE_URL=http://localhost:3000 pnpm test:e2e`. Tambahkan `?chipdebug` di URL untuk melihat kotak anchor chip.
 
@@ -41,8 +41,9 @@ Playwright memakai Chrome yang terpasang (`channel: "chrome"`). Untuk menguji se
 - **Tanpa drei**: rounded box, environment panel cahaya, dan bayangan dibuat sendiri supaya bundle 3D tetap kecil.
 - Mobile: DPR 1, material tanpa clearcoat/anisotropi, environment 64 px, render berhenti saat anchor tersembunyi.
 - **Chip ikut turun di HP/tablet (< 1024px)**: tiap section penting punya anchor "stage" kosong di alur layout (`<ChipAnchor stage />`), jadi chip meluncur antar section seperti di desktop tanpa menutup teks. Mode Ringan di HP = chip hanya di hero.
+- **Chip bisa diputar**: seret horizontal (mouse), geser kiri-kanan (sentuh; atas-bawah tetap scroll; tahan lalu geser = putar bebas), tombol panah (keyboard). Inersia lalu kembali ke pose normal; sisi bawah chip punya bola solder BGA. Lihat `src/components/three/ChipGrab.tsx` dan `docs/08` §5.
 - **Header satu kapsul**: ≥768px link langsung di kapsul; < 768px link ada di menu ☰ (`MobileMenu`, focus trap + Esc).
-- **Animasi teks judul** (scramble/decode): teks asli tidak diubah, mesin hanya menggambar lapisan `aria-hidden` di atasnya (tanpa layout shift); berjalan tiap judul masuk layar lagi; mode Ringan dan reduced-motion = tanpa animasi.
+- **Animasi teks judul** (scramble/decode): teks asli tidak diubah, mesin hanya menggambar lapisan `aria-hidden` di atasnya (tanpa layout shift; jumlah karakter acak = jumlah huruf asli); berjalan tiap judul masuk layar lagi; mode Ringan dan reduced-motion = tanpa animasi. CSS-nya dibawa mesin sendiri (bukan `globals.css`) dengan pengaman pembatalan, setelah insiden CSS lama di produksi (lihat `docs/08` §9).
 - **Chatbot**: konteks dibangun dari `src/content/*` (otomatis ikut proyek baru) ditambah indeks proyek per kategori/status/teknologi dan panduan situs; prompt mengatur penafsiran pertanyaan di luar template.
 - **Deploy**: Vercel; push/merge ke `main` = produksi (`argyweb.vercel.app`), tiap PR dapat preview. Alur: branch → PR → squash merge → hapus branch.
 - Screenshot proyek di `public/projects/[slug]/`: dari web lama (Klik PDPI, Direktori PDPI, Kontraku) dan dari aplikasi yang dijalankan lokal (Smart City Traffic, Mindra, AgriVision, Direktori PPDS, Kopaseba, Confindant; halaman publik saja, Confindant memakai data demo). Screenshot pertama dipakai sebagai sampul kartu.

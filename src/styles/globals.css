@@ -610,41 +610,16 @@
   }
 }
 
-/* Animasi teks "scramble / decode" (src/lib/scrambleEngine.ts, components/ui/Scramble.tsx).
-   Teks asli dibuat transparan selama animasi; lapisan .scr-layer (aria-hidden) menggambar karakter acak di
-   posisi tiap huruf asli, jadi layout tidak pernah berubah. */
-.scr-run,
-.scr-run * {
-  color: transparent !important;
+/* Animasi teks "scramble / decode": CSS-nya dibawa mesin sendiri (src/lib/scrambleEngine.ts, ensureStyle),
+   sengaja tidak di sini supaya tidak tergantung pada pipeline/cache CSS build. */
+
+/* Area putar chip (components/three/ChipGrab.tsx): posisi/touch-action ditulis inline di komponen; ini hanya kosmetik. */
+.chip-grab[data-grab] {
+  cursor: grabbing;
 }
-.scr-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: visible;
-  pointer-events: none;
-  user-select: none;
-}
-.scr-ch {
-  position: absolute;
-  display: block;
-  text-align: center;
-  white-space: pre;
-  letter-spacing: 0;
-  font-kerning: none;
-  font-style: normal;
-  text-transform: none;
-}
-.scr-ch[data-x] {
-  opacity: 0.7;
-}
-html[data-fx="lite"] .scr-layer {
-  display: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .scr-layer {
-    display: none;
-  }
+.chip-grab:focus-visible {
+  outline: 3px solid var(--glow);
+  outline-offset: 4px;
 }
 
 /* Latar sirkuit hidup (components/background/engine.ts) menggambar grid-nya sendiri; grid CSS dimatikan

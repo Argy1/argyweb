@@ -75,7 +75,7 @@ pnpm dev          # dev server
 pnpm lint         # ESLint
 pnpm typecheck    # tsc --noEmit
 pnpm build        # build produksi
-pnpm test:e2e     # Playwright: 112 tes (responsif, efek, alur tombol, mobile, scramble); lihat docs/08 §3 untuk menjalankan terhadap build produksi
+pnpm test:e2e     # Playwright: 126 tes (responsif, efek, alur tombol, mobile, scramble); lihat docs/08 §3 untuk menjalankan terhadap build produksi
 ```
 
 ## Definition of Done (seluruh proyek)

@@ -40,6 +40,26 @@ export const chipMotion = {
   glow: 0,
   /** Posisi & jari-jari chip di layar (px viewport) + opacity, ditulis <Chip> tiap frame; dibaca latar sirkuit. */
   screen: { x: 0, y: 0, r: 0, opacity: 0 },
+  /**
+   * Putar manual oleh pengguna (seret/sentuh/keyboard). Ditulis <ChipGrab>, dikonsumsi <Chip> tiap frame:
+   * delta langsung diterapkan, lalu inersia, lalu pitch kembali ke pose normal (docs/08 §5).
+   */
+  drag: {
+    /** Sedang diseret/ditahan. */
+    active: false,
+    /** Delta yaw/pitch (rad) yang belum diterapkan. */
+    dyaw: 0,
+    dpitch: 0,
+    /** Kecepatan (rad per frame 60fps) untuk inersia setelah dilepas. */
+    vYaw: 0,
+    vPitch: 0,
+    /** performance.now() saat dilepas; pitch mulai kembali setelah jeda. */
+    releasedAt: 0,
+    /** Minta pitch kembali ke pose normal segera. */
+    reset: false,
+  },
+  /** Pose saat ini (rad), ditulis <Chip>; dibaca tes lewat window.__chip (hanya dengan ?chipdebug). */
+  pose: { yaw: 0, pitch: 0 },
   kick(amount: number) {
     this.velocity += amount;
   },

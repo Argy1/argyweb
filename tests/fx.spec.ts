@@ -83,14 +83,18 @@ test("transisi halaman: memakai View Transition, arah benar, navbar tetap diam",
   await expect(page).toHaveURL(/\/id(\?|$)/);
   await page.waitForTimeout(1200);
 
+  // `data-vt` harus akhirnya dibersihkan. Di mesin tanpa GPU frame lambat dan pembersihan bisa lewat dari
+  // jeda tetap 1,2 dtk (tes ini sudah tidak stabil sebelum fitur animasi judul ada), jadi tunggu dengan batas longgar.
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.hasAttribute("data-vt")), { timeout: 8000 })
+    .toBe(false);
   const r = await page.evaluate(() => {
     const w = window as unknown as { __vt: { calls: number; dirs: string[] }; __hdr: string[] };
-    return { ...w.__vt, headerPositions: [...new Set(w.__hdr)].length, vtLeft: document.documentElement.hasAttribute("data-vt") };
+    return { ...w.__vt, headerPositions: [...new Set(w.__hdr)].length };
   });
   expect(r.calls).toBeGreaterThanOrEqual(2);
   expect(r.dirs.slice(0, 2)).toEqual(["forward", "back"]);
   expect(r.headerPositions).toBe(1);
-  expect(r.vtLeft).toBe(false);
 });
 
 test("efek kursor: menggambar saat mouse bergerak dan bersih setelah pergi", async ({ page }) => {

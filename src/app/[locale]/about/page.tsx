@@ -47,10 +47,10 @@ export default async function AboutPage({ params }: Props) {
         labelledBy="about-title"
         crumbs={<Breadcrumbs items={[{ label: tNav("home"), href: "/" }, { label: tNav("about") }]} />}
       >
-        <h1 id="about-title" className="h-page">
+        <Scramble as="h1" id="about-title" className="h-page">
           {t("pageA")}
           <span className="mark">{t("pageB")}</span>
-        </h1>
+        </Scramble>
         <p className="lead">{t("lead")}</p>
         <div className="flex flex-wrap gap-3">
           <a href={profile.cv[locale]} download={profile.cvDownloadName} className="btn btn-blue">

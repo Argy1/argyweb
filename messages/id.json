@@ -29,6 +29,9 @@
     "menuLabel": "Menu navigasi",
     "logoLabel": "argy · Beranda"
   },
+  "chip": {
+    "label": "Chip CPU 3D. Seret atau tekan tombol panah untuk memutarnya."
+  },
   "hero": {
     "hello": "Halo, saya Argy",
     "h1a": "Saya bikin web yang ",

@@ -73,8 +73,40 @@ export function Chip({ layerEl, isMobile, dark, reduceMotion, onFrameVisible }: 
   }, []);
   const engravingTexture = useMemo(() => createEngravingTexture(), []);
 
+  // Bola solder (BGA) di sisi bawah papan: hanya terlihat saat chip dibalik (putar manual).
+  const bga = useRef<THREE.InstancedMesh>(null);
+  const bgaGeometry = useMemo(() => new THREE.SphereGeometry(1, 8, 5), []);
+  const bgaPoints = useMemo(() => {
+    const n = isMobile ? 12 : 16;
+    const pitch = 1.5 / (n - 1);
+    const pts: [number, number][] = [];
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        const x = (i - (n - 1) / 2) * pitch;
+        const z = (j - (n - 1) / 2) * pitch;
+        // Area tengah dikosongkan seperti BGA sungguhan (kapasitor/ground pad).
+        if (Math.abs(x) < pitch * 1.6 && Math.abs(z) < pitch * 1.6) continue;
+        pts.push([x, z]);
+      }
+    }
+    return pts;
+  }, [isMobile]);
+
   // Catatan: efek di dalam <Canvas> memakai useLayoutEffect; passive effect di root R3F kadang baru
   // di-flush pada commit berikutnya (frameloop "demand"), sehingga listener/tekstur telat terpasang.
+
+  useLayoutEffect(() => {
+    const mesh = bga.current;
+    if (!mesh) return;
+    const m = new THREE.Object3D();
+    bgaPoints.forEach(([x, z], i) => {
+      m.position.set(x, -chipDims.board.h / 2 - 0.012, z);
+      m.scale.set(0.028, 0.02, 0.028);
+      m.updateMatrix();
+      mesh.setMatrixAt(i, m.matrix);
+    });
+    mesh.instanceMatrix.needsUpdate = true;
+  }, [bgaPoints]);
 
   // Ukiran "AF" digambar setelah font Gabarito siap supaya hurufnya benar (sebelumnya tekstur kosong).
   useLayoutEffect(() => {
@@ -97,12 +129,13 @@ export function Chip({ layerEl, isMobile, dark, reduceMotion, onFrameVisible }: 
       pinGeometry.dispose();
       pinMarker.dispose();
       engravingTexture.texture.dispose();
+      bgaGeometry.dispose();
       boardGeometry.dispose();
       dieGeometry.dispose();
       lidGeometry.dispose();
       shadowTexture.dispose();
     },
-    [boardMaterial, dieMaterial, pinGeometry, pinMarker, engravingTexture, boardGeometry, dieGeometry, lidGeometry, shadowTexture],
+    [boardMaterial, dieMaterial, pinGeometry, pinMarker, engravingTexture, bgaGeometry, boardGeometry, dieGeometry, lidGeometry, shadowTexture],
   );
 
   // Kursor (desktop saja).
@@ -132,6 +165,7 @@ export function Chip({ layerEl, isMobile, dark, reduceMotion, onFrameVisible }: 
     lastStage: -1,
     pinK: -1,
     reported: false,
+    dragPitch: 0,
   });
   const pinMatrix = useMemo(() => new THREE.Object3D(), []);
   const glowColor = useMemo(() => new THREE.Color(), []);
@@ -261,6 +295,39 @@ export function Chip({ layerEl, isMobile, dark, reduceMotion, onFrameVisible }: 
     const idle = calm ? 0.04 : 0.16;
     st.yaw += idle * dt + (calm ? 0 : chipMotion.velocity);
     chipMotion.velocity *= Math.pow(0.9, dt * 60);
+
+    // Putar manual (seret / sentuh / keyboard): delta dari <ChipGrab>, lalu inersia, lalu pitch kembali
+    // ke pose normal. Yaw tidak punya "pose normal": putaran santai berlanjut dari sudut terakhir.
+    const d = chipMotion.drag;
+    st.yaw += d.dyaw;
+    st.dragPitch += d.dpitch;
+    d.dyaw = 0;
+    d.dpitch = 0;
+    const frames = dt * 60;
+    if (!d.active) {
+      if (calm) {
+        d.vYaw = 0;
+        d.vPitch = 0;
+      } else {
+        st.yaw += d.vYaw * frames;
+        st.dragPitch += d.vPitch * frames;
+        const decay = Math.pow(0.955, frames);
+        d.vYaw *= decay;
+        d.vPitch *= decay;
+      }
+      if (st.dragPitch !== 0 && (d.reset || performance.now() - d.releasedAt > 1200)) {
+        // Jalur terpendek ke pose normal (-π..π), lalu mengendur pelan (cepat bila Ringan atau reset).
+        st.dragPitch -= Math.PI * 2 * Math.round(st.dragPitch / (Math.PI * 2));
+        st.dragPitch *= Math.pow(d.reset || calm ? 0.8 : 0.96, frames);
+        if (Math.abs(st.dragPitch) < 0.002) {
+          st.dragPitch = 0;
+          d.reset = false;
+        }
+      }
+    }
+    chipMotion.pose.yaw = st.yaw;
+    chipMotion.pose.pitch = st.dragPitch;
+    if (bga.current) bga.current.visible = Math.abs(st.dragPitch) > 0.3;
     chipMotion.glow *= Math.pow(0.955, dt * 60);
     uniforms.uGlow.value = chipMotion.glow;
 
@@ -279,7 +346,7 @@ export function Chip({ layerEl, isMobile, dark, reduceMotion, onFrameVisible }: 
       root.current.position.set(st.x, st.y, 0);
       root.current.scale.setScalar(Math.max(st.s, 0.0001));
     }
-    if (tiltGroup.current) tiltGroup.current.rotation.x = st.tilt - m.y * 0.35;
+    if (tiltGroup.current) tiltGroup.current.rotation.x = st.tilt - m.y * 0.35 + st.dragPitch;
     if (yawGroup.current) yawGroup.current.rotation.y = st.yaw + m.x * 0.8;
     if (floatGroup.current) floatGroup.current.position.y = reduceMotion ? 0 : 0.04 * Math.sin(st.time * 1.1);
 
@@ -302,6 +369,9 @@ export function Chip({ layerEl, isMobile, dark, reduceMotion, onFrameVisible }: 
         <group ref={floatGroup}>
           <group ref={yawGroup}>
             <mesh ref={board} geometry={boardGeometry} material={boardMaterial} />
+            <instancedMesh ref={bga} args={[bgaGeometry, undefined, bgaPoints.length]} visible={false}>
+              <meshStandardMaterial color={chipPalette.solder} metalness={1} roughness={0.32} />
+            </instancedMesh>
             <mesh
               geometry={pinMarker}
               position={[-chipDims.board.w / 2 + 0.1, chipDims.board.h / 2 + 0.001, chipDims.board.w / 2 - 0.1]}
