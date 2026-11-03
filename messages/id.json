@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "siteName": "Argy Fawwaz Akbar",
+    "homeTitle": "Argy Fawwaz Akbar · Full-stack developer",
+    "homeDescription": "Portofolio Argy Fawwaz Akbar, full-stack developer dan mahasiswa D4 TRPL IPB University. Web, mobile, AI, dan 3D.",
+    "workTitle": "Karya",
+    "workDescription": "Semua proyek Argy: website organisasi, aplikasi mobile, AI, 3D, sampai proyek kuliah dan lomba.",
+    "aboutTitle": "Tentang",
+    "aboutDescription": "Profil, stack, perjalanan, dan sertifikat Argy Fawwaz Akbar.",
+    "notFoundTitle": "Halaman tidak ditemukan",
+    "contactTitle": "Kontak",
+    "contactDescription": "Hubungi Argy Fawwaz Akbar untuk proyek, kolaborasi, atau tim lomba: email, LinkedIn, GitHub, Instagram, dan CV."
+  },
+  "a11y": {
+    "skipToContent": "Langsung ke konten",
+    "breadcrumb": "Jejak navigasi"
+  },
+  "nav": {
+    "home": "Beranda",
+    "work": "Karya",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "label": "Navigasi utama",
+    "langLabel": "Bahasa",
+    "themeLabel": "Ganti tema terang/gelap",
+    "askLabel": "Tanya AI",
+    "logoLabel": "argy · Beranda"
+  },
+  "hero": {
+    "hello": "Halo, saya Argy",
+    "h1a": "Saya bikin web yang ",
+    "h1b": "enak dipakai",
+    "h1c": " dan ",
+    "h1d": "terasa hidup",
+    "h1e": ".",
+    "lead": "Full-stack developer dan mahasiswa D4 Teknologi Rekayasa Perangkat Lunak di IPB University. Saya membangun aplikasi web dan mobile dari database sampai antarmuka, lalu menambahkan sentuhan 3D.",
+    "ctaWork": "Lihat karya",
+    "ctaAsk": "Ngobrol dengan AI saya",
+    "stickersLabel": "Fokus teknologi",
+    "clock": "{time} WIB · Indonesia",
+    "marquee": [
+      "Web full-stack",
+      "Aplikasi mobile",
+      "Web 3D",
+      "Integrasi AI",
+      "UI/UX"
+    ]
+  },
+  "home": {
+    "workEyebrow": "Karya pilihan",
+    "workTitle": "Yang sedang saya banggakan",
+    "workSub": "Klik kartu untuk intip ringkasannya, atau buka halaman penuhnya.",
+    "allWork": "Lihat semua {count} proyek",
+    "allWorkSub": "Web, mobile, AI & data, sampai proyek kuliah dan lomba",
+    "aboutEyebrow": "Tentang saya",
+    "quote": "Saya suka mengubah masalah nyata jadi produk yang orang senang pakai.",
+    "moreAbout": "Kenalan lebih jauh"
+  },
+  "stats": {
+    "doctors": "profil dokter dikelola",
+    "projects": "proyek di portofolio",
+    "gates": "gerbang logika 3D di Blender",
+    "certificates": "sertifikat & penghargaan"
+  },
+  "work": {
+    "pageA": "Semua ",
+    "pageB": "karya",
+    "pageSub": "Dari website organisasi sampai computer vision dan big data. Saring berdasarkan kategori, lalu buka studi kasusnya.",
+    "filterLabel": "Filter kategori",
+    "resultCount": "{count, plural, other {# proyek}}",
+    "cats": {
+      "all": "Semua",
+      "web": "Web",
+      "mobile": "Mobile",
+      "ai": "AI & Data",
+      "3d": "3D",
+      "biz": "Bisnis"
+    }
+  },
+  "project": {
+    "visit": "Kunjungi {label}",
+    "askProject": "Tanya AI soal proyek ini",
+    "askPrompt": "Ceritakan tentang {name}",
+    "highlights": "Sorotan",
+    "stack": "Stack",
+    "gallery": "Tampilan",
+    "shotPlaceholder": "[Screenshot {n} · {name}]",
+    "prev": "Sebelumnya",
+    "next": "Berikutnya",
+    "role": "Peran",
+    "year": "Tahun",
+    "status": "Status",
+    "category": "Kategori",
+    "openFull": "Buka halaman penuh",
+    "peekNote": "Panel cepat. URL sudah berganti ke halaman proyek, jadi link ini bisa dibagikan dan dibuka langsung sebagai halaman penuh.",
+    "close": "Tutup",
+    "enlarge": "Perbesar {alt}"
+  },
+  "about": {
+    "pageA": "Kenalan dengan ",
+    "pageB": "Argy",
+    "lead": "Developer full-stack dari IPB University yang suka membangun produk dari nol, dari database sampai detail animasi.",
+    "cv": "Unduh CV",
+    "photoAlt": "Foto Argy Fawwaz Akbar",
+    "bio1": "Pengalaman terbesar saya datang dari membangun sistem untuk Perhimpunan Dokter Paru Indonesia, dari website organisasi sampai direktori anggota se-Indonesia.",
+    "bio2": "Saya terbiasa memegang proyek dari perencanaan sampai rilis: menulis dokumen kebutuhan, merancang database, membangun antarmuka, lalu mengujinya.",
+    "bio3": "Di luar kode, saya memodelkan 3D di Blender. Itu yang membuat saya ingin membawa kedalaman 3D ke web tanpa mengorbankan kecepatan.",
+    "facts": [
+      {
+        "k": "Studi",
+        "v": "D4 Teknologi Rekayasa Perangkat Lunak, Sekolah Vokasi IPB University"
+      },
+      {
+        "k": "Fokus",
+        "v": "Web full-stack, aplikasi mobile, web 3D"
+      },
+      {
+        "k": "Basis",
+        "v": "Indonesia · WIB (UTC+7)"
+      },
+      {
+        "k": "Sedang dibangun",
+        "v": "TradeMatrix AI dan Direktori PPDS"
+      }
+    ],
+    "stackEyebrow": "Stack",
+    "stackTitle": "Alat favorit saya",
+    "journeyEyebrow": "Perjalanan",
+    "journeyTitle": "Jejak sejauh ini",
+    "certEyebrow": "Sertifikat",
+    "certTitle": "Sertifikat & penghargaan",
+    "certSub": "Klik kartu untuk melihat sertifikatnya.",
+    "certOpenFile": "Buka file di tab baru",
+    "certCredential": "Verifikasi kredensial",
+    "certCats": {
+      "course": "Kursus",
+      "competition": "Lomba",
+      "organization": "Organisasi",
+      "other": "Lainnya"
+    }
+  },
+  "contact": {
+    "eyebrow": "Kontak",
+    "title": "Ayo bikin sesuatu bareng!",
+    "sub": "Terbuka untuk proyek, kolaborasi, dan tim lomba. Kirim email, atau tanya dulu ke asisten AI saya.",
+    "copy": "Salin",
+    "copied": "Tersalin!",
+    "copyLabel": "Salin alamat email",
+    "cv": "CV",
+    "allOptions": "Semua kontak"
+  },
+  "footer": {
+    "credit": "Dirancang & dibangun oleh Argy",
+    "backTop": "Kembali ke atas"
+  },
+  "intro": {
+    "skip": "Lewati",
+    "assembling": "Memasang {part}…",
+    "ready": "Chip siap. Selamat datang!",
+    "almost": "Hampir siap…",
+    "parts": [
+      "Papan",
+      "Pin",
+      "Die",
+      "Tutup"
+    ],
+    "progressLabel": "Memuat situs"
+  },
+  "chat": {
+    "title": "Asisten Argy",
+    "sub": "Tanya apa saja tentang portofolio ini",
+    "placeholder": "Tulis pertanyaan…",
+    "send": "Kirim",
+    "close": "Tutup",
+    "open": "Buka asisten AI",
+    "greeting": "Halo! Saya asisten AI di portofolio Argy. Mau tahu proyeknya, tech stack, atau cara menghubunginya?",
+    "sugs": [
+      "Proyek apa saja?",
+      "Tech stack-nya apa?",
+      "Cerita soal PDPI",
+      "Cara menghubungi Argy?"
+    ],
+    "note": "Jawaban dibuat AI dari isi portofolio ini dan bisa keliru.",
+    "demo": "Mode demo: jawaban berbasis kata kunci, belum terhubung ke LLM.",
+    "errorLimit": "Pertanyaannya sudah banyak sekali. Coba lagi beberapa menit lagi, atau email Argy di {email}.",
+    "errorGeneric": "Maaf, asisten sedang tidak bisa menjawab. Silakan email Argy di {email}.",
+    "typing": "Asisten sedang mengetik"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Halaman ini tidak ada",
+    "sub": "Mungkin tautannya salah ketik atau halamannya sudah dipindah.",
+    "home": "Kembali ke beranda"
+  },
+  "contactPage": {
+    "eyebrow": "Kontak",
+    "titleA": "Ayo bikin sesuatu ",
+    "titleB": "bareng",
+    "titleC": "!",
+    "emailCta": "Kirim email",
+    "channelsEyebrow": "Jalur kontak",
+    "channelsTitle": "Pilih yang paling nyaman",
+    "channels": {
+      "email": "Email langsung, bisa juga disalin.",
+      "LinkedIn": "Profil profesional dan pengalaman.",
+      "GitHub": "Kode dan repositori proyek.",
+      "Instagram": "Kabar sehari-hari.",
+      "cv": "Unduh CV (gambar JPG).",
+      "ai": "Tanya dulu ke asisten AI soal portofolio ini."
+    },
+    "cvLabel": "CV",
+    "aiLabel": "Asisten AI",
+    "formEyebrow": "Kirim pesan",
+    "formTitle": "Ceritakan idemu",
+    "formSub": "Isi formulir ini dan pesanmu langsung masuk ke email Argy. Tidak ada data yang disimpan di situs ini.",
+    "name": "Nama",
+    "namePlaceholder": "Nama kamu",
+    "email": "Email kamu",
+    "emailPlaceholder": "nama@email.com",
+    "topic": "Topik",
+    "topics": [
+      "Proyek",
+      "Kolaborasi",
+      "Tim lomba",
+      "Lainnya"
+    ],
+    "message": "Pesan",
+    "messagePlaceholder": "Ceritakan singkat apa yang ingin kamu buat atau tanyakan…",
+    "send": "Kirim pesan",
+    "sending": "Mengirim…",
+    "sent": "Terkirim. Terima kasih, Argy akan membalas lewat email yang kamu isi.",
+    "errorLimit": "Terlalu banyak pesan dalam waktu singkat. Coba lagi beberapa menit lagi.",
+    "errorSend": "Pesan belum terkirim. Coba lagi, atau tulis langsung ke {email}.",
+    "fallbackNote": "Pengiriman langsung belum aktif, jadi aplikasi email kamu dibuka dengan pesan yang sudah tersusun. Tekan kirim di sana.",
+    "errorRequired": "Wajib diisi.",
+    "errorEmail": "Format email belum benar.",
+    "subject": "[{topic}] Pesan dari {name}",
+    "bodyFrom": "Dari: {name} ({email})",
+    "infoTitle": "Info singkat",
+    "location": "Lokasi",
+    "localTime": "Waktu Argy sekarang",
+    "basedValue": "Indonesia · WIB (UTC+7)"
+  },
+  "fx": {
+    "label": "Efek",
+    "full": "Penuh",
+    "lite": "Ringan",
+    "hintFull": "Latar bergerak, efek kursor, dan transisi halaman aktif.",
+    "hintLite": "Lebih hemat tenaga: latar statis dan transisi sederhana.",
+    "system": "Dikunci Ringan mengikuti pengaturan \"kurangi gerakan\" di perangkatmu.",
+    "notice": "Perangkatmu terasa berat, jadi efek dialihkan ke mode Ringan.",
+    "tryFull": "Coba efek penuh",
+    "close": "Tutup"
+  }
+}

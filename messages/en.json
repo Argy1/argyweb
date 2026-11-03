@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "siteName": "Argy Fawwaz Akbar",
+    "homeTitle": "Argy Fawwaz Akbar · Full-stack developer",
+    "homeDescription": "Portfolio of Argy Fawwaz Akbar, full-stack developer and Software Engineering Technology student at IPB University. Web, mobile, AI and 3D.",
+    "workTitle": "Work",
+    "workDescription": "All of Argy's projects: organization websites, mobile apps, AI, 3D, plus coursework and competitions.",
+    "aboutTitle": "About",
+    "aboutDescription": "Profile, stack, journey and certificates of Argy Fawwaz Akbar.",
+    "notFoundTitle": "Page not found",
+    "contactTitle": "Contact",
+    "contactDescription": "Reach Argy Fawwaz Akbar for projects, collaborations or competition teams: email, LinkedIn, GitHub, Instagram and CV."
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "breadcrumb": "Breadcrumb"
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "label": "Main navigation",
+    "langLabel": "Language",
+    "themeLabel": "Toggle light/dark theme",
+    "askLabel": "Ask AI",
+    "logoLabel": "argy · Home"
+  },
+  "hero": {
+    "hello": "Hi, I'm Argy",
+    "h1a": "I build web apps that feel ",
+    "h1b": "effortless",
+    "h1c": " and ",
+    "h1d": "alive",
+    "h1e": ".",
+    "lead": "Full-stack developer and Software Engineering Technology student at IPB University. I build web and mobile apps from the database to the interface, then add a touch of 3D.",
+    "ctaWork": "See my work",
+    "ctaAsk": "Chat with my AI",
+    "stickersLabel": "Tech focus",
+    "clock": "{time} WIB · Indonesia",
+    "marquee": [
+      "Full-stack web",
+      "Mobile apps",
+      "3D web",
+      "AI integration",
+      "UI/UX"
+    ]
+  },
+  "home": {
+    "workEyebrow": "Selected work",
+    "workTitle": "What I'm proud of",
+    "workSub": "Tap a card for a quick peek, or open its full page.",
+    "allWork": "See all {count} projects",
+    "allWorkSub": "Web, mobile, AI & data, plus coursework and competitions",
+    "aboutEyebrow": "About me",
+    "quote": "I like turning real problems into products people enjoy using.",
+    "moreAbout": "Get to know me"
+  },
+  "stats": {
+    "doctors": "doctor profiles managed",
+    "projects": "projects in this portfolio",
+    "gates": "logic gates modeled in Blender",
+    "certificates": "certificates & awards"
+  },
+  "work": {
+    "pageA": "All ",
+    "pageB": "work",
+    "pageSub": "From organization websites to computer vision and big data. Filter by category, then open the case study.",
+    "filterLabel": "Category filter",
+    "resultCount": "{count, plural, one {# project} other {# projects}}",
+    "cats": {
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "ai": "AI & Data",
+      "3d": "3D",
+      "biz": "Business"
+    }
+  },
+  "project": {
+    "visit": "Visit {label}",
+    "askProject": "Ask AI about this project",
+    "askPrompt": "Tell me about {name}",
+    "highlights": "Highlights",
+    "stack": "Stack",
+    "gallery": "Screens",
+    "shotPlaceholder": "[Screenshot {n} · {name}]",
+    "prev": "Previous",
+    "next": "Next",
+    "role": "Role",
+    "year": "Year",
+    "status": "Status",
+    "category": "Category",
+    "openFull": "Open full page",
+    "peekNote": "Quick panel. The URL already points to the project page, so the link can be shared and opened directly as a full page.",
+    "close": "Close",
+    "enlarge": "Enlarge {alt}"
+  },
+  "about": {
+    "pageA": "Meet ",
+    "pageB": "Argy",
+    "lead": "A full-stack developer from IPB University who likes building products from scratch, from the database to the animation details.",
+    "cv": "Download CV",
+    "photoAlt": "Photo of Argy Fawwaz Akbar",
+    "bio1": "My biggest experience comes from building systems for the Indonesian Society of Respirology (PDPI), from the organization website to a nationwide member directory.",
+    "bio2": "I am used to owning projects from planning to release: writing requirements, designing the database, building the interface, then testing it.",
+    "bio3": "Outside code, I model in Blender. That is why I want to bring 3D depth to the web without giving up speed.",
+    "facts": [
+      {
+        "k": "Study",
+        "v": "D4 Software Engineering Technology, Vocational School, IPB University"
+      },
+      {
+        "k": "Focus",
+        "v": "Full-stack web, mobile apps, 3D web"
+      },
+      {
+        "k": "Based in",
+        "v": "Indonesia · WIB (UTC+7)"
+      },
+      {
+        "k": "Building now",
+        "v": "TradeMatrix AI and the PPDS Directory"
+      }
+    ],
+    "stackEyebrow": "Stack",
+    "stackTitle": "My favorite tools",
+    "journeyEyebrow": "Journey",
+    "journeyTitle": "So far",
+    "certEyebrow": "Certificates",
+    "certTitle": "Certificates & awards",
+    "certSub": "Tap a card to view the certificate.",
+    "certOpenFile": "Open file in a new tab",
+    "certCredential": "Verify credential",
+    "certCats": {
+      "course": "Course",
+      "competition": "Competition",
+      "organization": "Organization",
+      "other": "Other"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's make something together!",
+    "sub": "Open to projects, collaborations and competition teams. Send an email, or ask my AI assistant first.",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "copyLabel": "Copy email address",
+    "cv": "CV",
+    "allOptions": "All contact options"
+  },
+  "footer": {
+    "credit": "Designed & built by Argy",
+    "backTop": "Back to top"
+  },
+  "intro": {
+    "skip": "Skip",
+    "assembling": "Mounting the {part}…",
+    "ready": "Chip ready. Welcome in!",
+    "almost": "Almost ready…",
+    "parts": [
+      "Board",
+      "Pins",
+      "Die",
+      "Lid"
+    ],
+    "progressLabel": "Loading the site"
+  },
+  "chat": {
+    "title": "Argy's assistant",
+    "sub": "Ask anything about this portfolio",
+    "placeholder": "Type a question…",
+    "send": "Send",
+    "close": "Close",
+    "open": "Open the AI assistant",
+    "greeting": "Hi! I'm the AI assistant on Argy's portfolio. Want to know about his projects, tech stack, or how to reach him?",
+    "sugs": [
+      "What has he built?",
+      "What's his tech stack?",
+      "Tell me about PDPI",
+      "How do I contact Argy?"
+    ],
+    "note": "Answers are AI-generated from this portfolio and may be wrong.",
+    "demo": "Demo mode: keyword-based answers, not connected to an LLM yet.",
+    "errorLimit": "That's a lot of questions! Try again in a few minutes, or email Argy at {email}.",
+    "errorGeneric": "Sorry, the assistant can't answer right now. Please email Argy at {email}.",
+    "typing": "The assistant is typing"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "This page doesn't exist",
+    "sub": "The link may have a typo, or the page has moved.",
+    "home": "Back to home"
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "titleA": "Let's make something ",
+    "titleB": "together",
+    "titleC": "!",
+    "emailCta": "Send an email",
+    "channelsEyebrow": "Ways to reach me",
+    "channelsTitle": "Pick what suits you",
+    "channels": {
+      "email": "Email directly, or copy the address.",
+      "LinkedIn": "Professional profile and experience.",
+      "GitHub": "Code and project repositories.",
+      "Instagram": "Day-to-day updates.",
+      "cv": "Download the CV (JPG image).",
+      "ai": "Ask the AI assistant about this portfolio first."
+    },
+    "cvLabel": "CV",
+    "aiLabel": "AI assistant",
+    "formEyebrow": "Send a message",
+    "formTitle": "Tell me your idea",
+    "formSub": "Fill in this form and your message goes straight to Argy's inbox. Nothing is stored on this site.",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Your email",
+    "emailPlaceholder": "name@email.com",
+    "topic": "Topic",
+    "topics": [
+      "Project",
+      "Collaboration",
+      "Competition team",
+      "Other"
+    ],
+    "message": "Message",
+    "messagePlaceholder": "Briefly describe what you want to build or ask…",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Sent. Thank you, Argy will reply to the email you entered.",
+    "errorLimit": "Too many messages in a short time. Please try again in a few minutes.",
+    "errorSend": "Your message wasn't sent. Try again, or write directly to {email}.",
+    "fallbackNote": "Direct sending isn't active yet, so your email app opened with the message ready. Press send there.",
+    "errorRequired": "Required.",
+    "errorEmail": "That email doesn't look right.",
+    "subject": "[{topic}] Message from {name}",
+    "bodyFrom": "From: {name} ({email})",
+    "infoTitle": "Quick info",
+    "location": "Location",
+    "localTime": "Argy's local time",
+    "basedValue": "Indonesia · WIB (UTC+7)"
+  },
+  "fx": {
+    "label": "Effects",
+    "full": "Full",
+    "lite": "Lite",
+    "hintFull": "Animated background, cursor effects and page transitions are on.",
+    "hintLite": "Lighter on power: static background and simple transitions.",
+    "system": "Locked to Lite by your device's \"reduce motion\" setting.",
+    "notice": "Your device seems to be struggling, so effects were switched to Lite.",
+    "tryFull": "Try full effects",
+    "close": "Close"
+  }
+}

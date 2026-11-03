@@ -1,0 +1,115 @@
+/*
+ * Token desain resmi "Silicon" — sumber kebenaran untuk warna, tipografi, radius, dan bayangan.
+ * Semua komponen WAJIB memakai token ini (langsung atau lewat @theme Tailwind), bukan hex literal.
+ * Tema: atribut data-theme="light" | "dark" pada <html> (dikelola next-themes, default: system).
+ * Lihat docs/02-DESIGN-SYSTEM.md untuk aturan pemakaian.
+ */
+
+:root,
+:root[data-theme="light"] {
+  /* Permukaan */
+  --bg: #EEF1F6;          /* latar halaman, putih keperakan */
+  --surface: #FFFFFF;     /* kartu, panel */
+  --surface-2: #E4E8EF;   /* chip, isian sekunder */
+  --line: #D3D9E3;        /* border */
+  /* Teks */
+  --ink: #0F1629;         /* teks utama */
+  --muted: #4E5870;       /* teks sekunder (kontras ≥ 4.5:1 di --bg dan --surface) */
+  --accent-text: #2F5BFF; /* teks/link aksen */
+  /* Pola latar sirkuit */
+  --grid: rgba(47, 91, 255, 0.055);
+  --dot: rgba(47, 91, 255, 0.22);
+  /* Efek */
+  --shadow: rgba(15, 22, 41, 0.12);
+  --nav-bg: rgba(255, 255, 255, 0.86);
+  --tile-edge: transparent;
+  --danger: #B42318;      /* pesan error form (tambahan versi Next.js) */
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0A0F1F;
+  --surface: #121A2E;
+  --surface-2: #1A2440;
+  --line: #26304D;
+  --ink: #E8ECF5;
+  --muted: #A3ADC6;
+  --accent-text: #8EA6FF;
+  --grid: rgba(91, 140, 255, 0.06);
+  --dot: rgba(91, 140, 255, 0.28);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --nav-bg: rgba(18, 26, 46, 0.86);
+  --tile-edge: rgba(255, 255, 255, 0.08);
+  --danger: #FF8A80;
+  color-scheme: dark;
+}
+
+/* Warna brand — sama di kedua tema, diambil dari material chip CPU */
+:root {
+  --blue: #2F5BFF;     /* warna utama: tombol, link, papan sirkuit */
+  --navy: #121A3A;     /* papan chip; kartu gelap, panel kontak */
+  --gold: #E3B34C;     /* kaki chip; aksen hangat, highlight, CTA sekunder */
+  --steel: #D6DCE6;    /* tutup chip; kartu terang */
+  --violet: #6E62F0;   /* die chip; kartu aksen */
+  --glow: #5B8CFF;     /* cahaya sirkuit; hover glow, focus */
+  --lilac: #C9CFFF;    /* label lembut (stack, timeline) */
+  --sky: #9DB4FF;      /* label lembut (stack, timeline) */
+  --ok: #22A866;       /* status live/online saja */
+  --tile-ink: #0F1629; /* teks di atas gold/steel/lilac/sky */
+  --on-dark: #FFFFFF;  /* teks di atas blue/navy/violet */
+
+  /* Tipografi (next/font/google; --font-*-face di-set oleh next/font di <html>) */
+  --font-display: var(--font-gabarito-face, "Gabarito"), ui-sans-serif, system-ui, sans-serif; /* 700–900, judul */
+  --font-body: var(--font-figtree-face, "Figtree"), ui-sans-serif, system-ui, sans-serif;     /* 400–700, teks */
+  --font-mono: var(--font-jetbrains-face, "JetBrains Mono"), ui-monospace, SFMono-Regular, Menlo, monospace; /* label, kode, angka */
+
+  /* Turunan (tambahan versi Next.js): lapisan putih transparan di atas kartu berwarna, bayangan, scrim */
+  --veil-50: rgba(255, 255, 255, 0.5);   /* pill status di kartu berwarna */
+  --veil-55: rgba(255, 255, 255, 0.55);  /* kotak meta di cover proyek */
+  --veil-75: rgba(255, 255, 255, 0.75);  /* tombol panah bulat */
+  --veil-20: rgba(255, 255, 255, 0.2);   /* label di atas biru */
+  --veil-18: rgba(255, 255, 255, 0.18);  /* tombol tutup di header chat */
+  --veil-35: rgba(255, 255, 255, 0.35);  /* border link di panel kontak */
+  --on-dark-muted: #C3CCE3;              /* eyebrow di panel navy */
+  --blue-shadow: rgba(47, 91, 255, 0.7);
+  --glow-soft: rgba(91, 140, 255, 0.55);
+  --glow-faint: rgba(91, 140, 255, 0.09);
+  --ok-ring: rgba(34, 168, 102, 0.22);
+  --scrim: rgba(14, 26, 58, 0.38);
+
+  /* Radius */
+  --r-chip: 999px;
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 28px;
+  --r-xl: 40px;
+
+  /* Gerak */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-inout: cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+/* Latar grid sirkuit (dipakai body dan layar intro) */
+.bg-circuit {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    radial-gradient(circle, var(--dot) 1.7px, transparent 2.1px);
+  background-size: 72px 72px, 72px 72px, 72px 72px;
+  background-position: 0 0, 0 0, -36px -36px;
+}
+
+/* Glow hover ala jalur sirkuit (kartu proyek, tombol prev/next) */
+.hover-glow {
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s, border-color 0.3s;
+}
+.hover-glow:hover {
+  transform: translateY(-6px);
+  border-color: var(--glow);
+  box-shadow: 0 0 0 1.5px var(--glow), 0 0 30px -6px rgba(91, 140, 255, 0.55), 0 28px 50px -24px var(--shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-glow:hover { transform: none; }
+}

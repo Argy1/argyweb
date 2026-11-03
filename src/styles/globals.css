@@ -1,0 +1,860 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Token → Tailwind. Kelas seperti bg-surface, text-muted, border-line tersedia dari sini. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent-text);
+  --color-blue: var(--blue);
+  --color-navy: var(--navy);
+  --color-gold: var(--gold);
+  --color-steel: var(--steel);
+  --color-violet: var(--violet);
+  --color-glow: var(--glow);
+  --color-lilac: var(--lilac);
+  --color-sky: var(--sky);
+  --color-ok: var(--ok);
+  --color-tile-ink: var(--tile-ink);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-muted: var(--on-dark-muted);
+  --color-veil-50: var(--veil-50);
+  --color-veil-55: var(--veil-55);
+  --color-veil-75: var(--veil-75);
+  --color-veil-20: var(--veil-20);
+  --color-veil-18: var(--veil-18);
+  --color-veil-35: var(--veil-35);
+  --color-tile-edge: var(--tile-edge);
+  --color-nav-bg: var(--nav-bg);
+  --color-danger: var(--danger);
+
+  --radius-chip: var(--r-chip);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+}
+
+/* Font: nama sama dengan tokens.css (yang tidak berlapis, jadi menang); di sini hanya agar utilitas
+   font-display / font-body / font-mono dibuat Tailwind. */
+@theme {
+  --font-display: var(--font-gabarito-face), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-figtree-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-face), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --breakpoint-nav: 900px;
+}
+
+/* ============ Dasar ============ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 96px;
+  }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    color: var(--ink);
+    font-family: var(--font-body);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition:
+      background-color 0.45s,
+      color 0.45s;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 3px solid var(--glow);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--tile-ink);
+  }
+}
+
+/* ============ Komponen dasar ============ */
+@layer components {
+  .wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  @media (min-width: 760px) {
+    .wrap {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex: none;
+  }
+
+  .h-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(46px, 7.4vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .h-page {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(44px, 6.6vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin: 0;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .h-section {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 68px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 12px 0 0;
+    text-wrap: balance;
+    max-width: 15ch;
+  }
+  .h-card {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(24px, 2.4vw, 28px);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 14px;
+  }
+  .mark {
+    background-image: linear-gradient(var(--gold), var(--gold));
+    background-repeat: no-repeat;
+    background-size: 100% 42%;
+    background-position: 0 86%;
+    padding: 0 0.06em;
+    /* Selalu tinta gelap di atas emas (kontras di kedua tema). */
+    color: var(--tile-ink);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  /* Tema gelap: stabilo menutup hampir seluruh tinggi huruf supaya tinta gelap tidak jatuh di latar gelap. */
+  [data-theme="dark"] .mark {
+    background-size: 100% 80%;
+    background-position: 0 72%;
+  }
+  .lead {
+    font-size: clamp(17px, 1.5vw, 19px);
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 52ch;
+    margin: 0;
+  }
+  .prose-body p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--muted);
+    margin: 0 0 14px;
+    max-width: 56ch;
+  }
+  .prose-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Tombol */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 54px;
+    padding: 0 24px;
+    border-radius: var(--r-chip);
+    font-weight: 700;
+    font-size: 16px;
+    border: 0;
+    text-align: center;
+    transition:
+      transform 0.2s var(--ease-out),
+      box-shadow 0.2s,
+      border-color 0.2s;
+  }
+  .btn:hover {
+    transform: translateY(-3px);
+  }
+  .btn-blue {
+    background: var(--blue);
+    color: var(--on-dark);
+    box-shadow: 0 12px 26px -12px var(--blue-shadow);
+  }
+  .btn-line {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1.5px solid var(--line);
+  }
+  .btn-line:hover {
+    border-color: var(--blue);
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--tile-ink);
+  }
+
+  /* Kartu */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(20px, 3vw, 30px);
+  }
+
+  /* Warna tone kartu proyek */
+  .tone-blue {
+    background: var(--blue);
+    color: var(--on-dark);
+  }
+  .tone-navy {
+    background: var(--navy);
+    color: var(--on-dark);
+    border-color: var(--tile-edge);
+  }
+  .tone-violet {
+    background: var(--violet);
+    color: var(--on-dark);
+  }
+  .tone-gold {
+    background: var(--gold);
+    color: var(--tile-ink);
+  }
+  .tone-steel {
+    background: var(--steel);
+    color: var(--tile-ink);
+  }
+  .swatch-gold {
+    background: var(--gold);
+  }
+  .swatch-steel {
+    background: var(--steel);
+  }
+  .swatch-lilac {
+    background: var(--lilac);
+  }
+  .swatch-sky {
+    background: var(--sky);
+  }
+
+  /* Huruf dekoratif besar di kartu */
+  .glyph {
+    position: absolute;
+    right: -6px;
+    bottom: -22px;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 150px;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    opacity: 0.17;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+  /* Glyph lewat pseudo-element: dekoratif murni, tidak terbaca sebagai teks oleh pembaca layar/audit kontras. */
+  .glyph::after {
+    content: attr(data-glyph);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: var(--r-chip);
+    font-size: 12.5px;
+    font-weight: 700;
+    background: var(--veil-50);
+    color: var(--tile-ink);
+    white-space: nowrap;
+  }
+  .status-pill::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .idx {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .arrow {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--veil-75);
+    color: var(--tile-ink);
+    display: grid;
+    place-items: center;
+    flex: none;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .group:hover .arrow,
+  .group:focus-visible .arrow {
+    transform: rotate(-45deg);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chips > * {
+    min-height: 30px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 11px;
+    border-radius: var(--r-chip);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .filter-chip {
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: var(--r-chip);
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+    transition:
+      border-color 0.2s,
+      background-color 0.2s,
+      color 0.2s;
+  }
+  .filter-chip:hover {
+    border-color: var(--blue);
+  }
+  .filter-chip[aria-pressed="true"] {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--on-dark);
+  }
+  .filter-chip small {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+
+  .stat {
+    padding: 16px 20px;
+    border-radius: var(--r-md);
+    min-width: 150px;
+    color: var(--tile-ink);
+    box-shadow: 0 14px 30px -20px var(--shadow);
+    border: 1px solid transparent;
+  }
+  .stat b {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 40px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span {
+    display: block;
+    margin-top: 6px;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+
+  /* Link pill navbar */
+  .nav-link {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 15px;
+    border-radius: var(--r-chip);
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--muted);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-link:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+  }
+  .nav-link[aria-current="page"] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  /* Pita marquee */
+  .marquee-band {
+    background: var(--blue);
+    color: var(--on-dark);
+    transform: rotate(-1.6deg);
+    margin: 30px -24px 0;
+    padding: 18px 0;
+    overflow: hidden;
+    box-shadow: 0 18px 40px -24px var(--blue-shadow);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 34s linear infinite;
+  }
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(22px, 2.4vw, 28px);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  /* Anchor chip 3D: ruang kosong nyata di layout. Ukuran = lebar anchor (docs/03 §5). */
+  .chip-anchor {
+    aspect-ratio: 1 / 1;
+    flex: none;
+    pointer-events: none;
+    position: relative;
+  }
+  html[data-chip-debug] .chip-anchor {
+    outline: 1px dashed var(--glow);
+    background: var(--glow-faint);
+  }
+  .chip-fallback {
+    display: none;
+  }
+  html[data-webgl="off"] .chip-fallback {
+    display: block;
+    position: absolute;
+    inset: 4%;
+    width: 92%;
+    height: 92%;
+    object-fit: contain;
+  }
+}
+
+/* Ukuran anchor per breakpoint. Mobile < 768, tablet 768–1023, desktop ≥ 1024. */
+[data-chip-anchor="intro"] {
+  width: min(66vw, 34svh);
+}
+[data-chip-anchor="home-hero"] {
+  width: min(62vw, 32svh);
+}
+[data-chip-anchor="work-head"],
+[data-chip-anchor="project-hero"],
+[data-chip-anchor="contact-hero"] {
+  width: min(46vw, 30svh);
+}
+[data-chip-anchor="about-hero"] {
+  width: min(50vw, 30svh);
+}
+[data-chip-anchor="home-work"],
+[data-chip-anchor="home-about"],
+[data-chip-anchor="contact"],
+[data-chip-anchor="work-grid"],
+[data-chip-anchor="project-body"],
+[data-chip-anchor="contact-form"],
+[data-chip-anchor="about-stack"],
+[data-chip-anchor="about-journey"] {
+  display: none;
+}
+@media (min-width: 768px) {
+  [data-chip-anchor="intro"] {
+    width: min(46vw, 46svh);
+  }
+  [data-chip-anchor="home-hero"] {
+    width: min(44vw, 38svh);
+  }
+  [data-chip-anchor="work-head"],
+  [data-chip-anchor="project-hero"],
+  [data-chip-anchor="contact-hero"] {
+    width: 34vw;
+  }
+  [data-chip-anchor="about-hero"] {
+    width: 36vw;
+  }
+  [data-chip-anchor="home-work"] {
+    display: block;
+    width: 16vw;
+  }
+  [data-chip-anchor="home-about"] {
+    display: block;
+    width: min(32vw, 30svh);
+  }
+  [data-chip-anchor="contact"] {
+    display: block;
+    width: 14vw;
+  }
+}
+@media (min-width: 1024px) {
+  [data-chip-anchor="intro"] {
+    width: min(30vw, 460px, 52svh);
+  }
+  [data-chip-anchor="home-hero"] {
+    width: min(30vw, 520px, 62svh);
+  }
+  [data-chip-anchor="home-work"] {
+    width: 12vw;
+  }
+  [data-chip-anchor="home-about"] {
+    width: min(26vw, 440px);
+  }
+  [data-chip-anchor="contact"] {
+    width: min(11vw, 170px);
+  }
+  [data-chip-anchor="work-head"],
+  [data-chip-anchor="project-hero"],
+  [data-chip-anchor="contact-hero"] {
+    width: min(26vw, 400px, 56svh);
+  }
+  [data-chip-anchor="about-hero"] {
+    width: min(28vw, 420px, 56svh);
+  }
+  [data-chip-anchor="work-grid"],
+  [data-chip-anchor="project-body"],
+  [data-chip-anchor="contact-form"] {
+    display: block;
+    width: min(8vw, 120px);
+  }
+  [data-chip-anchor="about-stack"],
+  [data-chip-anchor="about-journey"] {
+    display: block;
+    width: min(12vw, 180px);
+  }
+}
+
+/* Latar sirkuit hidup (components/background/engine.ts) menggambar grid-nya sendiri; grid CSS dimatikan
+   setelah frame pertama. Tanpa JS / reduced motion, grid CSS statis tetap tampil. */
+html[data-bg="live"] body.bg-circuit {
+  background-image: none;
+}
+
+/* Mode Ringan: hentikan animasi dekoratif yang terus berjalan. */
+html[data-fx="lite"] .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ============ Intro ============ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 0px) + 20px) max(20px, env(safe-area-inset-right, 0px))
+    calc(env(safe-area-inset-bottom, 0px) + 24px) max(20px, env(safe-area-inset-left, 0px));
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s;
+}
+@media (min-width: 760px) {
+  .intro {
+    padding: 36px 44px;
+  }
+}
+.intro[data-state="done"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+html[data-intro="seen"] .intro {
+  display: none;
+}
+.intro-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: var(--r-chip);
+  border: 1.5px dashed var(--line);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--muted);
+  transition: all 0.35s var(--ease-out);
+}
+.intro-part i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background-color 0.3s;
+}
+.intro-part[data-on="true"] {
+  border-style: solid;
+  border-color: var(--glow);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 0 18px -6px var(--glow-soft);
+  transform: translateY(-3px);
+}
+
+/* ============ Kanvas 3D ============ */
+.chip-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+.chip-canvas[data-layer="intro"] {
+  z-index: 101;
+}
+
+/* ============ Gerak ============ */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Fade-naik untuk navigasi klien yang TIDAK memakai View Transition (tombol Back/Forward browser, browser tanpa
+   dukungan). Hanya saat html[data-nav]; load pertama tidak dianimasikan supaya LCP tidak tertunda. */
+html[data-nav]:not([data-vt]) .page-enter {
+  animation: page-in 0.55s var(--ease-out) both;
+}
+
+/* ============ Transisi halaman (View Transitions API, dipicu NavLink via lib/pageTransition.ts) ============ */
+/* Isi halaman = satu kelompok bernama; elemen persisten punya nama sendiri supaya tetap diam. */
+.page-vt {
+  view-transition-name: argy-page;
+}
+.site-header {
+  view-transition-name: site-header;
+}
+.site-chat {
+  view-transition-name: site-chat;
+}
+.site-bg {
+  view-transition-name: site-bg;
+}
+.chip-canvas {
+  view-transition-name: site-chip;
+}
+::view-transition-group(site-header),
+::view-transition-group(site-chat),
+::view-transition-group(site-bg),
+::view-transition-group(site-chip),
+::view-transition-group(argy-page) {
+  animation: none;
+}
+::view-transition-old(site-header),
+::view-transition-old(site-chat),
+::view-transition-old(site-bg),
+::view-transition-old(site-chip) {
+  display: none;
+}
+::view-transition-new(site-header),
+::view-transition-new(site-chat),
+::view-transition-new(site-bg),
+::view-transition-new(site-chip) {
+  animation: none;
+}
+::view-transition-group(site-header) {
+  z-index: 100;
+}
+/* Root (latar persisten) berganti seketika; hanya isi halaman yang beranimasi. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+/* Klik tetap tembus ke halaman selama transisi. */
+::view-transition {
+  pointer-events: none;
+}
+
+@keyframes nav-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes nav-slide {
+  from {
+    translate: var(--slide-offset) 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+/* Maju: halaman lama keluar ke kiri, baru masuk dari kanan. Mundur: sebaliknya. Keluar cepat, masuk pelan. */
+::view-transition-old(argy-page) {
+  --slide-offset: -60px;
+  animation:
+    150ms ease-in both nav-fade reverse,
+    400ms ease-in-out both nav-slide reverse;
+}
+::view-transition-new(argy-page) {
+  --slide-offset: 60px;
+  animation:
+    210ms ease-out 150ms both nav-fade,
+    400ms ease-in-out both nav-slide;
+}
+html[data-nav-dir="back"]::view-transition-old(argy-page) {
+  --slide-offset: 60px;
+}
+html[data-nav-dir="back"]::view-transition-new(argy-page) {
+  --slide-offset: -60px;
+}
+/* Mode Ringan: hanya fade, tanpa geser. */
+html[data-fx="lite"]::view-transition-old(argy-page) {
+  animation: 110ms ease-in both nav-fade reverse;
+}
+html[data-fx="lite"]::view-transition-new(argy-page) {
+  animation: 170ms ease-out 110ms both nav-fade;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.3s ease both;
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.45s var(--ease-out) both;
+}
+.animate-pop-in {
+  animation: pop-in 0.35s var(--ease-out) both;
+}
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: blink 1.2s infinite;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  .marquee-track,
+  .page-enter,
+  .animate-fade-in,
+  .animate-slide-in-right,
+  .animate-pop-in,
+  .typing-dot {
+    animation: none !important;
+  }
+  .btn:hover,
+  .group:hover .arrow {
+    transform: none;
+  }
+  .intro {
+    transition-duration: 0.25s;
+  }
+}

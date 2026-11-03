@@ -1,0 +1,9 @@
+/** JSON-LD; `<` di-escape supaya isi string tidak bisa menutup tag script. */
+export function JsonLd({ data }: { data: Record<string, unknown> }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
+  );
+}

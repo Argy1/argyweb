@@ -1,0 +1,120 @@
+{
+  "nav": [
+    "Home",
+    "Work",
+    "About",
+    "Contact"
+  ],
+  "hello": "Hi, I'm Argy",
+  "h1a": "I build web apps that feel ",
+  "h1b": "effortless",
+  "h1c": " and ",
+  "h1d": "alive",
+  "h1e": ".",
+  "lead": "Full-stack developer and Software Engineering Technology student at IPB University. I build web and mobile apps from the database to the interface, then add a touch of 3D.",
+  "ctaWork": "See my work",
+  "ctaAsk": "Chat with my AI",
+  "marquee": [
+    "Full-stack web",
+    "Mobile apps",
+    "3D web",
+    "AI integration",
+    "UI/UX"
+  ],
+  "workEyebrow": "Selected work",
+  "workTitle": "What I'm proud of",
+  "workSub": "Tap a card for a quick peek, or open its full page.",
+  "allWork": "See all 13 projects",
+  "allWorkSub": "Web, mobile, AI, 3D, plus coursework and competitions",
+  "aboutEyebrow": "About me",
+  "quote": "I like turning real problems into products people enjoy using.",
+  "moreAbout": "Get to know me",
+  "bio1": "My biggest experience comes from building systems for the Indonesian Society of Respirology (PDPI), from the organization website to a nationwide member directory.",
+  "bio2": "I am used to owning projects from planning to release: writing requirements, designing the database, building the interface, then testing it.",
+  "bio3": "Outside code, I model in Blender. That is why I want to bring 3D depth to the web without giving up speed.",
+  "stat1": "doctor profiles managed",
+  "stat2": "projects in this portfolio",
+  "stat3": "logic gates modeled in Blender",
+  "workPageA": "All ",
+  "workPageB": "work",
+  "workPageSub": "From organization websites to machine learning research. Filter by category, then open the case study.",
+  "cats": {
+    "all": "All",
+    "web": "Web",
+    "mobile": "Mobile",
+    "ai": "AI & Data",
+    "3d": "3D",
+    "biz": "Business"
+  },
+  "visit": "Visit",
+  "askProject": "Ask AI about this project",
+  "highlights": "Highlights",
+  "prev": "Previous",
+  "next": "Next",
+  "kRole": "Role",
+  "kYear": "Year",
+  "kStatus": "Status",
+  "kType": "Category",
+  "openFull": "Open full page",
+  "peekNote": "Quick panel. The URL already points to the project page, so the link can be shared and opened directly as a full page.",
+  "aboutPageA": "Meet ",
+  "aboutPageB": "Argy",
+  "aboutLead": "A full-stack developer from IPB University who likes building products from scratch, from the database to the animation details.",
+  "cv": "Download CV [link]",
+  "photo": "Your photo",
+  "facts": [
+    {
+      "k": "Study",
+      "v": "D4 Software Engineering Technology, Vocational School, IPB University"
+    },
+    {
+      "k": "Focus",
+      "v": "Full-stack web, mobile apps, 3D web"
+    },
+    {
+      "k": "Based in",
+      "v": "Indonesia · WIB (UTC+7)"
+    },
+    {
+      "k": "Building now",
+      "v": "TradeMatrix AI and the PPDS Directory"
+    }
+  ],
+  "stackTitle": "My favorite tools",
+  "journeyEyebrow": "Journey",
+  "journeyTitle": "So far",
+  "contactEyebrow": "Contact",
+  "contactTitle": "Let's make something together!",
+  "contactSub": "Open to projects, collaborations and competition teams. Send an email, or ask my AI assistant first.",
+  "footer": "Designed & built by Argy",
+  "backTop": "Back to top",
+  "skip": "Skip",
+  "assembling": "Mounting the",
+  "ready": "Chip ready. Welcome in!",
+  "parts": [
+    "Board",
+    "Pins",
+    "Die",
+    "Lid"
+  ],
+  "chatTitle": "Argy's assistant",
+  "chatSub": "Ask anything about this portfolio",
+  "chatPlaceholder": "Type a question…",
+  "send": "Send",
+  "close": "Close",
+  "greeting": "Hi! I'm the AI assistant on Argy's portfolio. Want to know about his projects, tech stack, or how to reach him?",
+  "sugs": [
+    "What has he built?",
+    "What's his tech stack?",
+    "Tell me about PDPI",
+    "How do I contact Argy?"
+  ],
+  "demo": "Demo mode. In the Next.js build, this assistant connects to an LLM.",
+  "copy": "Copy",
+  "copied": "Copied!",
+  "langLabel": "Language",
+  "themeLabel": "Toggle light/dark theme",
+  "askLabel": "Ask AI",
+  "navLabel": "Main navigation",
+  "filterLabel": "Category filter"
+}

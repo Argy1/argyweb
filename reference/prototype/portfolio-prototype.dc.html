@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Argy Portfolio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700;800;900&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+/* Look: "Silicon" — silver-white ground with a faint circuit grid, cobalt primary, gold, navy and steel taken from the CPU's materials; the persistent 3D chip travels across sections and pages. */
+body{margin:0}
+.root{--display:'Gabarito',ui-sans-serif,system-ui,sans-serif;--body:'Figtree',ui-sans-serif,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--tile-ink:#0F1629;--blue:#2F5BFF;--gold:#E3B34C;--navy:#121A3A;--steel:#D6DCE6;--violet:#6E62F0;--glow:#5B8CFF;--ok:#22A866;position:relative;min-height:100vh;background-color:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),radial-gradient(circle,var(--dot) 1.7px,transparent 2.1px);background-size:72px 72px,72px 72px,72px 72px;background-position:0 0,0 0,-36px -36px;transition:background-color .45s,color .45s;-webkit-font-smoothing:antialiased}
+.t-light{--bg:#EEF1F6;--surface:#FFFFFF;--surface2:#E4E8EF;--ink:#0F1629;--muted:#4E5870;--line:#D3D9E3;--grid:rgba(47,91,255,.055);--dot:rgba(47,91,255,.22);--shadow:rgba(15,22,41,.12);--navbg:rgba(255,255,255,.86);--accent-text:#2F5BFF;--tile-edge:transparent;color-scheme:light}
+.t-dark{--bg:#0A0F1F;--surface:#121A2E;--surface2:#1A2440;--ink:#E8ECF5;--muted:#A3ADC6;--line:#26304D;--grid:rgba(91,140,255,.06);--dot:rgba(91,140,255,.28);--shadow:rgba(0,0,0,.5);--navbg:rgba(18,26,46,.86);--accent-text:#8EA6FF;--tile-edge:rgba(255,255,255,.08);color-scheme:dark}
+.root *{box-sizing:border-box}
+.root a{color:inherit;text-decoration:none}
+.root button{font:inherit;color:inherit}
+.root :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{position:relative;width:100%;max-width:1200px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+@media (min-width:760px){.wrap{padding-left:40px;padding-right:40px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--blue);display:inline-block}
+.gl{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.main{position:relative;z-index:2}
+.page{animation:pagein .55s cubic-bezier(.2,.8,.2,1)}
+
+/* nav */
+.nav{position:fixed;top:calc(env(safe-area-inset-top, 0px) + 14px);left:0;right:0;z-index:30;pointer-events:none}
+.navin{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;height:62px;padding:0 8px 0 18px;border-radius:999px;background:var(--navbg);border:1px solid var(--line);box-shadow:0 10px 30px -14px var(--shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.logo{border:0;background:transparent;cursor:pointer;font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.03em;padding:0}
+.logo span{color:var(--blue)}
+.links{display:flex;gap:4px}
+.link{height:40px;display:inline-flex;align-items:center;padding:0 15px;border:0;border-radius:999px;background:transparent;cursor:pointer;font-weight:600;font-size:14.5px;color:var(--muted);transition:background .2s,color .2s}
+.link:hover{color:var(--ink);background:var(--surface2)}
+.link-on{background:var(--ink);color:var(--bg)}
+.link-on:hover{background:var(--ink);color:var(--bg)}
+.tools{display:flex;align-items:center;gap:6px}
+.lang{display:flex;background:var(--surface2);border-radius:999px;padding:3px}
+.lb{height:38px;min-width:42px;border:0;border-radius:999px;background:transparent;cursor:pointer;font-weight:700;font-size:13px;color:var(--muted)}
+.lb-on{background:var(--surface);color:var(--ink);box-shadow:0 2px 6px var(--shadow)}
+.ib{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;transition:transform .2s}
+.ib:hover{transform:rotate(-12deg)}
+.askb{height:46px;padding:0 18px;border:0;border-radius:999px;background:var(--gold);color:var(--tile-ink);font-weight:700;font-size:14.5px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:transform .2s}
+.askb:hover{transform:translateY(-2px)}
+.mlinks{display:none}
+@media (max-width:900px){.links{display:none}.mlinks{display:flex;gap:6px;justify-content:center;margin-top:8px;pointer-events:auto}.mlinks .link{background:var(--navbg);border:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.mlinks .link-on{background:var(--ink)}}
+@media (max-width:480px){.askb span{display:none}.askb{width:46px;padding:0;justify-content:center}.navin{padding-left:14px}}
+
+/* route pill */
+.route{position:fixed;left:calc(env(safe-area-inset-left, 0px) + 20px);bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);z-index:40;display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);box-shadow:0 10px 24px -14px var(--shadow);font-family:var(--mono);font-size:12.5px;max-width:calc(100vw - 120px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.route b{color:var(--accent-text);font-weight:500}
+.route small{font-size:11px;color:var(--muted);font-family:var(--body);font-weight:600}
+@media (max-width:620px){.route small{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-3px)}
+.btn-blue{background:var(--blue);color:#FFFFFF;box-shadow:0 12px 26px -12px rgba(47,91,255,.7)}
+.btn-line{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.btn-yellow{background:var(--gold);color:var(--tile-ink)}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted)}
+.crumbs button{border:0;background:transparent;cursor:pointer;color:var(--muted);font-weight:600;padding:6px 0}
+.crumbs button:hover{color:var(--accent-text)}
+.crumbs span{opacity:.6}
+.crumbs b{color:var(--ink)}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:70px}
+.herobox{max-width:700px;display:flex;flex-direction:column;gap:26px}
+.hello{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;height:40px;padding:0 16px 0 6px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14.5px}
+.hello .av{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#FFFFFF;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:13px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(34,168,102,.22)}
+.h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,7.4vw,104px);line-height:.98;letter-spacing:-.04em;margin:0;text-wrap:balance}
+.h1p{font-family:var(--display);font-weight:800;font-size:clamp(44px,6.6vw,92px);line-height:.98;letter-spacing:-.04em;margin:0;text-wrap:balance}
+.mark{background-image:linear-gradient(var(--gold),var(--gold));background-repeat:no-repeat;background-size:100% 42%;background-position:0 86%;padding:0 .06em;color:var(--ink)}
+.blue{color:var(--accent-text)}
+.lead{font-size:clamp(17px,1.5vw,19px);line-height:1.65;color:var(--muted);max-width:52ch;margin:0}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.stickers{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.stk{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:12px;font-family:var(--mono);font-weight:500;font-size:13px;color:var(--tile-ink);box-shadow:0 10px 22px -16px var(--shadow);transition:transform .25s,box-shadow .25s}
+.stk:hover{transform:translateY(-2px);box-shadow:0 0 0 1.5px var(--glow),0 12px 24px -14px rgba(47,91,255,.5)}
+.s1{background:var(--gold)}
+.s2{background:var(--steel)}
+.s3{background:var(--navy);color:#FFFFFF}
+.s4{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+@media (max-width:700px){.hero{align-items:flex-end}.herobox{padding-top:36vh}}
+.phero{padding-top:150px;padding-bottom:40px;min-height:62vh;display:flex;align-items:center}
+.pherobox{max-width:660px;display:flex;flex-direction:column;gap:22px}
+@media (max-width:700px){.phero{padding-top:44vh;min-height:auto}}
+
+/* marquee */
+.band{background:var(--blue);color:#FFFFFF;transform:rotate(-1.6deg);margin:30px -20px 0;padding:18px 0;overflow:hidden;box-shadow:0 18px 40px -24px rgba(47,91,255,.8)}
+.track{display:flex;width:max-content;animation:marq 34s linear infinite}
+.mi{display:flex;align-items:center;gap:28px;padding-right:28px;font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.02em;white-space:nowrap}
+.mi svg{flex:none}
+
+/* sections */
+.sec{position:relative;padding-top:120px;padding-bottom:20px}
+.shead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 30px;margin-bottom:36px}
+.h2{font-family:var(--display);font-weight:800;font-size:clamp(36px,5vw,68px);line-height:1;letter-spacing:-.04em;margin:12px 0 0;text-wrap:balance;max-width:15ch}
+.h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.4vw,32px);letter-spacing:-.03em;margin:0 0 14px}
+.ssub{font-size:17px;line-height:1.6;color:var(--muted);max-width:40ch;margin:0}
+
+/* bento (home) */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:230px;gap:18px}
+.tile{position:relative;border:1px solid var(--tile-edge);border-radius:30px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;cursor:pointer;overflow:hidden;box-shadow:0 18px 40px -26px var(--shadow);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.tile:hover{transform:translateY(-6px);box-shadow:0 0 0 1.5px var(--glow),0 0 30px -6px rgba(91,140,255,.55),0 28px 50px -24px var(--shadow)}
+.tile:hover .arrow{transform:rotate(-45deg)}
+.tb1{grid-column:span 4;grid-row:span 2}
+.tb2,.tb3{grid-column:span 2}
+.tball{grid-column:span 6;flex-direction:row;align-items:center;background:var(--ink);color:var(--bg)}
+@media (max-width:1000px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.tb1{grid-column:span 2;grid-row:span 2}.tb2,.tb3{grid-column:span 1}.tball{grid-column:span 2}}
+@media (max-width:620px){.bento{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}.tile{min-height:220px}.tb1{grid-column:span 1;grid-row:span 1;min-height:340px}.tb2,.tb3,.tball{grid-column:span 1}.tball{min-height:150px}}
+.ttop{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative}
+.pill{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:700;background:rgba(255,255,255,.5)}
+.pill i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.7}
+.idx{font-family:var(--mono);font-size:13px;font-weight:500;opacity:.75}
+.glyph{position:absolute;right:-6px;bottom:-22px;font-family:var(--display);font-weight:900;font-size:150px;letter-spacing:-.06em;line-height:1;opacity:.17;pointer-events:none}
+.tb1 .glyph{font-size:min(340px, 30vw)}
+.tname{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.03em;line-height:1.05;margin:0;display:block}
+.tb1 .tname{font-size:clamp(36px,4.4vw,58px)}
+.tkind{font-size:14.5px;font-weight:600;opacity:.82;margin:6px 0 0;display:block}
+.tdesc{font-size:17px;line-height:1.55;opacity:.92;margin:14px 0 0;max-width:44ch;display:block}
+.tbot{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;position:relative}
+.arrow{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.75);color:var(--tile-ink);display:grid;place-items:center;flex:none;transition:transform .3s}
+.tball .arrow{background:var(--gold)}
+.tball .tname{font-size:clamp(26px,3vw,40px)}
+.tallin{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%}
+
+/* work index */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;color:var(--ink);transition:all .2s}
+.chip:hover{border-color:var(--blue)}
+.chip-on{background:var(--blue);border-color:var(--blue);color:#FFFFFF}
+.chip small{font-family:var(--mono);font-size:11.5px;font-weight:500;opacity:.75}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.wcard{border:1px solid var(--line);border-radius:28px;background:var(--surface);overflow:hidden;text-align:left;cursor:pointer;padding:0;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;animation:pagein .45s cubic-bezier(.2,.8,.2,1)}
+.wcard:hover{transform:translateY(-6px);border-color:var(--glow);box-shadow:0 0 0 1px var(--glow),0 0 28px -8px rgba(91,140,255,.55),0 26px 44px -26px var(--shadow)}
+.wcard:hover .arrow{transform:rotate(-45deg)}
+.wtop{position:relative;height:170px;overflow:hidden;padding:18px;display:flex;justify-content:space-between;align-items:flex-start}
+.wtop .glyph{font-size:130px;bottom:-26px;opacity:.22}
+.wbody{padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.wname{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.025em;margin:0}
+.wkind{font-size:14px;color:var(--muted);font-weight:600;margin:0}
+.wfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{height:30px;display:inline-flex;align-items:center;padding:0 11px;border-radius:999px;background:var(--surface2);font-weight:600;font-size:13px}
+.wfoot .arrow{width:40px;height:40px;background:var(--surface2);color:var(--ink)}
+
+/* project page */
+.cover{position:relative;border-radius:36px;min-height:300px;overflow:hidden;padding:clamp(22px,4vw,40px);display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 24px 50px -30px var(--shadow)}
+.cover .glyph{font-size:min(360px, 34vw);bottom:-40px;right:10px;opacity:.2}
+.cover .meta{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cover .meta div{background:rgba(255,255,255,.55);border-radius:18px;padding:12px 14px;color:var(--tile-ink)}
+.cover .meta dt{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.cover .meta dd{margin:4px 0 0;font-weight:700;font-size:15px}
+@media (max-width:760px){.cover .meta{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pbody{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;margin-top:28px;align-items:start}
+@media (max-width:900px){.pbody{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(20px,3vw,30px)}
+.card p{font-size:17px;line-height:1.75;color:var(--muted);margin:0}
+.hl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.hl li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;font-size:16.5px;line-height:1.55;font-weight:500}
+.hl li i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--tile-ink)}
+.side{display:flex;flex-direction:column;gap:16px}
+.side .btn{justify-content:center;width:100%}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px}
+@media (max-width:640px){.shots{grid-template-columns:minmax(0,1fr)}}
+.shot{aspect-ratio:16/10;max-width:100%;border-radius:24px;border:2px dashed var(--line);background:var(--surface);display:grid;place-items:center;color:var(--muted);font-family:var(--mono);font-size:13px;text-align:center;padding:16px}
+.pn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:40px}
+@media (max-width:640px){.pn{grid-template-columns:minmax(0,1fr)}}
+.pnb{border:1px solid var(--line);background:var(--surface);border-radius:26px;padding:22px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px;transition:transform .25s,border-color .25s}
+.pnb:hover{transform:translateY(-4px);border-color:var(--glow);box-shadow:0 0 24px -10px rgba(91,140,255,.6)}
+.pnb small{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.pnb b{font-family:var(--display);font-size:24px;font-weight:800;letter-spacing:-.02em}
+.pn .next{text-align:right}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.aboutspace{min-height:360px}
+@media (max-width:900px){.about{grid-template-columns:minmax(0,1fr)}.aboutspace{display:none}}
+.quote{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4vw,44px);line-height:1.12;letter-spacing:-.03em;margin:14px 0 22px;text-wrap:balance}
+.prose p{font-size:17px;line-height:1.75;color:var(--muted);margin:0 0 14px;max-width:56ch}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.stat{padding:16px 20px;border-radius:22px;min-width:150px;color:var(--tile-ink);box-shadow:0 14px 30px -20px var(--shadow)}
+.stat b{display:block;font-family:var(--display);font-weight:900;font-size:40px;letter-spacing:-.04em;line-height:1}
+.stat span{display:block;margin-top:6px;font-size:13.5px;font-weight:600}
+.st1{background:var(--gold)}.st2{background:var(--steel)}.st3{background:var(--navy);color:#FFFFFF;border:1px solid var(--tile-edge)}
+.agrid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:stretch}
+@media (max-width:1000px){.agrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.agrid .portrait{grid-row:span 2}}
+@media (max-width:640px){.agrid{grid-template-columns:minmax(0,1fr)}.agrid .portrait{grid-row:auto}}
+.portrait{border-radius:28px;background:var(--blue);color:#FFFFFF;min-height:320px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+.portrait .glyph{font-size:220px;opacity:.22;bottom:40px;right:-10px}
+.portrait span{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,.2);border-radius:999px;padding:6px 12px;align-self:flex-start;position:relative}
+.facts{display:flex;flex-direction:column;gap:0;margin:0}
+.fact{display:flex;flex-direction:column;gap:3px;padding:12px 0;border-bottom:1px solid var(--line)}
+.fact:last-child{border-bottom:0}
+.fact dt{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fact dd{margin:0;font-weight:600;font-size:15.5px}
+
+/* stack + journey */
+.stackgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.sg{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:22px}
+.sgh{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sgi{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:15px;color:var(--tile-ink)}
+.sgh b{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.jc{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.jyear{align-self:flex-start;height:32px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--tile-ink)}
+.jt{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.02em;line-height:1.15;margin:4px 0 0}
+.jr{font-weight:700;font-size:14px;color:var(--accent-text);margin:0}
+.jd{font-size:15px;line-height:1.6;color:var(--muted);margin:0}
+
+/* contact */
+.cbox{background-color:var(--navy);background-image:linear-gradient(rgba(91,140,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(91,140,255,.09) 1px,transparent 1px);background-size:48px 48px;color:#FFFFFF;border:1px solid var(--tile-edge);border-radius:40px;padding:clamp(28px,6vw,80px);position:relative;overflow:hidden}
+.cbox .eyebrow{color:#C3CCE3}
+.cbox .eyebrow i{background:var(--gold)}
+.cbox .mark{color:var(--tile-ink)}
+.cbig{font-family:var(--display);font-weight:900;font-size:clamp(46px,8vw,120px);line-height:.92;letter-spacing:-.05em;margin:18px 0 18px;max-width:11ch;text-wrap:balance}
+.csub{font-size:18px;line-height:1.6;max-width:46ch;margin:0 0 30px;font-weight:500}
+.crow{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.mailpill{display:flex;align-items:center;gap:6px;height:58px;padding:0 6px 0 22px;border-radius:999px;background:#FFFFFF;color:var(--tile-ink)}
+.mailpill code{font-family:var(--mono);font-size:15px;user-select:all;margin-right:8px}
+.copyb{height:46px;padding:0 18px;border:0;border-radius:999px;background:var(--gold);color:var(--tile-ink);font-weight:700;cursor:pointer}
+.cl{height:58px;display:inline-flex;align-items:center;gap:8px;padding:0 22px;border-radius:999px;border:1.5px solid rgba(255,255,255,.35);font-weight:700;font-size:15.5px;background:transparent;cursor:pointer;color:#FFFFFF;transition:background .2s,color .2s,border-color .2s}
+.cl:hover{background:#FFFFFF;color:var(--tile-ink);border-color:#FFFFFF}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:34px;padding-bottom:110px;color:var(--muted);font-size:14px}
+.foot button{border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:14px;padding:0}
+
+/* intro */
+.gl-top{z-index:101}
+.intro{position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),radial-gradient(circle,var(--dot) 1.7px,transparent 2.1px);background-size:72px 72px,72px 72px,72px 72px;background-position:0 0,0 0,-36px -36px;display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top, 0px) + 24px) max(20px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 24px) max(20px, env(safe-area-inset-left, 0px));transition:opacity .8s ease,visibility .8s}
+@media (min-width:760px){.intro{padding:36px 44px}}
+.intro-done{opacity:0;visibility:hidden}
+.itop{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.ilogo{font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:-.03em}
+.ilogo span{color:var(--blue)}
+.iskip{height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:700;font-size:14px;cursor:pointer;color:var(--ink)}
+.iskip:hover{border-color:var(--blue)}
+.ibot{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.inum{font-family:var(--display);font-weight:900;font-size:clamp(84px,14vw,190px);line-height:.82;letter-spacing:-.06em;font-variant-numeric:tabular-nums;margin:0}
+.inum small{font-size:.32em;color:var(--accent-text);letter-spacing:0;margin-left:.06em}
+.istage{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.ilabel{font-family:var(--display);font-weight:800;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;margin:0;text-align:right}
+.iparts{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.ipart{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 13px;border-radius:999px;border:1.5px dashed var(--line);font-weight:700;font-size:13.5px;color:var(--muted);transition:all .35s cubic-bezier(.2,.8,.2,1)}
+.ipart i{width:10px;height:10px;border-radius:50%;background:var(--line);transition:background .3s}
+.ipart-on{border-style:solid;border-color:var(--glow);background:var(--surface);color:var(--ink);box-shadow:0 0 18px -6px rgba(91,140,255,.6);transform:translateY(-3px)}
+@media (max-width:620px){.istage{align-items:flex-start}.ilabel{text-align:left}.iparts{justify-content:flex-start}}
+
+/* peek drawer */
+.scrim{position:fixed;top:0;left:0;right:0;bottom:0;z-index:65;background:rgba(14,26,58,.38);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:fade .3s}
+.peek{position:fixed;top:0;right:0;bottom:0;z-index:66;width:min(500px,100vw);background:var(--surface);overflow-y:auto;box-shadow:-30px 0 70px -30px var(--shadow);animation:slidein .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.pktop{position:relative;padding:calc(env(safe-area-inset-top, 0px) + 24px) 24px 28px;overflow:hidden;min-height:250px;display:flex;flex-direction:column;justify-content:flex-end}
+.pktop .glyph{opacity:.2}
+.pkx{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 16px);right:16px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.75);color:var(--tile-ink);display:grid;place-items:center;cursor:pointer;z-index:1}
+.pkbody{padding:24px;display:flex;flex-direction:column;gap:18px;flex:1}
+.pkbody p{margin:0;font-size:16.5px;line-height:1.7;color:var(--muted)}
+.note{font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--surface2);border-radius:14px;padding:10px 12px;line-height:1.5}
+
+/* chat */
+.fab{position:fixed;right:calc(env(safe-area-inset-right, 0px) + 22px);bottom:calc(env(safe-area-inset-bottom, 0px) + 22px);z-index:60;width:62px;height:62px;border-radius:50%;border:0;background:var(--blue);color:#FFFFFF;display:grid;place-items:center;cursor:pointer;box-shadow:0 16px 30px -10px rgba(47,91,255,.75);transition:transform .25s}
+.fab:hover{transform:scale(1.08) rotate(-8deg)}
+.chat{position:fixed;right:calc(env(safe-area-inset-right, 0px) + 22px);bottom:calc(env(safe-area-inset-bottom, 0px) + 98px);z-index:60;width:min(392px, calc(100vw - 32px));height:min(560px, calc(100vh - 140px));display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:0 30px 70px -30px var(--shadow);overflow:hidden;animation:pop .35s cubic-bezier(.2,.8,.2,1);transform-origin:bottom right}
+@media (max-width:480px){.chat{right:16px}.fab{right:16px}}
+.chh{display:flex;align-items:center;gap:12px;padding:14px 12px 14px 16px;background:var(--blue);color:#FFFFFF}
+.chav{width:40px;height:40px;border-radius:14px;background:var(--gold);color:var(--tile-ink);display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:14px;flex:none}
+.chh p{margin:0}
+.cht{font-family:var(--display);font-weight:800;font-size:17px}
+.chs{font-size:12.5px;opacity:.9;margin-top:2px}
+.xb{width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;cursor:pointer;color:inherit;margin-left:auto;flex:none}
+.msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:86%;padding:11px 14px;border-radius:20px;font-size:14.5px;line-height:1.55;white-space:pre-line}
+.bub-bot{background:var(--surface2);border-bottom-left-radius:6px;align-self:flex-start}
+.bub-me{background:var(--blue);color:#FFFFFF;border-bottom-right-radius:6px;align-self:flex-end}
+.typing{display:flex;gap:5px;align-items:center;height:18px}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+.sugs{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px}
+.sug{min-height:36px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-size:13px;font-weight:600;cursor:pointer;text-align:left}
+.sug:hover{border-color:var(--blue)}
+.cform{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.cin{flex:1;min-width:0;height:48px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);padding:0 16px;font:inherit;font-size:14.5px}
+.cin::placeholder{color:var(--muted)}
+.csend{width:48px;height:48px;border:0;border-radius:50%;background:var(--gold);color:var(--tile-ink);display:grid;place-items:center;cursor:pointer;flex:none}
+.demo{margin:0;padding:0 16px 12px;font-size:11.5px;color:var(--muted)}
+
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pagein{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.track,.chat,.peek,.page,.wcard,.itag i{animation:none}.intro{transition:none}}
+</style>
+</helmet>
+<div class="root {{themeClass}}" onMouseMove="{{onMove}}">
+
+<canvas class="{{glCls}}" ref="{{setCanvas}}" aria-hidden="true"></canvas>
+
+<sc-if value="{{showIntroLayer}}" hint-placeholder-val="{{ false }}">
+<div class="{{introCls}}" aria-hidden="{{introHidden}}">
+  <div class="itop">
+    <span class="ilogo">argy<span>.</span></span>
+    <button class="iskip" onClick="{{skipIntro}}">{{c.skip}} →</button>
+  </div>
+  <div class="ibot">
+    <p class="inum">{{introPctPad}}<small>%</small></p>
+    <div class="istage">
+      <p class="ilabel" aria-live="polite">{{introLabel}}</p>
+      <div class="iparts"><sc-for list="{{introParts}}" as="pt" hint-placeholder-count="4"><span class="{{pt.cls}}"><i style="background: {{pt.dot}}"></i>{{pt.t}}</span></sc-for></div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="navin">
+      <button class="logo" onClick="{{goHome}}" aria-label="argy · {{navHome}}">argy<span>.</span></button>
+      <nav class="links" aria-label="{{c.navLabel}}">
+        <sc-for list="{{navLinks}}" as="n" hint-placeholder-count="4"><button class="{{n.cls}}" onClick="{{n.go}}" aria-current="{{n.cur}}">{{n.label}}</button></sc-for>
+      </nav>
+      <div class="tools">
+        <div class="lang" role="group" aria-label="{{c.langLabel}}">
+          <button class="{{idCls}}" onClick="{{setID}}" aria-pressed="{{isID}}">ID</button>
+          <button class="{{enCls}}" onClick="{{setEN}}" aria-pressed="{{isEN}}">EN</button>
+        </div>
+        <button class="ib" onClick="{{toggleTheme}}" aria-label="{{c.themeLabel}}">
+          <sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a7 7 0 0 0 10.7 10.7z"></path></svg></sc-if>
+          <sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"></path></svg></sc-if>
+        </button>
+        <button class="askb" onClick="{{toggleChat}}" aria-expanded="{{chatOpen}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path></svg><span>{{c.askLabel}}</span></button>
+      </div>
+    </div>
+    <nav class="mlinks" aria-label="{{c.navLabel}}">
+      <sc-for list="{{navLinks}}" as="n" hint-placeholder-count="4"><button class="{{n.cls}}" onClick="{{n.go}}">{{n.label}}</button></sc-for>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ============ BERANDA ============ -->
+<sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+<div class="page">
+<section id="h-hero" class="hero">
+  <div class="wrap">
+    <div class="herobox">
+      <span class="hello"><span class="av">AF</span>{{c.hello}}<span class="live" aria-hidden="true"></span></span>
+      <h1 class="h1">{{c.h1a}}<span class="mark">{{c.h1b}}</span>{{c.h1c}}<span class="blue">{{c.h1d}}</span>{{c.h1e}}</h1>
+      <p class="lead">{{c.lead}}</p>
+      <div class="ctas">
+        <button class="btn btn-blue" onClick="{{goWork}}">{{c.ctaWork}}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        <button class="btn btn-line" onClick="{{openChat}}">{{c.ctaAsk}}</button>
+      </div>
+      <div class="stickers" aria-label="{{c.focusLabel}}">
+        <span class="stk s1">Next.js</span><span class="stk s2">Flutter</span><span class="stk s3">Three.js</span><span class="stk s4">{{time}} WIB · Indonesia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true">
+  <div class="track">
+    <sc-for list="{{marquee}}" as="m" hint-placeholder-count="8"><span class="mi">{{m.t}}<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6-2.6 7.9-2.6-7.9L1.5 12l7.9-2.6z" fill="#E3B34C"></path></svg></span></sc-for>
+  </div>
+</div>
+
+<section id="h-work" class="sec">
+  <div class="wrap">
+    <div class="shead">
+      <div><span class="eyebrow"><i></i>{{c.workEyebrow}}</span><h2 class="h2">{{c.workTitle}}</h2></div>
+      <p class="ssub">{{c.workSub}}</p>
+    </div>
+    <div class="bento">
+      <sc-for list="{{featured}}" as="p" hint-placeholder-count="3">
+      <button class="{{p.cls}}" style="background: {{p.bg}}; color: {{p.fg}}" onClick="{{p.peek}}" aria-label="{{p.aria}}">
+        <span class="glyph" aria-hidden="true">{{p.glyph}}</span>
+        <span class="ttop"><span class="idx">{{p.idx}}</span><span class="pill" style="color: {{p.ink}}"><i></i>{{p.status}}</span></span>
+        <span class="tbot">
+          <span style="display: block; min-width: 0">
+            <span class="tname">{{p.name}}</span>
+            <span class="tkind">{{p.kind}}</span>
+            <sc-if value="{{p.big}}" hint-placeholder-val="{{ false }}"><span class="tdesc">{{p.overview}}</span></sc-if>
+          </span>
+          <span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </span>
+      </button>
+      </sc-for>
+      <button class="tile tball" onClick="{{goWork}}">
+        <span class="tallin">
+          <span><span class="tname">{{c.allWork}}</span><span class="tkind">{{c.allWorkSub}}</span></span>
+          <span class="arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="h-about" class="sec">
+  <div class="wrap about">
+    <div class="aboutspace" aria-hidden="true"></div>
+    <div>
+      <span class="eyebrow"><i></i>{{c.aboutEyebrow}}</span>
+      <p class="quote">{{c.quote}}</p>
+      <div class="prose"><p>{{c.bio1}}</p></div>
+      <div class="stats">
+        <div class="stat st1"><b>1.800+</b><span>{{c.stat1}}</span></div>
+        <div class="stat st2"><b>13</b><span>{{c.stat2}}</span></div>
+        <div class="stat st3"><b>8</b><span>{{c.stat3}}</span></div>
+      </div>
+      <div class="ctas" style="margin-top: 30px"><button class="btn btn-line" onClick="{{goAbout}}">{{c.moreAbout}} →</button></div>
+    </div>
+  </div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ /karya ============ -->
+<sc-if value="{{isWork}}" hint-placeholder-val="{{ false }}">
+<div class="page">
+<section id="w-head" class="phero">
+  <div class="wrap">
+    <div class="pherobox">
+      <div class="crumbs"><button onClick="{{goHome}}">{{navHome}}</button><span>/</span><b>{{navWork}}</b></div>
+      <h1 class="h1p">{{c.workPageA}}<span class="mark">{{c.workPageB}}</span></h1>
+      <p class="lead">{{c.workPageSub}}</p>
+    </div>
+  </div>
+</section>
+<section id="w-grid" class="sec" style="padding-top: 10px">
+  <div class="wrap">
+    <div class="filters" role="group" aria-label="{{c.filterLabel}}">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="6"><button class="{{f.cls}}" onClick="{{f.pick}}" aria-pressed="{{f.on}}">{{f.label}}<small>{{f.count}}</small></button></sc-for>
+    </div>
+    <div class="wgrid">
+      <sc-for list="{{workList}}" as="p" hint-placeholder-count="6">
+      <button class="wcard" onClick="{{p.go}}" aria-label="{{p.aria}}">
+        <span class="wtop" style="background: {{p.bg}}; color: {{p.fg}}">
+          <span class="glyph" aria-hidden="true">{{p.glyph}}</span>
+          <span class="idx" style="position: relative">{{p.idx}}</span>
+          <span class="pill" style="position: relative; color: {{p.ink}}"><i></i>{{p.status}}</span>
+        </span>
+        <span class="wbody">
+          <span class="wname">{{p.name}}</span>
+          <span class="wkind">{{p.kind}} · {{p.year}}</span>
+          <span class="wfoot"><span class="chips"><sc-for list="{{p.stack3}}" as="s" hint-placeholder-count="3"><span>{{s.t}}</span></sc-for></span><span class="arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
+        </span>
+      </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ /karya/[slug] ============ -->
+<sc-if value="{{isProject}}" hint-placeholder-val="{{ false }}">
+<div class="page">
+<section id="p-hero" class="phero">
+  <div class="wrap">
+    <div class="pherobox">
+      <div class="crumbs"><button onClick="{{goHome}}">{{navHome}}</button><span>/</span><button onClick="{{goWork}}">{{navWork}}</button><span>/</span><b>{{proj.name}}</b></div>
+      <span class="eyebrow"><i></i>{{proj.kind}}</span>
+      <h1 class="h1p">{{proj.name}}</h1>
+      <p class="lead">{{proj.overview}}</p>
+      <div class="ctas">
+        <sc-if value="{{proj.hasLink}}" hint-placeholder-val="{{ true }}"><a class="btn btn-blue" href="{{proj.link}}" target="_blank" rel="noopener">{{c.visit}} {{proj.linkLabel}} ↗</a></sc-if>
+        <button class="btn btn-line" onClick="{{askProject}}">{{c.askProject}}</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="p-body" class="sec" style="padding-top: 10px">
+  <div class="wrap">
+    <div class="cover" style="background: {{proj.bg}}; color: {{proj.fg}}">
+      <span class="glyph" aria-hidden="true">{{proj.glyph}}</span>
+      <dl class="meta">
+        <div><dt>{{c.kRole}}</dt><dd>{{proj.role}}</dd></div>
+        <div><dt>{{c.kYear}}</dt><dd>{{proj.year}}</dd></div>
+        <div><dt>{{c.kStatus}}</dt><dd>{{proj.status}}</dd></div>
+        <div><dt>{{c.kType}}</dt><dd>{{proj.catLabel}}</dd></div>
+      </dl>
+    </div>
+    <div class="pbody">
+      <div class="card">
+        <h2 class="h3">{{c.highlights}}</h2>
+        <ul class="hl">
+          <sc-for list="{{proj.hl}}" as="h" hint-placeholder-count="3"><li><i style="background: {{proj.chipBg}}">{{h.n}}</i><span>{{h.t}}</span></li></sc-for>
+        </ul>
+      </div>
+      <aside class="side">
+        <div class="card"><h2 class="h3">Stack</h2><div class="chips"><sc-for list="{{proj.stack}}" as="s" hint-placeholder-count="4"><span>{{s.t}}</span></sc-for></div></div>
+        <button class="btn btn-yellow" onClick="{{askProject}}">{{c.askProject}}</button>
+      </aside>
+    </div>
+    <div class="shots">
+      <div class="shot">[Screenshot 1 · {{proj.name}}]</div>
+      <div class="shot">[Screenshot 2 · {{proj.name}}]</div>
+    </div>
+    <div class="pn">
+      <button class="pnb" onClick="{{prevProj.go}}"><small>← {{c.prev}}</small><b>{{prevProj.name}}</b></button>
+      <button class="pnb next" onClick="{{nextProj.go}}"><small>{{c.next}} →</small><b>{{nextProj.name}}</b></button>
+    </div>
+  </div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ /tentang ============ -->
+<sc-if value="{{isAbout}}" hint-placeholder-val="{{ false }}">
+<div class="page">
+<section id="a-hero" class="phero">
+  <div class="wrap">
+    <div class="pherobox">
+      <div class="crumbs"><button onClick="{{goHome}}">{{navHome}}</button><span>/</span><b>{{navAbout}}</b></div>
+      <h1 class="h1p">{{c.aboutPageA}}<span class="mark">{{c.aboutPageB}}</span></h1>
+      <p class="lead">{{c.aboutLead}}</p>
+      <div class="ctas">
+        <a class="btn btn-blue" href="#a-hero">{{c.cv}}</a>
+        <button class="btn btn-line" onClick="{{goWork}}">{{c.ctaWork}}</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="a-profile" class="sec" style="padding-top: 10px">
+  <div class="wrap">
+    <div class="agrid">
+      <div class="portrait"><span class="glyph" aria-hidden="true">AF</span><span>[{{c.photo}}]</span></div>
+      <div class="card prose"><p>{{c.bio1}}</p><p>{{c.bio2}}</p><p style="margin: 0">{{c.bio3}}</p></div>
+      <div class="card"><dl class="facts"><sc-for list="{{c.facts}}" as="f" hint-placeholder-count="4"><div class="fact"><dt>{{f.k}}</dt><dd>{{f.v}}</dd></div></sc-for></dl></div>
+    </div>
+    <div class="stats" style="margin-top: 34px">
+      <div class="stat st1"><b>1.800+</b><span>{{c.stat1}}</span></div>
+      <div class="stat st2"><b>13</b><span>{{c.stat2}}</span></div>
+      <div class="stat st3"><b>8</b><span>{{c.stat3}}</span></div>
+    </div>
+  </div>
+</section>
+<section id="a-stack" class="sec">
+  <div class="wrap">
+    <div class="shead" style="justify-content: flex-end; text-align: right"><div><span class="eyebrow"><i></i>Stack</span><h2 class="h2" style="margin-left: auto">{{c.stackTitle}}</h2></div></div>
+    <div class="stackgrid">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="4"><div class="sg"><div class="sgh"><span class="sgi" style="background: {{g.color}}">{{g.code}}</span><b>{{g.title}}</b></div><div class="chips"><sc-for list="{{g.items}}" as="it" hint-placeholder-count="4"><span>{{it.t}}</span></sc-for></div></div></sc-for>
+    </div>
+  </div>
+</section>
+<section id="a-journey" class="sec">
+  <div class="wrap">
+    <div class="shead"><div><span class="eyebrow"><i></i>{{c.journeyEyebrow}}</span><h2 class="h2">{{c.journeyTitle}}</h2></div></div>
+    <div class="jgrid">
+      <sc-for list="{{timeline}}" as="e" hint-placeholder-count="4"><article class="jc"><span class="jyear" style="background: {{e.color}}">{{e.when}}</span><h3 class="jt">{{e.title}}</h3><p class="jr">{{e.role}}</p><p class="jd">{{e.desc}}</p></article></sc-for>
+    </div>
+  </div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ shared: contact + footer ============ -->
+<section id="s-contact" class="sec">
+  <div class="wrap">
+    <div class="cbox">
+      <span class="eyebrow"><i></i>{{c.contactEyebrow}}</span>
+      <h2 class="cbig">{{c.contactTitle}}</h2>
+      <p class="csub">{{c.contactSub}}</p>
+      <div class="crow">
+        <div class="mailpill"><code>[email kamu]</code><button class="copyb" onClick="{{copyEmail}}">{{copyLabel}}</button></div>
+        <a class="cl" href="https://github.com/Argy1" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="cl" href="#s-contact">LinkedIn · [link]</a>
+        <button class="cl" onClick="{{openChat}}">{{c.askLabel}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot"><span>© 2026 Argy Fawwaz Akbar</span><span>{{c.footer}}</span><button onClick="{{toTop}}">{{c.backTop}} ↑</button></div>
+</section>
+
+</main>
+
+<div class="route" aria-live="polite"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span>argy.dev<b>{{routePath}}</b></span><small>{{routeNote}}</small></div>
+
+<!-- peek drawer (intercepting route) -->
+<sc-if value="{{peekOpen}}" hint-placeholder-val="{{ false }}">
+<div class="scrim" onClick="{{closePeek}}"></div>
+<aside class="peek" role="dialog" aria-label="{{pk.name}}">
+  <div class="pktop" style="background: {{pk.bg}}; color: {{pk.fg}}">
+    <span class="glyph" aria-hidden="true">{{pk.glyph}}</span>
+    <button class="pkx" onClick="{{closePeek}}" aria-label="{{c.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+    <span class="idx" style="position: relative">{{pk.idx}} · {{pk.kind}}</span>
+    <span class="tname" style="font-size: 40px; margin-top: 8px; position: relative">{{pk.name}}</span>
+  </div>
+  <div class="pkbody">
+    <p>{{pk.overview}}</p>
+    <div class="chips"><sc-for list="{{pk.stack}}" as="s" hint-placeholder-count="4"><span>{{s.t}}</span></sc-for></div>
+    <button class="btn btn-blue" onClick="{{openFull}}" style="justify-content: center">{{c.openFull}} →</button>
+    <p class="note">{{c.peekNote}}</p>
+  </div>
+</aside>
+</sc-if>
+
+<sc-if value="{{chatOpen}}" hint-placeholder-val="{{ false }}">
+<div class="chat" role="dialog" aria-label="{{c.chatTitle}}">
+  <div class="chh"><span class="chav" aria-hidden="true">AI</span><div><p class="cht">{{c.chatTitle}}</p><p class="chs">{{c.chatSub}}</p></div><button class="xb" onClick="{{closeChat}}" aria-label="{{c.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div>
+  <div class="msgs" ref="{{setMsgs}}" aria-live="polite">
+    <sc-for list="{{messages}}" as="m" hint-placeholder-count="1"><div class="{{m.cls}}">{{m.text}}</div></sc-for>
+    <sc-if value="{{typing}}" hint-placeholder-val="{{ false }}"><div class="bub bub-bot"><div class="typing"><span></span><span></span><span></span></div></div></sc-if>
+  </div>
+  <div class="sugs"><sc-for list="{{suggestions}}" as="q" hint-placeholder-count="3"><button class="sug" onClick="{{q.pick}}">{{q.t}}</button></sc-for></div>
+  <div class="cform">
+    <label class="sr" for="chat-input">{{c.chatPlaceholder}}</label>
+    <input id="chat-input" class="cin" type="text" autocomplete="off" placeholder="{{c.chatPlaceholder}}" value="{{chatInput}}" onChange="{{onChatInput}}" onKeyDown="{{onChatKey}}">
+    <button class="csend" onClick="{{sendChat}}" aria-label="{{c.send}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+  </div>
+  <p class="demo">{{c.demo}}</p>
+</div>
+</sc-if>
+
+<button class="fab" onClick="{{toggleChat}}" aria-expanded="{{chatOpen}}" aria-label="{{c.askLabel}}">
+  <sc-if value="{{chatClosed}}" hint-placeholder-val="{{ true }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-linecap="round" stroke-width="3"></path></svg></sc-if>
+  <sc-if value="{{chatOpen}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></sc-if>
+</button>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startTheme":{"editor":"enum","options":["light","dark"],"default":"light"},"startLang":{"editor":"enum","options":["id","en"],"default":"id"},"showIntro":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":5200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var p = props || {};
+    this.state = {
+      theme: p.startTheme || 'light', lang: p.startLang || 'id',
+      introPct: 0, introDone: false, introGone: false,
+      route: 'home', slug: 'klik', peek: null, filter: 'all',
+      sec: 0, copied: false,
+      chatOpen: false, chatInput: '', typing: false, messages: [{ role: 'bot', greet: true }],
+      time: this.clock()
+    };
+    this._m = { x: 0, y: 0, tx: 0, ty: 0 };
+    this._obj = { x: 0.5, y: 0, s: 1.1, a: 1 };
+    this._spin = 0; this._vel = 0; this._lastY = 0;
+    var self = this;
+    this.setCanvas = function (el) { if (!el) { self.stopGL(); self._canvas = null; return; } if (self._canvas === el) return; self._canvas = el; self.initGL(el); };
+    this.setMsgs = function (el) { self._msgsEl = el; };
+    this.toggleTheme = function () { self.setState({ theme: self.state.theme === 'dark' ? 'light' : 'dark' }); };
+    this.setID = function () { self.setState({ lang: 'id' }); };
+    this.setEN = function () { self.setState({ lang: 'en' }); };
+    this.openChat = function () { self.setState({ chatOpen: true }); };
+    this.closeChat = function () { self.setState({ chatOpen: false }); };
+    this.toggleChat = function () { self.setState({ chatOpen: !self.state.chatOpen }); };
+    this.goHome = function () { self.go('home'); };
+    this.goWork = function () { self.go('work'); };
+    this.goAbout = function () { self.go('about'); };
+    this.closePeek = function () { self.setState({ peek: null }); };
+    this.skipIntro = function () { self.finishIntro(); };
+    this.openFull = function () { var s = self.state.peek; self.go('project', s); };
+    this.toTop = function () { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } };
+    this.askProject = function () { var pr = self.findProj(self.state.slug); self.setState({ chatOpen: true }); self.send((self.state.lang === 'en' ? 'Tell me about ' : 'Ceritakan tentang ') + pr.name); };
+    this.onMove = function (e) { var w = window.innerWidth || 1, h = window.innerHeight || 1; self._m.tx = (e.clientX / w) * 2 - 1; self._m.ty = -((e.clientY / h) * 2 - 1); };
+    this.onChatInput = function (e) { self.setState({ chatInput: e.target.value }); };
+    this.onChatKey = function (e) { if (e.key === 'Enter') { e.preventDefault(); self.send(self.state.chatInput); } };
+    this.sendChat = function () { self.send(self.state.chatInput); };
+    this.copyEmail = function () {
+      var done = function () { self.setState({ copied: true }); clearTimeout(self._ct); self._ct = setTimeout(function () { self.setState({ copied: false }); }, 1600); };
+      try { navigator.clipboard.writeText('[email kamu]').then(done, done); } catch (e) { done(); }
+    };
+    this._onScroll = function () { self.readScroll(); };
+  }
+
+  clock() { try { return new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit' }); } catch (e) { return '--.--'; } }
+
+  go(route, slug) {
+    var o = { route: route, peek: null, sec: 0 };
+    if (slug) o.slug = slug;
+    this.setState(o);
+    this._lastY = 0;
+    try { window.scrollTo(0, 0); } catch (e) {}
+    this._vel += 0.6;
+  }
+
+  findProj(slug) { var all = this.projects(); for (var i = 0; i < all.length; i++) { if (all[i].slug === slug) return all[i]; } return all[0]; }
+
+  sectionIds() {
+    var r = this.state.route;
+    if (r === 'work') return ['w-head', 'w-grid', 's-contact'];
+    if (r === 'project') return ['p-hero', 'p-body', 's-contact'];
+    if (r === 'about') return ['a-hero', 'a-profile', 'a-stack', 'a-journey', 's-contact'];
+    return ['h-hero', 'h-work', 'h-about', 's-contact'];
+  }
+
+  targets() {
+    var r = this.state.route;
+    if (r === 'work') return [[0.62, 0.02, 0.85, 1], [0.9, 0.36, 0.38, 0.9], [0.66, 0.0, 0.8, 1]];
+    if (r === 'project') return [[0.6, 0.0, 0.85, 1], [0.9, 0.36, 0.36, 0.9], [0.66, 0.0, 0.8, 1]];
+    if (r === 'about') return [[0.6, -0.02, 0.95, 1], [0.92, 0.34, 0.36, 0.9], [-0.84, 0.25, 0.45, 0.95], [0.86, 0.3, 0.45, 0.95], [0.66, 0.0, 0.8, 1]];
+    return [[0.56, -0.02, 1.15, 1], [0.8, 0.3, 0.5, 1], [-0.52, -0.04, 1.0, 1], [0.66, 0.0, 0.8, 1]];
+  }
+
+  componentDidMount() {
+    var self = this;
+    if (this.props.showIntro === false) { this.setState({ introPct: 100, introDone: true, introGone: true }); }
+    else {
+      var marks = [26, 50, 74, 97];
+      this._iv = setInterval(function () {
+        var prev = self.state.introPct;
+        var next = Math.min(100, prev + 1 + Math.floor(Math.random() * 3));
+        for (var i = 0; i < marks.length; i++) { if (prev < marks[i] && next >= marks[i]) { self._vel += 0.22; self._glw = Math.max(self._glw || 0, 0.55); } }
+        self.setState({ introPct: next });
+        if (next >= 100) { clearInterval(self._iv); self._t1 = setTimeout(function () { self.finishIntro(); }, 650); }
+      }, 46);
+    }
+    this._clock = setInterval(function () { self.setState({ time: self.clock() }); }, 20000);
+    try { window.addEventListener('scroll', this._onScroll, { passive: true }); window.addEventListener('resize', this._onScroll); } catch (e) {}
+    this.readScroll();
+  }
+
+  finishIntro() {
+    var self = this;
+    clearInterval(this._iv); clearTimeout(this._t1); clearTimeout(this._t2);
+    this._vel += 0.45; this._glw = 1.5;
+    this.setState({ introPct: 100, introDone: true });
+    this._t2 = setTimeout(function () { self.setState({ introGone: true }); }, 900);
+  }
+
+  readScroll() {
+    var ids = this.sectionIds();
+    var vh = window.innerHeight || 800; var cur = 0;
+    for (var i = 0; i < ids.length; i++) { var el = document.getElementById(ids[i]); if (el && el.getBoundingClientRect().top < vh * 0.5) cur = i; }
+    var y = window.scrollY || 0; this._vel += (y - this._lastY) * 0.004; this._lastY = y;
+    if (cur !== this.state.sec) this.setState({ sec: cur });
+  }
+
+  componentDidUpdate() { if (this._msgsEl) this._msgsEl.scrollTop = this._msgsEl.scrollHeight; }
+
+  componentWillUnmount() {
+    clearInterval(this._iv); clearInterval(this._clock); clearTimeout(this._t1); clearTimeout(this._t2); clearTimeout(this._rt); clearTimeout(this._ct);
+    try { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); } catch (e) {}
+    this.stopGL();
+  }
+
+  stopGL() { if (this._raf) cancelAnimationFrame(this._raf); this._raf = null; }
+
+  initGL(el) {
+    var self = this; var gl = null;
+    try { gl = el.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false }); } catch (e) { gl = null; }
+    if (!gl) return;
+    var vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+    var fs = [
+      'precision highp float;',
+      'uniform vec2 R;uniform float T;uniform vec2 M;uniform vec3 O;uniform float A;uniform float SP;uniform float TH;uniform float AS;uniform float GLW;uniform float TL;',
+      'mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}',
+      'float sdRB(vec3 p,vec3 b,float r){vec3 q=abs(p)-b;return length(max(q,0.))+min(max(q.x,max(q.y,q.z)),0.)-r;}',
+      'float sdSeg(vec2 p,vec2 a,vec2 b){vec2 pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*h);}',
+      'float pk(float a,float b){float k=clamp((AS-a)/(b-a),0.,1.);return 1.-pow(1.-k,3.);}',
+      'float letters(vec2 q){',
+      ' float d=sdSeg(q,vec2(-.30,-.13),vec2(-.19,.13));',
+      ' d=min(d,sdSeg(q,vec2(-.19,.13),vec2(-.08,-.13)));',
+      ' d=min(d,sdSeg(q,vec2(-.255,-.03),vec2(-.125,-.03)));',
+      ' d=min(d,sdSeg(q,vec2(.07,-.13),vec2(.07,.13)));',
+      ' d=min(d,sdSeg(q,vec2(.07,.13),vec2(.25,.13)));',
+      ' d=min(d,sdSeg(q,vec2(.07,.015),vec2(.21,.015)));',
+      ' return d-.021;}',
+      'vec3 rotL(vec3 p){p.yz*=rot(TL+M.y*.35);p.xz*=rot(T*.16+SP+M.x*.8+.65);return p;}',
+      'vec3 toLocal(vec3 p){p.y-=.04*sin(T*1.1);return rotL(p);}',
+      'float legs(vec3 p,float k){',
+      ' float s=.18;float L=.1*k+.002;',
+      ' vec3 a=p;a.z=abs(a.z);a.x-=s*(clamp(floor(a.x/s),-4.,3.)+.5);',
+      ' float l1=sdRB(a-vec3(0.,-.02,1.0+L),vec3(.03,.014,L),.006);',
+      ' vec3 b=p.zyx;b.z=abs(b.z);b.x-=s*(clamp(floor(b.x/s),-4.,3.)+.5);',
+      ' float l2=sdRB(b-vec3(0.,-.02,1.0+L),vec3(.03,.014,L),.006);',
+      ' return min(l1,l2);}',
+      'vec2 map(vec3 w){',
+      ' vec3 p=toLocal(w);',
+      ' float k1=pk(0.,.26),k2=pk(.22,.5),k3=pk(.46,.72),k4=pk(.7,.97);',
+      ' vec2 r=vec2(9.,0.);',
+      ' if(k1>.02){vec3 q=(p-vec3(0.,-2.4,0.)*(1.-k1))/k1;float sub=sdRB(q,vec3(.95,.045,.95),.04)*k1;r=vec2(sub,1.);}',
+      ' if(k2>.02){float lg=legs(p,k2);if(lg<r.x)r=vec2(lg,2.);}',
+      ' if(k3>.02){vec3 q=p-vec3(0.,.08+2.*(1.-k3),0.);float die=sdRB(q,vec3(.36*k3+.001,.03,.36*k3+.001),.012);if(die<r.x)r=vec2(die,5.);}',
+      ' if(k4>.02){vec3 q=p-vec3(0.,.15+2.6*(1.-k4),0.);q.xz*=rot((1.-k4)*1.8);float ihs=sdRB(q,vec3(.66,.045,.66),.05);',
+      '  float eng=max(letters(vec2(q.x,-q.z)),-(q.y-.075));ihs=max(ihs,-eng);if(ihs<r.x)r=vec2(ihs,3.);}',
+      ' return r;}',
+      'vec3 nor(vec3 p){vec2 e=vec2(.0012,0.);return normalize(vec3(map(p+e.xyy).x-map(p-e.xyy).x,map(p+e.yxy).x-map(p-e.yxy).x,map(p+e.yyx).x-map(p-e.yyx).x));}',
+      'vec3 env(vec3 d){',
+      ' float y=d.y*.5+.5;',
+      ' vec3 lo=mix(vec3(.5,.55,.68),vec3(.04,.05,.09),TH);',
+      ' vec3 hi=mix(vec3(1.,1.,1.),vec3(.32,.37,.52),TH);',
+      ' vec3 c=mix(lo,hi,smoothstep(0.,1.,y));',
+      ' float a=atan(d.x,d.z);',
+      ' c+=vec3(1.)*smoothstep(.965,1.,sin(a*2.+.9))*smoothstep(-.2,.6,d.y)*mix(.8,1.5,TH);',
+      ' c+=vec3(.25,.42,1.)*smoothstep(.35,1.,-d.x*.85+d.y*.2)*.45;',
+      ' c+=vec3(1.,.82,.5)*smoothstep(.45,1.,d.x*.8+d.y*.35)*.3;',
+      ' return c;}',
+      'float traces(vec3 lp){',
+      ' float ax=abs(lp.x),az=abs(lp.z);float m=max(ax,az);',
+      ' if(m<.71||m>.97)return 0.;',
+      ' float s=.18;float al=az>ax?lp.x:lp.z;',
+      ' float qx=al-s*(clamp(floor(al/s),-4.,3.)+.5);',
+      ' float line=(1.-smoothstep(.007,.016,abs(qx)))*step(abs(al),.72);',
+      ' float bus=(1.-smoothstep(.003,.01,abs(m-.82)));',
+      ' return max(line,bus*.55);}',
+      'void main(){',
+      ' vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;uv=(uv-O.xy)/O.z;',
+      ' vec3 ro=vec3(0.,.1,4.3);vec3 rd=normalize(vec3(uv,-1.9));',
+      ' float t=0.;float hit=0.;float id=0.;',
+      ' for(int i=0;i<90;i++){vec2 h=map(ro+rd*t);if(h.x<.0012){hit=1.;id=h.y;break;}t+=h.x*.9;if(t>9.)break;}',
+      ' if(hit<.5){',
+      '  if(rd.y<0.){float ft=(-1.45-ro.y)/rd.y;vec3 fp=ro+rd*ft;float sh=(1.-smoothstep(0.,1.35,length(fp.xz*vec2(1.,1.5))))*mix(.18,.34,TH)*clamp(AS*1.3,0.,1.);gl_FragColor=vec4(mix(vec3(.05,.08,.2),vec3(0.),TH)*sh*A,sh*A);return;}',
+      '  gl_FragColor=vec4(0.);return;}',
+      ' vec3 p=ro+rd*t;vec3 n=nor(p);vec3 rf=reflect(rd,n);',
+      ' vec3 lp=toLocal(p);vec3 ln=rotL(n);',
+      ' vec3 L=normalize(vec3(-.4,.9,.55));',
+      ' float dif=clamp(dot(n,L)*.5+.5,0.,1.);',
+      ' float sp=pow(max(dot(rf,L),0.),64.);',
+      ' float fr=pow(1.-max(dot(n,-rd),0.),4.);',
+      ' float ao=clamp(map(p+n*.08).x/.08,0.,1.);',
+      ' float pulse=pow(.5+.5*sin(max(abs(lp.x),abs(lp.z))*22.-T*3.5+(lp.x-lp.z)*2.),8.);',
+      ' vec3 glowC=vec3(.38,.58,1.);',
+      ' vec3 col;',
+      ' if(id<1.5){',
+      '  vec3 base=vec3(.05,.07,.17);',
+      '  col=base*(.5+.6*dif)+env(rf)*(.06+.5*fr)+vec3(1.)*sp*.5;',
+      '  float tr=traces(lp)*step(.8,ln.y);',
+      '  col=mix(col,vec3(.72,.55,.3)*(.4+.5*dif),tr*.55);',
+      '  col+=glowC*tr*(.18+.9*pulse+2.2*GLW);',
+      ' } else if(id<2.5){',
+      '  vec3 gold=vec3(1.,.77,.36);',
+      '  col=gold*(env(rf)*.8+.12)+gold*sp*1.2;',
+      ' } else if(id<3.5){',
+      '  vec3 sil=vec3(.88,.9,.94);',
+      '  float br=.94+.06*sin(lp.x*320.+sin(lp.z*9.)*2.);',
+      '  col=sil*env(rf)*.86*br+vec3(1.)*sp*.9+sil*.06;',
+      '  if(letters(vec2(lp.x,-lp.z))<.0&&ln.y>.5){col=mix(vec3(.16,.18,.24),glowC,.35+.65*clamp(GLW,0.,1.));}',
+      ' } else {',
+      '  vec3 base=vec3(.08,.06,.18);',
+      '  vec2 g=abs(fract(lp.xz*14.)-.5);float grid=1.-smoothstep(.0,.08,min(g.x,g.y));',
+      '  col=base*(.6+.5*dif)+env(rf)*.15*fr+vec3(.55,.45,1.)*grid*(.35+.8*pulse+1.5*GLW);',
+      ' }',
+      ' col*=.75+.25*ao;',
+      ' col=col/(1.+col*.12);',
+      ' gl_FragColor=vec4(clamp(col,0.,1.)*A,A);',
+      '}'
+    ].join('\n');
+    function sh(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; }
+    var v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
+    if (!v || !f) return;
+    var pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+    gl.useProgram(pr);
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var U = {}; ['R', 'T', 'M', 'O', 'A', 'SP', 'TH', 'AS', 'GLW', 'TL'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
+    var as = this.props.showIntro === false ? 1 : 0; var tl = this.props.showIntro === false ? -0.92 : -1.3; self._glw = 0;
+    var start = performance.now(); var reduce = false; var th = self.state.theme === 'dark' ? 1 : 0;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    var loop = function () {
+      self._raf = requestAnimationFrame(loop);
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      var w = Math.max(2, Math.floor(el.clientWidth * dpr * 0.6)), h = Math.max(2, Math.floor(el.clientHeight * dpr * 0.6));
+      if (el.width !== w || el.height !== h) { el.width = w; el.height = h; gl.viewport(0, 0, w, h); }
+      var asp = w / h; var narrow = asp < 0.95; var sec = self.state.sec;
+      var list = self.targets(); var tg = list[Math.min(sec, list.length - 1)];
+      var tx = tg[0] * 0.5 * asp, ty = tg[1], ts = tg[2], ta = tg[3];
+      if (narrow) { tx = sec === 0 ? 0 : tg[0] * 0.3 * asp; ty = sec === 0 ? 0.27 : ty; ts = sec === 0 ? 0.62 : ts * 0.55; ta = sec === 0 ? 1 : 0.5; }
+      if (!self.state.introDone) { tx = 0; ty = narrow ? 0.12 : 0.06; ts = narrow ? 0.72 : 0.95; ta = 1; }
+      var ease = self.state.introDone ? 0.055 : 0.12;
+      var o = self._obj; o.x += (tx - o.x) * ease; o.y += (ty - o.y) * ease; o.s += (ts - o.s) * ease; o.a += (ta - o.a) * ease;
+      as += (Math.min(1, self.state.introPct / 100) - as) * 0.1;
+      var m = self._m; m.x += (m.tx - m.x) * 0.05; m.y += (m.ty - m.y) * 0.05;
+      self._spin += self._vel; self._vel *= 0.9;
+      th += ((self.state.theme === 'dark' ? 1 : 0) - th) * 0.1;
+      gl.uniform2f(U.R, w, h); gl.uniform1f(U.T, (performance.now() - start) / 1000 * (reduce ? 0.2 : 1)); gl.uniform2f(U.M, m.x, m.y);
+      gl.uniform3f(U.O, o.x, o.y, o.s); gl.uniform1f(U.A, o.a); gl.uniform1f(U.SP, reduce ? 0 : self._spin); gl.uniform1f(U.TH, th); gl.uniform1f(U.AS, reduce ? 1 : as); self._glw *= 0.955; tl += ((self.state.introDone ? -0.92 : -1.3) - tl) * 0.045; gl.uniform1f(U.GLW, self._glw); gl.uniform1f(U.TL, tl);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+    this.stopGL(); loop();
+  }
+
+  copy() {
+    var id = {
+      navLabel: 'Navigasi utama', langLabel: 'Bahasa', themeLabel: 'Ganti tema terang/gelap', askLabel: 'Tanya AI', focusLabel: 'Fokus teknologi',
+      nav: ['Beranda', 'Karya', 'Tentang', 'Kontak'],
+      hello: 'Halo, saya Argy', h1a: 'Saya bikin web yang ', h1b: 'enak dipakai', h1c: ' dan ', h1d: 'terasa hidup', h1e: '.',
+      lead: 'Full-stack developer dan mahasiswa D4 Teknologi Rekayasa Perangkat Lunak di IPB University. Saya membangun aplikasi web dan mobile dari database sampai antarmuka, lalu menambahkan sentuhan 3D.',
+      ctaWork: 'Lihat karya', ctaAsk: 'Ngobrol dengan AI saya',
+      marquee: ['Web full-stack', 'Aplikasi mobile', 'Web 3D', 'Integrasi AI', 'UI/UX'],
+      workEyebrow: 'Karya pilihan', workTitle: 'Yang sedang saya banggakan', workSub: 'Klik kartu untuk intip ringkasannya, atau buka halaman penuhnya.',
+      allWork: 'Lihat semua 13 proyek', allWorkSub: 'Web, mobile, AI, 3D, sampai proyek kuliah dan lomba',
+      aboutEyebrow: 'Tentang saya', quote: 'Saya suka mengubah masalah nyata jadi produk yang orang senang pakai.', moreAbout: 'Kenalan lebih jauh',
+      bio1: 'Pengalaman terbesar saya datang dari membangun sistem untuk Perhimpunan Dokter Paru Indonesia, dari website organisasi sampai direktori anggota se-Indonesia.',
+      bio2: 'Saya terbiasa memegang proyek dari perencanaan sampai rilis: menulis dokumen kebutuhan, merancang database, membangun antarmuka, lalu mengujinya.',
+      bio3: 'Di luar kode, saya memodelkan 3D di Blender. Itu yang membuat saya ingin membawa kedalaman 3D ke web tanpa mengorbankan kecepatan.',
+      stat1: 'profil dokter dikelola', stat2: 'proyek di portofolio', stat3: 'gerbang logika 3D di Blender',
+      workPageA: 'Semua ', workPageB: 'karya', workPageSub: 'Dari website organisasi sampai riset machine learning. Saring berdasarkan kategori, lalu buka studi kasusnya.',
+      filterLabel: 'Filter kategori',
+      cats: { all: 'Semua', web: 'Web', mobile: 'Mobile', ai: 'AI & Data', '3d': '3D', biz: 'Bisnis' },
+      visit: 'Kunjungi', askProject: 'Tanya AI soal proyek ini', highlights: 'Sorotan', prev: 'Sebelumnya', next: 'Berikutnya',
+      kRole: 'Peran', kYear: 'Tahun', kStatus: 'Status', kType: 'Kategori',
+      openFull: 'Buka halaman penuh', peekNote: 'Panel cepat. URL sudah berganti ke halaman proyek, jadi link ini bisa dibagikan dan dibuka langsung sebagai halaman penuh.',
+      aboutPageA: 'Kenalan dengan ', aboutPageB: 'Argy', aboutLead: 'Developer full-stack dari IPB University yang suka membangun produk dari nol, dari database sampai detail animasi.',
+      cv: 'Unduh CV [tautan]', photo: 'Foto kamu',
+      facts: [{ k: 'Studi', v: 'D4 Teknologi Rekayasa Perangkat Lunak, Sekolah Vokasi IPB University' }, { k: 'Fokus', v: 'Web full-stack, aplikasi mobile, web 3D' }, { k: 'Basis', v: 'Indonesia · WIB (UTC+7)' }, { k: 'Sedang dibangun', v: 'TradeMatrix AI dan Direktori PPDS' }],
+      stackTitle: 'Alat favorit saya', journeyEyebrow: 'Perjalanan', journeyTitle: 'Jejak sejauh ini',
+      contactEyebrow: 'Kontak', contactTitle: 'Ayo bikin sesuatu bareng!', contactSub: 'Terbuka untuk proyek, kolaborasi, dan tim lomba. Kirim email, atau tanya dulu ke asisten AI saya.',
+      footer: 'Dirancang & dibangun oleh Argy', backTop: 'Kembali ke atas', skip: 'Lewati', assembling: 'Memasang', ready: 'Chip siap. Selamat datang!',
+      parts: ['Papan', 'Pin', 'Die', 'Tutup'],
+      chatTitle: 'Asisten Argy', chatSub: 'Tanya apa saja tentang portofolio ini', chatPlaceholder: 'Tulis pertanyaan…', send: 'Kirim', close: 'Tutup',
+      greeting: 'Halo! Saya asisten AI di portofolio Argy. Mau tahu proyeknya, tech stack, atau cara menghubunginya?',
+      sugs: ['Proyek apa saja?', 'Tech stack-nya apa?', 'Cerita soal PDPI', 'Cara menghubungi Argy?'],
+      demo: 'Mode demo. Di versi Next.js, asisten ini terhubung ke LLM.', copy: 'Salin', copied: 'Tersalin!', open: 'Buka detail',
+      notes: { home: 'Beranda', work: 'Daftar karya', project: 'Studi kasus', about: 'Profil', peek: 'Panel intip' },
+      paths: { work: '/karya', about: '/tentang' }
+    };
+    var en = {
+      navLabel: 'Main navigation', langLabel: 'Language', themeLabel: 'Toggle light/dark theme', askLabel: 'Ask AI', focusLabel: 'Tech focus',
+      nav: ['Home', 'Work', 'About', 'Contact'],
+      hello: "Hi, I'm Argy", h1a: 'I build web apps that feel ', h1b: 'effortless', h1c: ' and ', h1d: 'alive', h1e: '.',
+      lead: 'Full-stack developer and Software Engineering Technology student at IPB University. I build web and mobile apps from the database to the interface, then add a touch of 3D.',
+      ctaWork: 'See my work', ctaAsk: 'Chat with my AI',
+      marquee: ['Full-stack web', 'Mobile apps', '3D web', 'AI integration', 'UI/UX'],
+      workEyebrow: 'Selected work', workTitle: "What I'm proud of", workSub: 'Tap a card for a quick peek, or open its full page.',
+      allWork: 'See all 13 projects', allWorkSub: 'Web, mobile, AI, 3D, plus coursework and competitions',
+      aboutEyebrow: 'About me', quote: 'I like turning real problems into products people enjoy using.', moreAbout: 'Get to know me',
+      bio1: 'My biggest experience comes from building systems for the Indonesian Society of Respirology (PDPI), from the organization website to a nationwide member directory.',
+      bio2: 'I am used to owning projects from planning to release: writing requirements, designing the database, building the interface, then testing it.',
+      bio3: 'Outside code, I model in Blender. That is why I want to bring 3D depth to the web without giving up speed.',
+      stat1: 'doctor profiles managed', stat2: 'projects in this portfolio', stat3: 'logic gates modeled in Blender',
+      workPageA: 'All ', workPageB: 'work', workPageSub: 'From organization websites to machine learning research. Filter by category, then open the case study.',
+      filterLabel: 'Category filter',
+      cats: { all: 'All', web: 'Web', mobile: 'Mobile', ai: 'AI & Data', '3d': '3D', biz: 'Business' },
+      visit: 'Visit', askProject: 'Ask AI about this project', highlights: 'Highlights', prev: 'Previous', next: 'Next',
+      kRole: 'Role', kYear: 'Year', kStatus: 'Status', kType: 'Category',
+      openFull: 'Open full page', peekNote: 'Quick panel. The URL already points to the project page, so the link can be shared and opened directly as a full page.',
+      aboutPageA: 'Meet ', aboutPageB: 'Argy', aboutLead: 'A full-stack developer from IPB University who likes building products from scratch, from the database to the animation details.',
+      cv: 'Download CV [link]', photo: 'Your photo',
+      facts: [{ k: 'Study', v: 'D4 Software Engineering Technology, Vocational School, IPB University' }, { k: 'Focus', v: 'Full-stack web, mobile apps, 3D web' }, { k: 'Based in', v: 'Indonesia · WIB (UTC+7)' }, { k: 'Building now', v: 'TradeMatrix AI and the PPDS Directory' }],
+      stackTitle: 'My favorite tools', journeyEyebrow: 'Journey', journeyTitle: 'So far',
+      contactEyebrow: 'Contact', contactTitle: "Let's make something together!", contactSub: 'Open to projects, collaborations and competition teams. Send an email, or ask my AI assistant first.',
+      footer: 'Designed & built by Argy', backTop: 'Back to top', skip: 'Skip', assembling: 'Mounting the', ready: 'Chip ready. Welcome in!',
+      parts: ['Board', 'Pins', 'Die', 'Lid'],
+      chatTitle: "Argy's assistant", chatSub: 'Ask anything about this portfolio', chatPlaceholder: 'Type a question…', send: 'Send', close: 'Close',
+      greeting: "Hi! I'm the AI assistant on Argy's portfolio. Want to know about his projects, tech stack, or how to reach him?",
+      sugs: ['What has he built?', "What's his tech stack?", 'Tell me about PDPI', 'How do I contact Argy?'],
+      demo: 'Demo mode. In the Next.js build, this assistant connects to an LLM.', copy: 'Copy', copied: 'Copied!', open: 'Open detail',
+      notes: { home: 'Home', work: 'Work index', project: 'Case study', about: 'Profile', peek: 'Peek panel' },
+      paths: { work: '/work', about: '/about' }
+    };
+    return this.state.lang === 'en' ? en : id;
+  }
+
+  projects() {
+    var B = '#2F5BFF', G = '#E3B34C', S = '#D6DCE6', V = '#6E62F0', N = '#121A3A', W = '#FFFFFF', K = '#0F1629';
+    return [
+      { slug: 'klik-pdpi', name: 'Klik PDPI', glyph: 'KP', cat: 'web', bg: B, fg: W, year: '[tahun]', link: 'https://klikpdpi.com', linkLabel: 'klikpdpi.com', stack: ['React', 'Vite', 'TypeScript', 'shadcn/ui', 'Supabase', 'Zod'],
+        id_: { kind: 'Website organisasi', status: 'Live', role: 'Full-stack developer', overview: 'Website resmi Perhimpunan Dokter Paru Indonesia, dengan registrasi dan login anggota, formulir kontak, dan konten organisasi.', hl: ['Validasi form dengan Zod dan react-hook-form', 'Backend Supabase: Postgres dan Edge Functions', 'Form Register, Login, dan Kontak diuji dengan Boundary Value Analysis dan Equivalence Partitioning'] },
+        en: { kind: 'Organization website', status: 'Live', role: 'Full-stack developer', overview: 'Official website of the Indonesian Society of Respirology (PDPI), with member sign-up and login, contact forms and organization content.', hl: ['Form validation with Zod and react-hook-form', 'Supabase backend: Postgres and Edge Functions', 'Register, Login and Contact forms tested with Boundary Value Analysis and Equivalence Partitioning'] } },
+      { slug: 'tradematrix-ai', name: 'TradeMatrix AI', glyph: 'TM', cat: 'ai', bg: N, fg: W, year: '2026', stack: ['Next.js', 'Flutter', 'Supabase', 'Railway', 'Gemini API'],
+        id_: { kind: 'AI · Web & mobile', status: 'Dalam pengembangan', role: 'Pembuat & developer', overview: 'Aplikasi prediksi arah harga crypto, naik atau turun, yang menggabungkan analisis sentimen LLM dengan indikator teknikal. Satu backend melayani web dan mobile.', hl: ['Sentimen LLM (Gemini API) digabung dengan indikator teknikal', 'Next.js untuk web, Flutter untuk mobile, satu backend bersama', 'Database Supabase, backend di Railway'] },
+        en: { kind: 'AI · Web & mobile', status: 'In development', role: 'Creator & developer', overview: 'A crypto price-direction predictor, up or down, that combines LLM sentiment analysis with technical indicators. One backend serves web and mobile.', hl: ['LLM sentiment (Gemini API) combined with technical indicators', 'Next.js for web, Flutter for mobile, one shared backend', 'Supabase database, backend on Railway'] } },
+      { slug: 'digitalpmo', name: 'DigitalPMO', glyph: 'PMO', cat: 'mobile', bg: S, fg: K, year: '2026', stack: ['Flutter', 'FastAPI', 'PostgreSQL', 'Claude API'],
+        id_: { kind: 'Aplikasi mobile kesehatan', status: 'Dalam pengembangan', role: 'Pembuat & developer', overview: 'Aplikasi untuk memantau kepatuhan minum obat pasien TB di Indonesia. Sebelumnya bernama TBCare.', hl: ['Verifikasi foto minum obat berbasis AI', 'Tiga peran: Pasien, Pegawai PMO, dan Dokter', 'Kebutuhan klinis direvisi bersama dokter spesialis paru'] },
+        en: { kind: 'Health mobile app', status: 'In development', role: 'Creator & developer', overview: 'An app for monitoring TB treatment adherence in Indonesia. Previously called TBCare.', hl: ['AI photo verification of medication intake', 'Three roles: Patient, PMO staff and Doctor', 'Clinical requirements revised with a pulmonologist'] } },
+      { slug: 'direktori-pdpi', name: 'Direktori PDPI', glyph: 'DP', cat: 'web', bg: G, fg: K, year: '[tahun]', link: 'https://direktoripdpi.com', linkLabel: 'direktoripdpi.com', stack: ['Web app', 'Database'],
+        id_: { kind: 'Direktori anggota', status: 'Live', role: 'Full-stack developer', overview: 'Direktori anggota PDPI yang mengelola lebih dari 1.800 profil dokter paru dari seluruh Indonesia.', hl: ['Mengelola 1.800+ profil dokter paru', 'Data anggota se-Indonesia dalam satu direktori', 'Live di direktoripdpi.com'] },
+        en: { kind: 'Member directory', status: 'Live', role: 'Full-stack developer', overview: 'PDPI member directory managing more than 1,800 pulmonologist profiles from across Indonesia.', hl: ['Manages 1,800+ pulmonologist profiles', 'Nationwide member data in one directory', 'Live at direktoripdpi.com'] } },
+      { slug: 'direktori-ppds', name: 'Direktori PPDS', glyph: 'PPDS', cat: 'web', bg: V, fg: W, year: '2026', stack: ['Web app', 'Data per kabupaten'],
+        id_: { kind: 'Direktori nasional', status: 'Sedang dibangun', role: 'Full-stack developer', overview: 'Direktori PPDS, konsultan, dan fellow pulmonologi se-Indonesia untuk Kolegium Pulmonologi dan Kedokteran Respirasi Indonesia.', hl: ['Data PPDS, konsultan, dan fellow pulmonologi', 'Perencanaan distribusi per kabupaten', 'Dibangun untuk Kolegium Pulmonologi dan Kedokteran Respirasi'] },
+        en: { kind: 'National directory', status: 'In progress', role: 'Full-stack developer', overview: 'A nationwide directory of pulmonology residents, consultants and fellows for the Indonesian College of Pulmonology and Respiratory Medicine.', hl: ['Residents, consultants and fellows in one place', 'Distribution planning per regency', 'Built for the Indonesian College of Pulmonology'] } },
+      { slug: 'agrivision', name: 'AgriVision', glyph: 'AV', cat: 'ai', bg: S, fg: K, year: '2026', stack: ['Next.js', 'Flutter', 'Supabase', 'FastAPI', 'Railway'],
+        id_: { kind: 'Computer vision · Web & mobile', status: 'Proyek kuliah', role: 'Developer · Kelompok 19', overview: 'Sistem deteksi penyakit dan pemantauan kesehatan tanaman tomat dan cabai berbasis computer vision untuk precision farming.', hl: ['Klasifikasi penyakit daun dengan transfer learning CNN', 'Indeks vegetasi ExG dan VARI untuk pemantauan tanaman', 'Web Next.js dan app Flutter dengan backend Supabase + FastAPI'] },
+        en: { kind: 'Computer vision · Web & mobile', status: 'Course project', role: 'Developer · Group 19', overview: 'A computer vision system that detects diseases and monitors the health of tomato and chili plants for precision farming.', hl: ['Leaf disease classification with transfer learning CNN', 'ExG and VARI vegetation indices for crop monitoring', 'Next.js web and Flutter app on a Supabase + FastAPI backend'] } },
+      { slug: 'smart-city-traffic', name: 'Smart City Traffic', glyph: 'SCT', cat: 'ai', bg: B, fg: W, year: '2026', stack: ['Lambda Architecture', 'Python', 'Google Colab', 'Dashboard web'],
+        id_: { kind: 'Big data · IoT', status: 'Proyek kuliah', role: 'Developer', overview: 'Sistem pemantauan dan prediksi kemacetan lalu lintas kota berbasis IoT dan big data, untuk membantu perencana kota mengambil keputusan real-time.', hl: ['Lambda Architecture untuk data batch dan real-time', 'Model dilatih di Google Colab dengan dataset mobilitas smart city', 'Diuji di dashboard web memakai video lalu lintas'] },
+        en: { kind: 'Big data · IoT', status: 'Course project', role: 'Developer', overview: 'An IoT and big data system that monitors and predicts city traffic congestion to support real-time decisions by city planners.', hl: ['Lambda Architecture for batch and real-time data', 'Model trained in Google Colab on a smart city mobility dataset', 'Tested on a web dashboard using traffic video'] } },
+      { slug: 'mindra', name: 'Mindra', glyph: 'MD', cat: 'web', bg: V, fg: W, year: '2026', stack: ['Next.js', 'Flutter'],
+        id_: { kind: 'Kesehatan mental · Web', status: 'Lomba UINIC 8.0', role: 'Ketua tim', overview: 'Aplikasi kesehatan mental yang dibawa ke UINIC 8.0 Web Development Competition dalam versi web Next.js.', hl: ['Versi web Next.js dari aplikasi Flutter', 'Tim tiga orang, Argy sebagai ketua', 'Lomba oleh HMPS Informatika UIN Sunan Kalijaga'] },
+        en: { kind: 'Mental health · Web', status: 'UINIC 8.0 entry', role: 'Team lead', overview: 'A mental health app entered in the UINIC 8.0 Web Development Competition as a Next.js web version.', hl: ['Next.js web version of a Flutter app', 'Three-person team, led by Argy', 'Competition by HMPS Informatika, UIN Sunan Kalijaga'] } },
+      { slug: 'kontraku', name: 'Kontraku', glyph: 'KT', cat: 'mobile', bg: G, fg: K, year: '2026', stack: ['Mobile', 'FastAPI', 'PostgreSQL', 'Railway'],
+        id_: { kind: 'Aplikasi mobile · SaaS', status: 'Konsep & desain', role: 'Pembuat', overview: 'Aplikasi pengingat untuk pemilik kontrakan: daftar properti, lokasi, dan foto, dengan pengingat jatuh tempo sewa, perpanjangan kontrak, dan perawatan.', hl: ['Multi-user: tiap pemilik mengelola kontrakannya sendiri', 'Desain "Hangat & Jelas" dengan kartu besar yang ramah lansia', 'Direncanakan jadi SaaS untuk banyak pemilik'] },
+        en: { kind: 'Mobile app · SaaS', status: 'Concept & design', role: 'Creator', overview: 'A reminder app for rental owners: properties, locations and photos, with reminders for rent due dates, contract renewals and maintenance.', hl: ['Multi-user: each owner manages their own rentals', '"Warm & Clear" design with large, elderly-friendly cards', 'Planned as a SaaS for many owners'] } },
+      { slug: 'driving-events', name: 'Driving Events', glyph: 'RF', cat: 'ai', bg: S, fg: K, year: '2026', stack: ['Python', 'Random Forest', 'XGBoost', 'UAH-DriveSet'],
+        id_: { kind: 'Skripsi · Machine learning', status: 'Proposal', role: 'Peneliti', overview: 'Penelitian untuk memprediksi pengereman mendadak dan akselerasi agresif dari sensor smartphone: akselerometer, giroskop, dan GPS.', hl: ['Model Random Forest dan XGBoost', 'Dataset UAH-DriveSet', 'Metodologi mengikuti SDLC Prototype'] },
+        en: { kind: 'Thesis · Machine learning', status: 'Proposal', role: 'Researcher', overview: 'Research on predicting hard braking and aggressive acceleration from smartphone sensors: accelerometer, gyroscope and GPS.', hl: ['Random Forest and XGBoost models', 'UAH-DriveSet dataset', 'Methodology follows the Prototype SDLC'] } },
+      { slug: 'magpad', name: 'MAGPAD', glyph: 'MP', cat: 'biz', bg: N, fg: W, year: '2026', stack: ['Business plan', 'Agribisnis'],
+        id_: { kind: 'Business plan', status: 'Presentasi final', role: 'Anggota tim', overview: 'Rencana bisnis food pad penyerap cairan antimikroba berbahan kitosan dari limbah maggot BSF, sebagai alternatif lokal kemasan daging, ikan, dan unggas segar.', hl: ['EPIC 2026 Business Plan Competition, subtema Agribisnis', 'Tim tiga orang', 'Presentasi final via Zoom, 31 Oktober 2026'] },
+        en: { kind: 'Business plan', status: 'Final presentation', role: 'Team member', overview: 'Business plan for an antimicrobial absorbent food pad made from BSF maggot chitosan, a local alternative for fresh meat, fish and poultry packaging.', hl: ['EPIC 2026 Business Plan Competition, Agribusiness subtheme', 'Three-person team', 'Final presentation via Zoom, 31 October 2026'] } },
+      { slug: 'logic-gates-3d', name: 'Logic Gates 3D', glyph: 'XOR', cat: '3d', bg: N, fg: W, year: '[tahun]', stack: ['Blender', 'Python', 'STL'],
+        id_: { kind: 'Modeling 3D', status: 'Selesai', role: '3D modeler', overview: 'Set lengkap delapan gerbang logika yang dimodelkan di Blender dengan bahasa desain yang konsisten.', hl: ['AND, OR, NOT, NAND, NOR, XOR, XNOR, dan BUFFER', 'Setiap gerbang punya Python script Blender dan file STL', 'Skema warna berbeda, aksen rim emas, dan bubble negasi'] },
+        en: { kind: '3D modeling', status: 'Complete', role: '3D modeler', overview: 'A complete set of eight logic gates modeled in Blender with one consistent design language.', hl: ['AND, OR, NOT, NAND, NOR, XOR, XNOR and BUFFER', 'Each gate ships as a Blender Python script and an STL file', 'Distinct color schemes, gold rim details and negation bubbles'] } },
+      { slug: 'argyweb-v1', name: 'argyweb v1', glyph: 'V1', cat: '3d', bg: S, fg: K, year: '[tahun]', link: 'https://argyweb.vercel.app', linkLabel: 'argyweb.vercel.app', stack: ['React', 'TypeScript', 'Tailwind', 'Three.js'],
+        id_: { kind: 'Portofolio 3D lama', status: 'Live', role: 'Desainer & developer', overview: 'Versi sebelumnya dari portofolio ini, dengan estetika "Circuit-Glass".', hl: ['React, TypeScript, Tailwind, dan Three.js', 'Canvas WebGL yang tetap aktif antar halaman', 'Sistem token warna yang ketat'] },
+        en: { kind: 'Previous 3D portfolio', status: 'Live', role: 'Designer & developer', overview: 'The previous version of this portfolio, with a "Circuit-Glass" aesthetic.', hl: ['React, TypeScript, Tailwind and Three.js', 'A WebGL canvas that persists across pages', 'A strict color token system'] } }
+    ];
+  }
+
+  timelineData() {
+    var en = this.state.lang === 'en';
+    return [
+      { when: '2026', color: '#E3B34C', title: 'UINIC 8.0 Web Development', role: en ? 'Team lead · Mindra' : 'Ketua tim · Mindra', desc: en ? 'Web development competition by HMPS Informatika, UIN Sunan Kalijaga.' : 'Lomba pengembangan web oleh HMPS Informatika UIN Sunan Kalijaga.' },
+      { when: '2026', color: '#C9CFFF', title: 'EPIC 2026 Business Plan', role: en ? 'Team member · MAGPAD' : 'Anggota tim · MAGPAD', desc: en ? 'Reached the final presentation stage of the Business Plan Competition.' : 'Sampai ke tahap presentasi final Business Plan Competition.' },
+      { when: en ? '[year]' : '[tahun]', color: '#D6DCE6', title: 'PDPI', role: 'Full-stack developer', desc: en ? 'Built Klik PDPI and the member directory that manages 1,800+ doctor profiles.' : 'Membangun Klik PDPI dan direktori anggota yang mengelola 1.800+ profil dokter.' },
+      { when: en ? '2024 – now' : '2024 – sekarang', color: '#9DB4FF', title: 'IPB University', role: en ? 'D4 Software Engineering Technology' : 'D4 Teknologi Rekayasa Perangkat Lunak', desc: en ? 'Vocational School. Coursework spans software testing, big data and computer vision.' : 'Sekolah Vokasi. Mata kuliah mencakup pengujian perangkat lunak, big data, dan computer vision.' }
+    ];
+  }
+
+  answer(q) {
+    var en = this.state.lang === 'en'; var key = en ? 'en' : 'id_';
+    var t = ' ' + String(q).toLowerCase() + ' ';
+    var all = this.projects();
+    for (var i = 0; i < all.length; i++) {
+      var pr = all[i];
+      if (t.indexOf(pr.name.toLowerCase()) !== -1 || t.indexOf(pr.slug.replace(/-/g, ' ')) !== -1) {
+        var L = pr[key];
+        return pr.name + ' · ' + L.kind + '\n' + L.overview + '\n\n' + (en ? 'Highlights:' : 'Sorotan:') + '\n• ' + L.hl.join('\n• ') + '\n\n' + (en ? 'Stack: ' : 'Stack: ') + pr.stack.join(', ') + ' · ' + L.status;
+      }
+    }
+    var has = function () { for (var j = 0; j < arguments.length; j++) { if (t.indexOf(arguments[j]) !== -1) return true; } return false; };
+    if (has('pdpi', 'dokter', 'doctor')) return en ? 'For PDPI, Argy built Klik PDPI (klikpdpi.com) with React, Vite, TypeScript and Supabase, plus the member directory that manages 1,800+ pulmonologist profiles.' : 'Untuk PDPI, Argy membangun Klik PDPI (klikpdpi.com) dengan React, Vite, TypeScript, dan Supabase, serta direktori anggota yang mengelola 1.800+ profil dokter paru.';
+    if (has('3d', 'blender', 'three', 'webgl')) return en ? 'Argy models in Blender (see Logic Gates 3D) and uses WebGL and Three.js on the web, like the 3D CPU chip that follows you across this site.' : 'Argy memodelkan 3D di Blender (lihat Logic Gates 3D) dan memakai WebGL serta Three.js di web, seperti chip CPU 3D yang ikut kamu di seluruh situs ini.';
+    if (has('proyek', 'project', 'karya', 'work', 'built', 'buat', 'portofolio', 'portfolio')) return en ? '13 projects in total. Featured:\n• Klik PDPI\n• TradeMatrix AI\n• DigitalPMO\nOthers include AgriVision, Smart City Traffic, Mindra, Kontraku and Logic Gates 3D. Open the Work page to filter them.' : 'Total ada 13 proyek. Unggulannya:\n• Klik PDPI\n• TradeMatrix AI\n• DigitalPMO\nLainnya ada AgriVision, Smart City Traffic, Mindra, Kontraku, dan Logic Gates 3D. Buka halaman Karya untuk menyaringnya.';
+    if (has('stack', 'tech', 'teknologi', 'skill', 'keahlian', 'framework', 'language')) return en ? 'Frontend: Next.js, React, TypeScript, Tailwind.\nBackend: Laravel, FastAPI, Supabase, PostgreSQL.\nMobile: Flutter.\nAI: Gemini and Claude API, Python.\n3D: Three.js and Blender.' : 'Frontend: Next.js, React, TypeScript, Tailwind.\nBackend: Laravel, FastAPI, Supabase, PostgreSQL.\nMobile: Flutter.\nAI: Gemini dan Claude API, Python.\n3D: Three.js dan Blender.';
+    if (has('kontak', 'contact', 'email', 'hubung', 'hire', 'rekrut', 'reach', 'kolaborasi', 'collab')) return en ? 'Use the email in the Contact section at the bottom of any page, or check his code on GitHub (github.com/Argy1).' : 'Gunakan email di bagian Kontak di bawah setiap halaman, atau lihat kodenya di GitHub (github.com/Argy1).';
+    if (has('kuliah', 'kampus', 'ipb', 'study', 'studi', 'pendidikan', 'education', 'universit')) return en ? 'Argy studies D4 Software Engineering Technology at the Vocational School of IPB University (2024 – now).' : 'Argy kuliah di D4 Teknologi Rekayasa Perangkat Lunak, Sekolah Vokasi IPB University (2024 – sekarang).';
+    if (has('lomba', 'competition', 'uinic', 'epic')) return en ? 'In 2026 he led the Mindra team at UINIC 8.0 Web Development and reached the final presentation of EPIC 2026 BPC with MAGPAD.' : 'Di 2026 ia memimpin tim Mindra di UINIC 8.0 Web Development dan sampai ke presentasi final EPIC 2026 BPC dengan MAGPAD.';
+    if (has('halo', 'hai ', ' hi ', 'hello', 'hey')) return this.copy().greeting;
+    return en ? "I don't have an answer for that yet. Try asking about a project by name, his tech stack, or how to contact him." : 'Saya belum punya jawaban untuk itu. Coba tanya nama proyeknya, tech stack, atau cara menghubungi Argy.';
+  }
+
+  send(text) {
+    var self = this; var q = String(text || '').trim();
+    if (!q || this.state.typing) return;
+    this.setState({ messages: this.state.messages.concat([{ role: 'me', text: q }]), chatInput: '', typing: true });
+    clearTimeout(this._rt);
+    this._rt = setTimeout(function () { self.setState({ typing: false, messages: self.state.messages.concat([{ role: 'bot', text: self.answer(q) }]) }); }, 700 + Math.random() * 500);
+  }
+
+  renderVals() {
+    var self = this; var s = this.state; var c = this.copy(); var lang = s.lang;
+    var key = lang === 'en' ? 'en' : 'id_';
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var all = this.projects();
+    var ink = function () { return '#0F1629'; };
+    var view = function (p, i) {
+      var L = p[key];
+      return { slug: p.slug, idx: pad(i + 1), name: p.name, glyph: p.glyph, bg: p.bg, fg: p.fg, ink: ink(p), kind: L.kind, status: L.status, overview: L.overview, year: p.year, catLabel: c.cats[p.cat],
+        stack: p.stack.map(function (t) { return { t: t }; }), stack3: p.stack.slice(0, 3).map(function (t) { return { t: t }; }), aria: p.name + ' · ' + c.open };
+    };
+    var featured = all.slice(0, 3).map(function (p, i) { var v = view(p, i); v.cls = 'tile tb' + (i + 1); v.big = i === 0; v.peek = function () { self.setState({ peek: p.slug }); }; return v; });
+    var counts = { all: all.length, web: 0, mobile: 0, ai: 0, '3d': 0, biz: 0 };
+    all.forEach(function (p) { counts[p.cat]++; });
+    var filters = ['all', 'web', 'mobile', 'ai', '3d', 'biz'].map(function (k) { var on = s.filter === k; return { label: c.cats[k], count: counts[k], on: on, cls: on ? 'chip chip-on' : 'chip', pick: function () { self.setState({ filter: k }); } }; });
+    var workList = [];
+    all.forEach(function (p, i) { if (s.filter === 'all' || p.cat === s.filter) { var v = view(p, i); v.go = function () { self.go('project', p.slug); }; workList.push(v); } });
+    var pi = 0; for (var i = 0; i < all.length; i++) { if (all[i].slug === s.slug) pi = i; }
+    var cur = all[pi]; var CL = cur[key];
+    var proj = view(cur, pi);
+    proj.role = CL.role; proj.hasLink = !!cur.link; proj.link = cur.link || '#'; proj.linkLabel = cur.linkLabel || '';
+    proj.chipBg = (cur.bg === '#121A3A' || cur.bg === '#2F5BFF' || cur.bg === '#6E62F0') ? '#E3B34C' : cur.bg;
+    proj.hl = CL.hl.map(function (t, j) { return { n: pad(j + 1), t: t }; });
+    var prevP = all[(pi - 1 + all.length) % all.length], nextP = all[(pi + 1) % all.length];
+    var pk = { idx: '', name: '', glyph: '', bg: '#2F5BFF', fg: '#FFFFFF', kind: '', overview: '', stack: [] };
+    if (s.peek) { for (var k = 0; k < all.length; k++) { if (all[k].slug === s.peek) pk = view(all[k], k); } }
+    var navDefs = [['home', c.nav[0]], ['work', c.nav[1]], ['about', c.nav[2]], ['contact', c.nav[3]]];
+    var navLinks = navDefs.map(function (d) {
+      var on = d[0] === 'contact' ? false : (s.route === d[0] || (d[0] === 'work' && s.route === 'project'));
+      return { label: d[1], cls: on ? 'link link-on' : 'link', cur: on ? 'page' : 'false', go: function () {
+        if (d[0] === 'contact') { var el = document.getElementById('s-contact'); if (el) { try { el.scrollIntoView({ behavior: 'smooth' }); } catch (e) { el.scrollIntoView(); } } }
+        else self.go(d[0]);
+      } };
+    });
+    var pre = '/' + lang; var path;
+    if (s.peek) path = pre + c.paths.work + '/' + s.peek;
+    else if (s.route === 'work') path = pre + c.paths.work;
+    else if (s.route === 'project') path = pre + c.paths.work + '/' + s.slug;
+    else if (s.route === 'about') path = pre + c.paths.about;
+    else path = pre;
+    var note = s.peek ? c.notes.peek : c.notes[s.route];
+    var marquee = c.marquee.concat(c.marquee).concat(c.marquee).concat(c.marquee).map(function (t) { return { t: t }; });
+    var groups = [
+      { code: 'FE', color: '#E3B34C', title: 'Frontend', items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui'] },
+      { code: 'BE', color: '#D6DCE6', title: 'Backend', items: ['Laravel', 'FastAPI', 'Supabase', 'PostgreSQL', 'Railway'] },
+      { code: 'MB', color: '#C9CFFF', title: 'Mobile', items: ['Flutter', 'Dart', 'REST API'] },
+      { code: '3D', color: '#9DB4FF', title: 'AI & 3D', items: ['Gemini API', 'Claude API', 'Python', 'Three.js', 'Blender'] }
+    ].map(function (g) { return { code: g.code, color: g.color, title: g.title, items: g.items.map(function (t) { return { t: t }; }) }; });
+    var messages = s.messages.map(function (m) { return { cls: m.role === 'me' ? 'bub bub-me' : 'bub bub-bot', text: m.greet ? c.greeting : m.text }; });
+    var suggestions = s.typing ? [] : c.sugs.map(function (t) { return { t: t, pick: function () { self.send(t); } }; });
+    return {
+      themeClass: s.theme === 'dark' ? 't-dark' : 't-light', c: c,
+      isDark: s.theme === 'dark', isLight: s.theme !== 'dark', isID: lang === 'id', isEN: lang === 'en',
+      idCls: lang === 'id' ? 'lb lb-on' : 'lb', enCls: lang === 'en' ? 'lb lb-on' : 'lb',
+      setID: this.setID, setEN: this.setEN, toggleTheme: this.toggleTheme, onMove: this.onMove, setCanvas: this.setCanvas,
+      isHome: s.route === 'home', isWork: s.route === 'work', isProject: s.route === 'project', isAbout: s.route === 'about',
+      goHome: this.goHome, goWork: this.goWork, goAbout: this.goAbout, toTop: this.toTop,
+      navLinks: navLinks, routePath: path, routeNote: note, navHome: c.nav[0], navWork: c.nav[1], navAbout: c.nav[2],
+      time: s.time, marquee: marquee, featured: featured, filters: filters, workList: workList,
+      proj: proj, prevProj: { name: prevP.name, go: function () { self.go('project', prevP.slug); } }, nextProj: { name: nextP.name, go: function () { self.go('project', nextP.slug); } }, askProject: this.askProject,
+      peekOpen: !!s.peek, pk: pk, closePeek: this.closePeek, openFull: this.openFull,
+      groups: groups, timeline: this.timelineData(),
+      showIntroLayer: !s.introGone, introCls: s.introDone ? 'intro intro-done' : 'intro', introHidden: s.introDone ? 'true' : 'false', introPct: s.introPct,
+      glCls: s.introGone ? 'gl' : 'gl gl-top', skipIntro: this.skipIntro,
+      introPctPad: (s.introPct < 10 ? '00' : s.introPct < 100 ? '0' : '') + s.introPct,
+      introLabel: (function () { var th = [0, 26, 50, 74]; var idx = 0; for (var q = 0; q < th.length; q++) { if (s.introPct >= th[q]) idx = q; } return s.introPct >= 97 ? c.ready : c.assembling + ' ' + c.parts[idx].toLowerCase() + '…'; })(),
+      introParts: c.parts.map(function (t, q) { var on = s.introPct >= [26, 50, 74, 97][q]; return { t: t, cls: on ? 'ipart ipart-on' : 'ipart', dot: on ? ['#1B2A6B', '#E2B04A', '#7A6BFF', '#C9CED8'][q] : 'var(--line)' }; }),
+      copyEmail: this.copyEmail, copyLabel: s.copied ? c.copied : c.copy,
+      chatOpen: s.chatOpen, chatClosed: !s.chatOpen, openChat: this.openChat, closeChat: this.closeChat, toggleChat: this.toggleChat,
+      messages: messages, typing: s.typing, suggestions: suggestions, chatInput: s.chatInput,
+      onChatInput: this.onChatInput, onChatKey: this.onChatKey, sendChat: this.sendChat, setMsgs: this.setMsgs
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+{
+  "nav": [
+    "Beranda",
+    "Karya",
+    "Tentang",
+    "Kontak"
+  ],
+  "hello": "Halo, saya Argy",
+  "h1a": "Saya bikin web yang ",
+  "h1b": "enak dipakai",
+  "h1c": " dan ",
+  "h1d": "terasa hidup",
+  "h1e": ".",
+  "lead": "Full-stack developer dan mahasiswa D4 Teknologi Rekayasa Perangkat Lunak di IPB University. Saya membangun aplikasi web dan mobile dari database sampai antarmuka, lalu menambahkan sentuhan 3D.",
+  "ctaWork": "Lihat karya",
+  "ctaAsk": "Ngobrol dengan AI saya",
+  "marquee": [
+    "Web full-stack",
+    "Aplikasi mobile",
+    "Web 3D",
+    "Integrasi AI",
+    "UI/UX"
+  ],
+  "workEyebrow": "Karya pilihan",
+  "workTitle": "Yang sedang saya banggakan",
+  "workSub": "Klik kartu untuk intip ringkasannya, atau buka halaman penuhnya.",
+  "allWork": "Lihat semua 13 proyek",
+  "allWorkSub": "Web, mobile, AI, 3D, sampai proyek kuliah dan lomba",
+  "aboutEyebrow": "Tentang saya",
+  "quote": "Saya suka mengubah masalah nyata jadi produk yang orang senang pakai.",
+  "moreAbout": "Kenalan lebih jauh",
+  "bio1": "Pengalaman terbesar saya datang dari membangun sistem untuk Perhimpunan Dokter Paru Indonesia, dari website organisasi sampai direktori anggota se-Indonesia.",
+  "bio2": "Saya terbiasa memegang proyek dari perencanaan sampai rilis: menulis dokumen kebutuhan, merancang database, membangun antarmuka, lalu mengujinya.",
+  "bio3": "Di luar kode, saya memodelkan 3D di Blender. Itu yang membuat saya ingin membawa kedalaman 3D ke web tanpa mengorbankan kecepatan.",
+  "stat1": "profil dokter dikelola",
+  "stat2": "proyek di portofolio",
+  "stat3": "gerbang logika 3D di Blender",
+  "workPageA": "Semua ",
+  "workPageB": "karya",
+  "workPageSub": "Dari website organisasi sampai riset machine learning. Saring berdasarkan kategori, lalu buka studi kasusnya.",
+  "cats": {
+    "all": "Semua",
+    "web": "Web",
+    "mobile": "Mobile",
+    "ai": "AI & Data",
+    "3d": "3D",
+    "biz": "Bisnis"
+  },
+  "visit": "Kunjungi",
+  "askProject": "Tanya AI soal proyek ini",
+  "highlights": "Sorotan",
+  "prev": "Sebelumnya",
+  "next": "Berikutnya",
+  "kRole": "Peran",
+  "kYear": "Tahun",
+  "kStatus": "Status",
+  "kType": "Kategori",
+  "openFull": "Buka halaman penuh",
+  "peekNote": "Panel cepat. URL sudah berganti ke halaman proyek, jadi link ini bisa dibagikan dan dibuka langsung sebagai halaman penuh.",
+  "aboutPageA": "Kenalan dengan ",
+  "aboutPageB": "Argy",
+  "aboutLead": "Developer full-stack dari IPB University yang suka membangun produk dari nol, dari database sampai detail animasi.",
+  "cv": "Unduh CV [tautan]",
+  "photo": "Foto kamu",
+  "facts": [
+    {
+      "k": "Studi",
+      "v": "D4 Teknologi Rekayasa Perangkat Lunak, Sekolah Vokasi IPB University"
+    },
+    {
+      "k": "Fokus",
+      "v": "Web full-stack, aplikasi mobile, web 3D"
+    },
+    {
+      "k": "Basis",
+      "v": "Indonesia · WIB (UTC+7)"
+    },
+    {
+      "k": "Sedang dibangun",
+      "v": "TradeMatrix AI dan Direktori PPDS"
+    }
+  ],
+  "stackTitle": "Alat favorit saya",
+  "journeyEyebrow": "Perjalanan",
+  "journeyTitle": "Jejak sejauh ini",
+  "contactEyebrow": "Kontak",
+  "contactTitle": "Ayo bikin sesuatu bareng!",
+  "contactSub": "Terbuka untuk proyek, kolaborasi, dan tim lomba. Kirim email, atau tanya dulu ke asisten AI saya.",
+  "footer": "Dirancang & dibangun oleh Argy",
+  "backTop": "Kembali ke atas",
+  "skip": "Lewati",
+  "assembling": "Memasang",
+  "ready": "Chip siap. Selamat datang!",
+  "parts": [
+    "Papan",
+    "Pin",
+    "Die",
+    "Tutup"
+  ],
+  "chatTitle": "Asisten Argy",
+  "chatSub": "Tanya apa saja tentang portofolio ini",
+  "chatPlaceholder": "Tulis pertanyaan…",
+  "send": "Kirim",
+  "close": "Tutup",
+  "greeting": "Halo! Saya asisten AI di portofolio Argy. Mau tahu proyeknya, tech stack, atau cara menghubunginya?",
+  "sugs": [
+    "Proyek apa saja?",
+    "Tech stack-nya apa?",
+    "Cerita soal PDPI",
+    "Cara menghubungi Argy?"
+  ],
+  "demo": "Mode demo. Di versi Next.js, asisten ini terhubung ke LLM.",
+  "copy": "Salin",
+  "copied": "Tersalin!",
+  "langLabel": "Bahasa",
+  "themeLabel": "Ganti tema terang/gelap",
+  "askLabel": "Tanya AI",
+  "navLabel": "Navigasi utama",
+  "filterLabel": "Filter kategori"
+}
