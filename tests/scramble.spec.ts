@@ -30,6 +30,7 @@ async function recordRunStart(page: Page) {
           h: r.height,
           color: getComputedStyle(el).color,
           layerAriaHidden: layer?.getAttribute("aria-hidden"),
+          layerPosition: layer ? getComputedStyle(layer).position : null,
           chars: el.querySelectorAll(".scr-ch").length,
         });
       }
@@ -57,7 +58,7 @@ test("hero: tidak ada layout shift dan lapisan karakter aria-hidden saat animasi
   await expect(page.locator(HERO)).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
 
   const during = await page.evaluate(
-    () => (window as unknown as { __runs: { id: string; w: number; h: number; color: string; layerAriaHidden: string; chars: number }[] }).__runs.find((r) => r.id === "hero-title"),
+    () => (window as unknown as { __runs: { id: string; w: number; h: number; color: string; layerAriaHidden: string; layerPosition: string; chars: number }[] }).__runs.find((r) => r.id === "hero-title"),
   );
   expect(during, "animasi hero sempat berjalan").toBeTruthy();
   expect(during!.layerAriaHidden).toBe("true");
@@ -84,7 +85,9 @@ test("judul masuk layar lagi setelah keluar penuh ≥ 800ms → animasi berjalan
   await expect(page.locator(HERO)).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
 
   await page.evaluate(() => window.scrollTo(0, 2600));
-  await page.waitForTimeout(1300);
+  // Aturan mesin: keluar layar ≥ 800 ms. Di mesin tanpa GPU frame lambat dan pemberitahuan IntersectionObserver
+  // bisa terlambat ±1 detik, jadi beri jeda longgar agar tes tidak peka waktu.
+  await page.waitForTimeout(3000);
   await page.evaluate(() => window.scrollTo(0, 0));
   await expect(page.locator(HERO)).toHaveAttribute("data-scr-plays", "2", { timeout: DONE_TIMEOUT });
 });
@@ -159,4 +162,62 @@ test("judul section di halaman lain beranimasi dan berakhir dengan teks yang ben
   await expect(stack).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
   await expect(stack).toHaveText("Alat favorit saya");
   await expect(page.locator("#stack-title .scr-layer")).toHaveCount(0);
+});
+
+test("jumlah karakter acak = jumlah huruf asli (tidak ada karakter tambahan)", async ({ page }) => {
+  await seeIntro(page);
+  await recordRunStart(page);
+  await page.goto("/id", { waitUntil: "load" });
+  await expect(page.locator(HERO)).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
+  const during = await page.evaluate(
+    () => (window as unknown as { __runs: { id: string; chars: number; layerPosition: string }[] }).__runs.find((r) => r.id === "hero-title"),
+  );
+  expect(during).toBeTruthy();
+  // Satu slot per karakter non-spasi pada teks asli (huruf dan tanda baca), tidak lebih.
+  expect(during!.chars).toBe(HERO_ID.replace(/\s/g, "").length);
+  // Lapisan menempel di atas teks (absolute), bukan mengalir sebagai teks tambahan.
+  expect(during!.layerPosition).toBe("absolute");
+});
+
+test("regresi insiden: CSS situs hilang sama sekali → judul tidak tumbuh/rusak saat animasi", async ({ page }) => {
+  await seeIntro(page);
+  await recordRunStart(page);
+  // Simulasi build dengan CSS lama/hilang: semua stylesheet situs kosong. CSS animasi dibawa mesin sendiri.
+  await page.route("**/*.css", (route) => route.fulfill({ status: 200, contentType: "text/css", body: "" }));
+  await page.goto("/id", { waitUntil: "load" });
+  // Tanpa CSS halaman tak bertata gaya dan judul terdorong ke bawah layar: gulir agar cukup terlihat.
+  await page.locator(HERO).scrollIntoViewIfNeeded();
+  await expect(page.locator(HERO)).toHaveAttribute("data-scr-plays", "1", { timeout: DONE_TIMEOUT });
+  const during = await page.evaluate(
+    () => (window as unknown as { __runs: { id: string; h: number; w: number; layerPosition: string; chars: number }[] }).__runs.find((r) => r.id === "hero-title"),
+  );
+  expect(during).toBeTruthy();
+  expect(during!.layerPosition).toBe("absolute");
+  expect(during!.chars).toBe(HERO_ID.replace(/\s/g, "").length);
+  const after = await page.locator(HERO).evaluate((el) => {
+    const r = el.getBoundingClientRect();
+    return { w: r.width, h: r.height, text: (el.textContent ?? "").replace(/\s+/g, " ").trim() };
+  });
+  expect(Math.abs(after.h - during!.h)).toBeLessThanOrEqual(0.5);
+  expect(Math.abs(after.w - during!.w)).toBeLessThanOrEqual(0.5);
+  expect(after.text).toBe(HERO_ID);
+});
+
+test("pengaman: bila gaya lapisan tidak berlaku, animasi dibatalkan dan judul tetap normal", async ({ page }) => {
+  await seeIntro(page);
+  // Mematahkan aturan layout lapisan (stylesheet !important mengalahkan gaya inline).
+  await page.addInitScript(() => {
+    document.addEventListener("DOMContentLoaded", () => {
+      const st = document.createElement("style");
+      st.textContent = ".scr-layer{position:static !important}";
+      document.head.appendChild(st);
+    });
+  });
+  await page.goto("/id", { waitUntil: "load" });
+  await page.waitForTimeout(3000);
+  await expect(page.locator(`${HERO}[data-scr="run"]`)).toHaveCount(0);
+  await expect(page.locator(".scr-layer")).toHaveCount(0);
+  await expect(page.locator(HERO)).not.toHaveClass(/scr-run/);
+  const text = await page.locator(HERO).evaluate((el) => (el.textContent ?? "").replace(/\s+/g, " ").trim());
+  expect(text).toBe(HERO_ID);
 });

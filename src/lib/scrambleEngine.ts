@@ -10,6 +10,11 @@ import { useFxStore } from "@/lib/fxStore";
  * "mengunci" ke huruf aslinya dari kiri ke kanan. Karena layout tidak disentuh, tidak ada layout shift.
  *
  * Satu IntersectionObserver dan satu loop rAF dipakai bersama oleh semua judul di halaman.
+ *
+ * MESIN MEMBAWA CSS-NYA SENDIRI (`ensureStyle`) dan memberi gaya inline untuk semua yang menentukan posisi,
+ * bukan bergantung pada globals.css. Alasannya insiden 2026-11-03: build Vercel dengan cache lama menyajikan
+ * CSS tanpa aturan `.scr-*`, sehingga lapisan karakter acak mengalir sebagai teks tambahan setelah judul dan
+ * layout melompat tiap 50 ms. Sebagai pengaman terakhir, animasi dibatalkan bila gaya ternyata tidak berlaku.
  */
 
 // Tanpa kurung kurawal/siku/backslash: terlalu tinggi dan melebar menimpa huruf tetangga.
@@ -24,6 +29,29 @@ const REPLAY_AFTER_MS = 800;
 const TICK_MS = 50;
 /** Bagian tinggi elemen yang harus terlihat supaya animasi mulai. */
 const START_RATIO = 0.6;
+/** Di perangkat sentuh (HP) lebih sedikit animasi bersamaan. */
+const MAX_ACTIVE_TOUCH = 4;
+/** Batas total karakter acak yang digambar bersamaan (menjaga DOM dan kerja per tick tetap kecil). */
+const MAX_GLYPHS = 160;
+
+const STYLE_ID = "scr-style";
+const STYLE = [
+  ".scr-run,.scr-run *{color:transparent !important}",
+  ".scr-layer{position:absolute;left:0;top:0;right:0;bottom:0;z-index:1;overflow:visible;pointer-events:none;user-select:none}",
+  ".scr-ch{position:absolute;display:block;margin:0;padding:0;text-align:center;white-space:pre;letter-spacing:0;font-kerning:none;font-style:normal;text-transform:none}",
+  ".scr-ch[data-x]{opacity:.7}",
+  'html[data-fx="lite"] .scr-layer{display:none}',
+  "@media (prefers-reduced-motion:reduce){.scr-layer{display:none}}",
+].join("");
+
+/** Pasang stylesheet milik mesin sekali (tidak bergantung pada pipeline CSS build). */
+function ensureStyle() {
+  if (document.getElementById(STYLE_ID)) return;
+  const el = document.createElement("style");
+  el.id = STYLE_ID;
+  el.textContent = STYLE;
+  document.head.appendChild(el);
+}
 
 interface Slot {
   node: HTMLElement;
@@ -67,6 +95,16 @@ const isLetterOrDigit = (ch: string) => /[\p{L}\p{N}]/u.test(ch);
 function motionAllowed(): boolean {
   if (useFxStore.getState().mode === "lite") return false;
   return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function maxActive(): number {
+  return window.matchMedia("(pointer: coarse)").matches ? MAX_ACTIVE_TOUCH : MAX_ACTIVE;
+}
+
+function activeGlyphs(): number {
+  let total = 0;
+  for (const entry of runs) total += entry.run?.slots.length ?? 0;
+  return total;
 }
 
 function introPending(): boolean {
@@ -129,6 +167,8 @@ function start(entry: Entry) {
   const layer = document.createElement("span");
   layer.className = "scr-layer";
   layer.setAttribute("aria-hidden", "true");
+  layer.style.cssText =
+    "position:absolute;left:0;top:0;right:0;bottom:0;z-index:1;overflow:visible;pointer-events:none;user-select:none;";
 
   const range = document.createRange();
   const walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT, {
@@ -157,10 +197,14 @@ function start(entry: Entry) {
   if (measured.length === 0) return;
 
   const n = measured.length;
+  // Anggaran karakter: jangan menambah animasi bila total karakter yang digambar sudah banyak.
+  if (activeGlyphs() + n > MAX_GLYPHS) return;
   const duration = Math.min(1100, 520 + 28 * n);
   const slots: Slot[] = measured.map(({ ch, r, style }, index) => {
     const node = document.createElement("span");
     node.className = "scr-ch";
+    node.style.cssText =
+      "position:absolute;display:block;margin:0;padding:0;text-align:center;white-space:pre;letter-spacing:0;font-kerning:none;font-style:normal;text-transform:none;";
     node.style.left = `${r.left - hostRect.left - host.clientLeft}px`;
     node.style.top = `${r.top - hostRect.top - host.clientTop}px`;
     node.style.width = `${r.width}px`;
@@ -187,6 +231,14 @@ function start(entry: Entry) {
 
   host.appendChild(layer);
   host.classList.add("scr-run");
+  // Pengaman: bila gaya layout/transparansi tidak berlaku (CSS gagal dimuat atau diblokir), batalkan
+  // sekarang juga supaya judul tidak pernah tampil rusak (teks ganda / karakter mengalir).
+  if (getComputedStyle(layer).position !== "absolute" || getComputedStyle(host).color !== "rgba(0, 0, 0, 0)") {
+    layer.remove();
+    host.classList.remove("scr-run");
+    entry.played += 1;
+    return;
+  }
   host.dataset.scr = "run";
   const now = performance.now();
   entry.run = { layer, slots, start: now, duration, lastTick: now };
@@ -201,10 +253,10 @@ function tryStart(entry: Entry) {
     waitForIntro();
     return;
   }
-  if (runs.size >= MAX_ACTIVE) return;
+  if (runs.size >= maxActive()) return;
   const go = () => {
     // Keadaan bisa berubah selama menunggu font.
-    if (!entry.inView || entry.run || !entry.el.isConnected || !motionAllowed() || runs.size >= MAX_ACTIVE) return;
+    if (!entry.inView || entry.run || !entry.el.isConnected || !motionAllowed() || runs.size >= maxActive()) return;
     start(entry);
   };
   if (document.fonts && document.fonts.status !== "loaded") void document.fonts.ready.then(go);
@@ -251,6 +303,7 @@ function onIntersect(list: IntersectionObserverEntry[]) {
 function setupGlobals() {
   if (globalsReady) return;
   globalsReady = true;
+  ensureStyle();
   // Mode Ringan (termasuk reduced-motion) atau resize: selesaikan semua animasi seketika.
   useFxStore.subscribe((s) => {
     if (s.mode === "lite") finishAll();
