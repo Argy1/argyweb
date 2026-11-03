@@ -24,6 +24,9 @@ export const profile = {
   cvDownloadName: "CV-Argy-Fawwaz-Akbar.jpg",
   photo: "/profile/argy-fawwaz-akbar.jpg",
   university: "IPB University",
+  // Token verifikasi Google Search Console (properti Awalan URL https://argyweb.vercel.app/). Bukan rahasia:
+  // memang tampil di HTML publik. Jangan dihapus, Google memeriksanya berkala. Env GOOGLE_SITE_VERIFICATION menimpanya.
+  googleSiteVerification: "LDhy3FEX_Jc7a8XSlteHhNDUEpnnW8PFXTgbRCP_KeY",
 };
 
 /** Angka di bagian Tentang. Sumber: docs/05 "Fakta yang sudah pasti". */

@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     // Verifikasi kepemilikan situs di Google Search Console / Bing Webmaster (isi lewat env, lihat docs/09-SEO.md).
     verification: {
-      google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined,
+      google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || profile.googleSiteVerification,
       other: process.env.BING_SITE_VERIFICATION?.trim() ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION.trim() } : undefined,
     },
   };

@@ -22,6 +22,8 @@ Terakhir diperbarui: 2026-11-03.
 ## 2. Langkah yang harus dilakukan Argy (urut)
 
 ### A. Daftarkan situs di Google Search Console (wajib, ±10 menit)
+
+> **Status 2026-11-03:** properti Awalan URL `https://argyweb.vercel.app/` sudah dibuat dan token tag HTML sudah tertanam di kode (`profile.googleSiteVerification`), jadi **tidak perlu mengisi env di Vercel**. Tinggal deploy lalu klik **Verifikasi**. Jangan hapus tag setelah berhasil. Langkah di bawah dipertahankan sebagai referensi (mis. untuk domain baru).
 1. Buka <https://search.google.com/search-console> dengan akun Google.
 2. **Tambahkan properti** → pilih tipe **"Awalan URL"** (URL prefix) → isi `https://argyweb.vercel.app` (persis sama, tanpa `/` di akhir).
 3. Pilih metode verifikasi **"Tag HTML"**. Google menampilkan potongan seperti `<meta name="google-site-verification" content="ABC123...">`. **Salin hanya nilai `content`** (`ABC123...`).
