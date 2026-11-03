@@ -65,6 +65,8 @@ Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkas
 - **Sertifikat PDF punya pratinjau gambar** (2026-11-03): iframe PDF tidak andal (terutama di HP), jadi tiap sertifikat PDF punya JPG halaman pertama (`image`) selain PDF asli (`file`). Kartu dan lightbox memakai `image`; `file` hanya untuk tombol "Buka file di tab baru". Lightbox mendahulukan gambar dan jatuh ke iframe hanya bila tidak ada gambar.
 - **Modal dirender lewat portal ke `document.body`** (`Lightbox.tsx`): `<main>` adalah stacking context (`z-[2]`), jadi dialog di dalamnya tidak bisa menembus navbar (`z-30`) walau `z-[80]`. Modal baru di dalam halaman harus memakai portal juga.
 
+- **Pengetahuan chatbot** (2026-11-03, `src/lib/chat-knowledge.ts`): "melatih" Gemini = melengkapi konteks dan aturan penalaran di prompt; tidak ada fine-tuning. Konteks kini berisi: profil, proyek, stack, perjalanan, sertifikat, **Indeks proyek** (per kategori, status, teknologi, tautan live; disusun otomatis dari `projects.ts` supaya model tidak salah menyaring), dan **panduan situs** (halaman + URL, fitur chip 3D/intro/tema/bahasa/panel intip/efek/formulir kontak). Prompt mengatur cara menafsirkan pertanyaan di luar template (sinonim, typo, campuran ID-EN, pertanyaan lanjutan), kapan menalar vs mengaku tidak tahu, dan penolakan topik di luar portofolio. **Panduan situs ditulis manual di `buildSiteGuide()`; bila fitur situs berubah, perbarui di sana.** Model default `gemini-2.5-flash-lite`; bila jawaban kurang akurat, coba `AI_MODEL=gemini-2.5-flash`. Belum diuji dengan key Gemini asli (hanya isi konteks yang diperiksa).
+
 ## 6. Deploy ke Vercel (belum dilakukan)
 
 1. Impor repo `Argy1/argyweb` di Vercel (framework Next.js terdeteksi otomatis, pnpm).
