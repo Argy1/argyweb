@@ -140,6 +140,9 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 
 ## 11. Catatan perubahan
 
+**2026-11-03 (judul hero)**:
+- Kata sorotan emas judul hero diganti atas permintaan Argy karena "effortless" bisa terbaca "tanpa usaha": EN "effortless" → "delightful", ID "enak dipakai" → "memukau" (`messages/*.json`, `hero.h1b`). Kata biru "alive" / "terasa hidup" tetap. `reference/content/messages.*.json` (spesifikasi awal) sengaja tidak diubah.
+
 **2026-11-03 (header HP/tablet + chip ikut turun)**:
 - Header: baris link kedua di < 900px dihapus; kini satu kapsul (menu ☰ di HP, link inline di ≥768px). Offset atas halaman `pt-[150px]` → `pt-[112px] md:pt-[120px]`.
 - Chip: anchor stage di Beranda (karya, tentang, kontak), Karya (grid), Detail (isi), Tentang (stack, perjalanan), Kontak (formulir). Lihat §5.
