@@ -134,7 +134,7 @@ export function buildKnowledge(locale: Locale): string {
   lines.push(`Bio: ${m.hero.lead} ${m.about.lead} ${m.about.bio1} ${m.about.bio2} ${m.about.bio3}`);
   for (const f of m.about.facts) lines.push(`${f.k}: ${f.v}`);
   lines.push(
-    `Angka: ${stats.doctorProfiles[locale]} ${m.stats.doctors}; ${projects.length} ${m.stats.projects}; ${stats.logicGates} ${m.stats.gates}; ${certificates.length} ${m.stats.certificates}.`,
+    `Angka: ${stats.doctorProfiles[locale]} ${m.stats.doctors}; ${projects.length} ${m.stats.projects}; ${certificates.length} ${m.stats.certificates}.`,
   );
 
   lines.push("\n## Proyek");

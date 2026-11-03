@@ -10,7 +10,6 @@ export async function Stats({ withCertificates = false, className = "" }: { with
   const items = [
     { value: stats.doctorProfiles[locale], label: t("doctors"), cls: "bg-gold" },
     { value: String(projects.length), label: t("projects"), cls: "bg-steel" },
-    { value: String(stats.logicGates), label: t("gates"), cls: "bg-navy text-on-dark border-tile-edge!" },
   ];
   if (withCertificates) items.push({ value: String(certificates.length), label: t("certificates"), cls: "bg-lilac" });
   return (

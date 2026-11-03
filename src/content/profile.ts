@@ -27,5 +27,4 @@ export const profile = {
 /** Angka di bagian Tentang. Sumber: docs/05 "Fakta yang sudah pasti". */
 export const stats = {
   doctorProfiles: { id: "1.800+", en: "1,800+" } satisfies Record<Locale, string>,
-  logicGates: 8,
 };

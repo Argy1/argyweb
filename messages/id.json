@@ -59,7 +59,6 @@
   "stats": {
     "doctors": "profil dokter dikelola",
     "projects": "proyek di portofolio",
-    "gates": "gerbang logika 3D di Blender",
     "certificates": "sertifikat & penghargaan"
   },
   "work": {
@@ -117,10 +116,6 @@
       {
         "k": "Basis",
         "v": "Indonesia · WIB (UTC+7)"
-      },
-      {
-        "k": "Sedang dibangun",
-        "v": "TradeMatrix AI dan Direktori PPDS"
       }
     ],
     "stackEyebrow": "Stack",
