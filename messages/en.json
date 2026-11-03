@@ -59,7 +59,6 @@
   "stats": {
     "doctors": "doctor profiles managed",
     "projects": "projects in this portfolio",
-    "gates": "logic gates modeled in Blender",
     "certificates": "certificates & awards"
   },
   "work": {
@@ -117,10 +116,6 @@
       {
         "k": "Based in",
         "v": "Indonesia · WIB (UTC+7)"
-      },
-      {
-        "k": "Building now",
-        "v": "TradeMatrix AI and the PPDS Directory"
       }
     ],
     "stackEyebrow": "Stack",

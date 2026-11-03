@@ -247,7 +247,7 @@ export const projects: Project[] = [
     tone: "blue",
     year: "2026",
     featured: false,
-    stack: ["Lambda Architecture", "Python", "Google Colab", "Dashboard web"],
+    stack: ["Lambda Architecture", "Python", "Google Colab"],
     i18n: {
       id: {
         kind: "Big data · IoT",
@@ -317,7 +317,7 @@ export const projects: Project[] = [
     year: "2026",
     featured: false,
     link: { href: "https://kontraku.vercel.app", label: "kontraku.vercel.app" },
-    stack: ["Mobile", "FastAPI", "PostgreSQL", "Railway"],
+    stack: ["FastAPI", "PostgreSQL", "Railway"],
     i18n: {
       id: {
         kind: "Aplikasi mobile · SaaS",
