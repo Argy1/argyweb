@@ -11,7 +11,7 @@ Terakhir diperbarui: 2026-11-03.
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
 - 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
 - Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
-- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **126 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
+- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **136 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8 + SEO 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
 
 ## 2. Tumpukan teknologi (versi saat ini)
 
@@ -24,7 +24,7 @@ pnpm install
 cp .env.example .env.local     # isi key sesuai §4
 pnpm dev                        # http://localhost:3000 → /id
 pnpm lint && pnpm typecheck && pnpm build
-pnpm test:e2e                   # 126 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8)
+pnpm test:e2e                   # 136 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8 + SEO 10)
 ```
 
 Catatan penting untuk pengujian:
@@ -157,6 +157,11 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 6. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
 
 ## 11. Catatan perubahan
+
+**2026-11-03 (SEO untuk pencarian nama)** — lihat `docs/09-SEO.md`:
+- Kode: JSON-LD `WebSite` + `Person` (`@graph`, `@id`, `alternateName`, `knowsAbout`, `sameAs`) di Beranda dan `ProfilePage` di Tentang; judul beranda memuat "Portofolio/Portfolio"; nama lengkap ada di lead hero (teks terlihat); deskripsi proyek dipotong ≤160 (`trimDescription`); Open Graph lengkap (siteName, locale, gambar) di Karya/Tentang/Kontak yang sebelumnya **tanpa gambar OG** karena menimpa `openGraph` layout (`openGraphFor` di `seo.ts`); `lastmod` di sitemap; meta robots `max-image-preview: large`; tag verifikasi lewat env `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION`.
+- Tes baru `tests/seo.spec.ts` (10 tes); total 136 tes lolos di build bersih.
+- **Tidak bisa dilakukan dari kode** (menunggu Argy): daftar di Google Search Console + isi `GOOGLE_SITE_VERIFICATION` di Vercel, kirim sitemap, minta pengindeksan, tautkan situs dari GitHub/LinkedIn/Instagram, pertimbangkan domain sendiri. Status indeks Google belum diketahui (belum terlihat di pencarian per 2026-11-03).
 
 **2026-11-03 (putar chip 3D + judul terlewat)**:
 - Fitur putar chip (lihat §5): seret/sentuh/keyboard, inersia, kembali ke pose normal, sisi bawah BGA. Berkas baru: `ChipGrab.tsx`, tes `tests/chip-rotate.spec.ts` (8 tes, termasuk **sentuhan sungguhan lewat CDP `Input.dispatchTouchEvent`**: geser horizontal memutar tanpa scroll, geser vertikal men-scroll tanpa memutar, tahan lalu geser memutar bebas tanpa scroll).

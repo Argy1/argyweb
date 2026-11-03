@@ -13,7 +13,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { profile } from "@/content/profile";
 import type { AppLocale } from "@/i18n/routing";
 import { personJsonLd } from "@/lib/jsonld";
-import { alternatesFor } from "@/lib/seo";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("contactTitle"),
     description: t("contactDescription"),
     alternates: alternatesFor(locale, "/contact"),
-    openGraph: { title: t("contactTitle"), description: t("contactDescription") },
+    openGraph: openGraphFor(locale, "/contact", { title: t("contactTitle"), description: t("contactDescription") }),
   };
 }
 

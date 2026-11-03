@@ -14,7 +14,7 @@ import { ScreenFrame } from "@/components/ui/ScreenFrame";
 import { NavLink } from "@/components/ui/NavLink";
 import type { AppLocale } from "@/i18n/routing";
 import { projectJsonLd } from "@/lib/jsonld";
-import { alternatesFor } from "@/lib/seo";
+import { alternatesFor, openGraphFor, trimDescription } from "@/lib/seo";
 import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale; slug: string }> };
@@ -30,11 +30,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProject(slug);
   if (!project) return {};
   const c = project.i18n[locale];
+  const description = trimDescription(`${project.name}: ${c.overview}`);
   return {
     title: project.name,
-    description: c.overview,
+    description,
     alternates: alternatesFor(locale, { pathname: "/work/[slug]", params: { slug } }),
-    openGraph: { title: project.name, description: c.overview, type: "article" },
+    openGraph: openGraphFor(locale, { pathname: "/work/[slug]", params: { slug } }, { title: project.name, description, type: "article", withImage: false }),
   };
 }
 

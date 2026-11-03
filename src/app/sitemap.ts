@@ -17,9 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
+  const lastModified = new Date();
   return pages.flatMap(({ href, priority }) =>
     routing.locales.map((locale) => ({
       url: localizedUrl(locale, href),
+      lastModified,
       changeFrequency: "monthly" as const,
       priority,
       alternates: {

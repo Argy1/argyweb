@@ -1,12 +1,12 @@
 {
   "meta": {
     "siteName": "Argy Fawwaz Akbar",
-    "homeTitle": "Argy Fawwaz Akbar · Full-stack developer",
+    "homeTitle": "Argy Fawwaz Akbar · Full-stack Developer Portfolio",
     "homeDescription": "Portfolio of Argy Fawwaz Akbar, full-stack developer and Software Engineering Technology student at IPB University. Web, mobile, AI and 3D.",
     "workTitle": "Work",
     "workDescription": "All of Argy's projects: organization websites, mobile apps, AI, 3D, plus coursework and competitions.",
     "aboutTitle": "About",
-    "aboutDescription": "Profile, stack, journey and certificates of Argy Fawwaz Akbar.",
+    "aboutDescription": "Profile of Argy Fawwaz Akbar, a full-stack developer from IPB University: tech stack, education and organization journey, plus certificates and awards.",
     "notFoundTitle": "Page not found",
     "contactTitle": "Contact",
     "contactDescription": "Reach Argy Fawwaz Akbar for projects, collaborations or competition teams: email, LinkedIn, GitHub, Instagram and CV."
@@ -39,7 +39,7 @@
     "h1c": " and ",
     "h1d": "alive",
     "h1e": ".",
-    "lead": "Full-stack developer and Software Engineering Technology student at IPB University. I build web and mobile apps from the database to the interface, then add a touch of 3D.",
+    "lead": "I'm Argy Fawwaz Akbar, a full-stack developer and Software Engineering Technology student at IPB University. I build web and mobile apps from the database to the interface, then add a touch of 3D.",
     "ctaWork": "See my work",
     "ctaAsk": "Chat with my AI",
     "stickersLabel": "Tech focus",

@@ -8,6 +8,8 @@ export interface Social {
 
 export const profile = {
   name: "Argy Fawwaz Akbar",
+  // Variasi nama yang dipakai orang saat mencari (GitHub: Argy1, Instagram: argy.py).
+  alternateNames: ["Argy Fawwaz", "Argy Akbar", "Argy1", "argy.py"],
   role: { id: "Full-stack developer", en: "Full-stack developer" } satisfies Record<Locale, string>,
   email: "tokichimikuni51@gmail.com",
   location: "Indonesia (WIB, UTC+7)",

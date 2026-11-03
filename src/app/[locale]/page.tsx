@@ -7,8 +7,8 @@ import { PageShell } from "@/components/layout/PageShell";
 import { Marquee } from "@/components/home/Marquee";
 import { JsonLd } from "@/components/ui/JsonLd";
 import type { AppLocale } from "@/i18n/routing";
-import { personJsonLd } from "@/lib/jsonld";
-import { alternatesFor } from "@/lib/seo";
+import { homeJsonLd } from "@/lib/jsonld";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: { absolute: t("homeTitle") },
     description: t("homeDescription"),
     alternates: alternatesFor(locale, "/"),
-    openGraph: { title: t("homeTitle"), description: t("homeDescription") },
+    openGraph: openGraphFor(locale, "/", { title: t("homeTitle"), description: t("homeDescription") }),
   };
 }
 
@@ -28,7 +28,7 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale);
   return (
     <PageShell>
-      <JsonLd data={personJsonLd(locale)} />
+      <JsonLd data={homeJsonLd(locale)} />
       <Hero />
       <Marquee />
       <FeaturedBento />

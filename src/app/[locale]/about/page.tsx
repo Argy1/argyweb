@@ -14,8 +14,8 @@ import { stackGroups } from "@/content/stack";
 import { timeline } from "@/content/timeline";
 import { NavLink } from "@/components/ui/NavLink";
 import type { AppLocale } from "@/i18n/routing";
-import { personJsonLd } from "@/lib/jsonld";
-import { alternatesFor } from "@/lib/seo";
+import { profilePageJsonLd } from "@/lib/jsonld";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("aboutTitle"),
     description: t("aboutDescription"),
     alternates: alternatesFor(locale, "/about"),
-    openGraph: { title: t("aboutTitle"), description: t("aboutDescription"), type: "profile" },
+    openGraph: openGraphFor(locale, "/about", { title: t("aboutTitle"), description: t("aboutDescription"), type: "profile" }),
   };
 }
 
@@ -41,7 +41,7 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <PageShell>
-      <JsonLd data={personJsonLd(locale)} />
+      <JsonLd data={profilePageJsonLd(locale)} />
       <PageHero
         anchor="about-hero"
         labelledBy="about-title"

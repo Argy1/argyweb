@@ -55,6 +55,7 @@ Cek versi terbaru paket sebelum install; jangan menebak API yang sudah berubah, 
 | `docs/06-CHATBOT.md` | Chatbot: prompt sistem, sumber pengetahuan, batasan, UI |
 | `docs/07-BUILD-PLAN.md` | Tahapan kerja + checklist + cara verifikasi (rencana awal; semua fase selesai kecuali deploy) |
 | `docs/08-STATUS.md` | **Status terkini**: progres, keputusan teknis, variabel env, cara deploy, daftar yang masih terbuka, jebakan yang pernah ditemui |
+| `docs/09-SEO.md` | **SEO**: yang sudah ada di kode, langkah Google Search Console, sinyal nama, domain sendiri, cara memeriksa hasil |
 | `reference/` | Token, data konten siap pakai, shader & prototipe acuan |
 
 ## Aturan kerja
@@ -75,7 +76,7 @@ pnpm dev          # dev server
 pnpm lint         # ESLint
 pnpm typecheck    # tsc --noEmit
 pnpm build        # build produksi
-pnpm test:e2e     # Playwright: 126 tes (responsif, efek, alur tombol, mobile, scramble); lihat docs/08 §3 untuk menjalankan terhadap build produksi
+pnpm test:e2e     # Playwright: 136 tes (responsif, efek, alur tombol, mobile, scramble); lihat docs/08 §3 untuk menjalankan terhadap build produksi
 ```
 
 ## Definition of Done (seluruh proyek)

@@ -8,7 +8,7 @@ import { WorkBrowser, WorkGridView } from "@/components/work/WorkBrowser";
 import type { WorkCardData } from "@/components/work/WorkCard";
 import { projectCover, projects } from "@/content/projects";
 import type { AppLocale } from "@/i18n/routing";
-import { alternatesFor } from "@/lib/seo";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("workTitle"),
     description: t("workDescription"),
     alternates: alternatesFor(locale, "/work"),
-    openGraph: { title: t("workTitle"), description: t("workDescription") },
+    openGraph: openGraphFor(locale, "/work", { title: t("workTitle"), description: t("workDescription") }),
   };
 }
 

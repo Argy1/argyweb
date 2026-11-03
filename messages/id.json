@@ -1,12 +1,12 @@
 {
   "meta": {
     "siteName": "Argy Fawwaz Akbar",
-    "homeTitle": "Argy Fawwaz Akbar · Full-stack developer",
+    "homeTitle": "Argy Fawwaz Akbar · Portofolio Full-stack Developer",
     "homeDescription": "Portofolio Argy Fawwaz Akbar, full-stack developer dan mahasiswa D4 TRPL IPB University. Web, mobile, AI, dan 3D.",
     "workTitle": "Karya",
     "workDescription": "Semua proyek Argy: website organisasi, aplikasi mobile, AI, 3D, sampai proyek kuliah dan lomba.",
     "aboutTitle": "Tentang",
-    "aboutDescription": "Profil, stack, perjalanan, dan sertifikat Argy Fawwaz Akbar.",
+    "aboutDescription": "Profil Argy Fawwaz Akbar, full-stack developer dari IPB University: tumpukan teknologi, perjalanan pendidikan dan organisasi, serta sertifikat dan penghargaan.",
     "notFoundTitle": "Halaman tidak ditemukan",
     "contactTitle": "Kontak",
     "contactDescription": "Hubungi Argy Fawwaz Akbar untuk proyek, kolaborasi, atau tim lomba: email, LinkedIn, GitHub, Instagram, dan CV."
@@ -39,7 +39,7 @@
     "h1c": " dan ",
     "h1d": "terasa hidup",
     "h1e": ".",
-    "lead": "Full-stack developer dan mahasiswa D4 Teknologi Rekayasa Perangkat Lunak di IPB University. Saya membangun aplikasi web dan mobile dari database sampai antarmuka, lalu menambahkan sentuhan 3D.",
+    "lead": "Saya Argy Fawwaz Akbar, full-stack developer dan mahasiswa D4 Teknologi Rekayasa Perangkat Lunak di IPB University. Saya membangun aplikasi web dan mobile dari database sampai antarmuka, lalu menambahkan sentuhan 3D.",
     "ctaWork": "Lihat karya",
     "ctaAsk": "Ngobrol dengan AI saya",
     "stickersLabel": "Fokus teknologi",
