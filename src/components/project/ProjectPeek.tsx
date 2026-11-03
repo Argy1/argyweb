@@ -6,7 +6,7 @@ import { getProject, projectCover, projects, type Locale } from "@/content/proje
 import { getPathname, useRouter } from "@/i18n/navigation";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { useUI } from "@/lib/uiStore";
-import { ArrowRightIcon, CloseIcon } from "@/components/ui/icons";
+import { ArrowRightIcon, CloseIcon, ExternalIcon } from "@/components/ui/icons";
 import { signalNavigation } from "@/components/ui/NavLink";
 import { runNavTransition } from "@/lib/pageTransition";
 import { ScreenFrame } from "@/components/ui/ScreenFrame";
@@ -106,6 +106,13 @@ export function ProjectPeek() {
               <span key={s}>{s}</span>
             ))}
           </div>
+          {project.link && (
+            <a href={project.link.href} target="_blank" rel="noopener noreferrer" className="btn btn-line w-full">
+              <span aria-hidden="true" className="size-2 rounded-full bg-ok shadow-[0_0_0_4px_var(--ok-ring)]" />
+              {t("visit", { label: project.link.label })}
+              <ExternalIcon />
+            </a>
+          )}
           <a
             href={getPathname({ locale, href })}
             onClick={(e) => {

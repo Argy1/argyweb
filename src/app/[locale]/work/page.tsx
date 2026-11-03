@@ -44,6 +44,7 @@ export default async function WorkPage({ params }: Props) {
       category: p.category,
       stack: p.stack,
       cover: cover ? { src: cover.src, alt: cover.alt[locale] } : undefined,
+      link: p.link,
     };
   });
 

@@ -35,7 +35,7 @@ export const projects: Project[] = [
     glyph: "KP",
     category: "web",
     tone: "blue",
-    year: "[tahun]",
+    year: "2025",
     featured: true,
     link: { href: "https://klikpdpi.com", label: "klikpdpi.com" },
     stack: ["React", "Vite", "TypeScript", "shadcn/ui", "Supabase", "Zod"],
@@ -72,11 +72,12 @@ export const projects: Project[] = [
     tone: "navy",
     year: "2026",
     featured: true,
+    link: { href: "https://kopaseba.vercel.app", label: "kopaseba.vercel.app" },
     stack: ["Next.js", "React", "TypeScript", "Prisma", "Supabase", "Tailwind CSS", "shadcn/ui"],
     i18n: {
       id: {
         kind: "Website koperasi · CMS",
-        status: "Dalam pengembangan",
+        status: "Live",
         role: "Solo developer",
         overview: "Situs resmi KOPASEBA (Koperasi Paru Sejahtera Bahagia), koperasi milik PDPI untuk dokter spesialis paru se-Indonesia: katalog produk mitra, unit usaha, pembiayaan anggota, dan dashboard admin.",
         highlights: [
@@ -87,7 +88,7 @@ export const projects: Project[] = [
       },
       en: {
         kind: "Cooperative website · CMS",
-        status: "In development",
+        status: "Live",
         role: "Solo developer",
         overview: "Official website of KOPASEBA (Koperasi Paru Sejahtera Bahagia), the PDPI cooperative for pulmonologists across Indonesia: partner product catalog, business units, member financing and an admin dashboard.",
         highlights: [
@@ -106,11 +107,12 @@ export const projects: Project[] = [
     tone: "blue",
     year: "2026",
     featured: false,
+    link: { href: "https://confindant.vercel.app", label: "confindant.vercel.app" },
     stack: ["Flutter", "Riverpod", "Next.js", "Laravel", "PostgreSQL", "Gemini AI"],
     i18n: {
       id: {
         kind: "Aplikasi keuangan · Mobile & web",
-        status: "Dalam pengembangan",
+        status: "Proyek kuliah",
         role: "Solo developer (mobile, web, backend)",
         overview: "Keuangan personal dan akuntansi organisasi dalam satu aplikasi, ditenagai AI. Pengalaman yang sama di mobile Flutter dan dashboard web Next.js, dengan API Laravel 12.",
         highlights: [
@@ -121,7 +123,7 @@ export const projects: Project[] = [
       },
       en: {
         kind: "Finance app · Mobile & web",
-        status: "In development",
+        status: "Course project",
         role: "Solo developer (mobile, web, backend)",
         overview: "Personal finance and organization accounting in one AI-powered app. The same experience on Flutter mobile and a Next.js web dashboard, backed by a Laravel 12 API.",
         highlights: [
@@ -138,7 +140,7 @@ export const projects: Project[] = [
     glyph: "DP",
     category: "web",
     tone: "gold",
-    year: "[tahun]",
+    year: "2025",
     featured: true,
     link: { href: "https://direktoripdpi.com", label: "direktoripdpi.com" },
     stack: ["Web app", "Database"],
@@ -175,11 +177,12 @@ export const projects: Project[] = [
     tone: "violet",
     year: "2026",
     featured: false,
+    link: { href: "https://direktori-ppds.vercel.app", label: "direktori-ppds.vercel.app" },
     stack: ["Web app", "Data per kabupaten"],
     i18n: {
       id: {
         kind: "Direktori nasional",
-        status: "Sedang dibangun",
+        status: "Live",
         role: "Full-stack developer",
         overview: "Direktori PPDS, konsultan, dan fellow pulmonologi se-Indonesia untuk Kolegium Pulmonologi dan Kedokteran Respirasi Indonesia.",
         highlights: [
@@ -190,7 +193,7 @@ export const projects: Project[] = [
       },
       en: {
         kind: "National directory",
-        status: "In progress",
+        status: "Live",
         role: "Full-stack developer",
         overview: "A nationwide directory of pulmonology residents, consultants and fellows for the Indonesian College of Pulmonology and Respiratory Medicine.",
         highlights: [
@@ -209,6 +212,7 @@ export const projects: Project[] = [
     tone: "steel",
     year: "2026",
     featured: false,
+    link: { href: "https://agrivision-blond-nine.vercel.app", label: "agrivision-blond-nine.vercel.app" },
     stack: ["Next.js", "Flutter", "Supabase", "FastAPI", "Railway"],
     i18n: {
       id: {
@@ -277,11 +281,12 @@ export const projects: Project[] = [
     tone: "violet",
     year: "2026",
     featured: false,
+    link: { href: "https://web-omega-one-69.vercel.app/beranda", label: "web-omega-one-69.vercel.app" },
     stack: ["Next.js", "Flutter"],
     i18n: {
       id: {
         kind: "Kesehatan mental · Web",
-        status: "Lomba UINIC 8.0",
+        status: "Proyek kuliah",
         role: "Ketua tim",
         overview: "Aplikasi kesehatan mental yang dibawa ke UINIC 8.0 Web Development Competition dalam versi web Next.js.",
         highlights: [
@@ -292,7 +297,7 @@ export const projects: Project[] = [
       },
       en: {
         kind: "Mental health · Web",
-        status: "UINIC 8.0 entry",
+        status: "Course project",
         role: "Team lead",
         overview: "A mental health app entered in the UINIC 8.0 Web Development Competition as a Next.js web version.",
         highlights: [
@@ -311,11 +316,12 @@ export const projects: Project[] = [
     tone: "gold",
     year: "2026",
     featured: false,
+    link: { href: "https://kontraku.vercel.app", label: "kontraku.vercel.app" },
     stack: ["Mobile", "FastAPI", "PostgreSQL", "Railway"],
     i18n: {
       id: {
         kind: "Aplikasi mobile · SaaS",
-        status: "Konsep & desain",
+        status: "Live",
         role: "Pembuat",
         overview: "Aplikasi pengingat untuk pemilik kontrakan: daftar properti, lokasi, dan foto, dengan pengingat jatuh tempo sewa, perpanjangan kontrak, dan perawatan.",
         highlights: [
@@ -326,7 +332,7 @@ export const projects: Project[] = [
       },
       en: {
         kind: "Mobile app · SaaS",
-        status: "Concept & design",
+        status: "Live",
         role: "Creator",
         overview: "A reminder app for rental owners: properties, locations and photos, with reminders for rent due dates, contract renewals and maintenance.",
         highlights: [

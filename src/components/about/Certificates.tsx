@@ -42,13 +42,20 @@ export function Certificates() {
             >
               <span className="relative block aspect-[16/10] w-full overflow-hidden bg-surface-2">
                 {c.image ? (
-                  <Image
-                    src={c.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 100vw, 380px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+                  <>
+                    <Image
+                      src={c.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, 380px"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    {c.file && (
+                      <span className="absolute top-3 left-3 grid size-8 place-items-center rounded-full bg-veil-75 text-tile-ink">
+                        <FileIcon size={16} />
+                      </span>
+                    )}
+                  </>
                 ) : (
                   <span className={`${fileTones[i % fileTones.length]} absolute inset-0 flex flex-col justify-between p-[18px]`}>
                     <span className="glyph text-[110px] opacity-20" data-glyph="PDF" aria-hidden="true" />

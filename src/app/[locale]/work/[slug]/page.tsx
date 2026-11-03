@@ -101,13 +101,28 @@ export default async function ProjectPage({ params }: Props) {
           >
             <span className="glyph right-2.5 bottom-[-40px] text-[min(360px,34vw)] opacity-20" data-glyph={project.glyph} aria-hidden="true" />
             {cover && (
-              <ScreenFrame
-                src={cover.src}
-                alt={cover.alt}
-                priority
-                sizes="(max-width: 1200px) 92vw, 1040px"
-                className="relative mb-[clamp(18px,3vw,28px)] aspect-[16/10] w-full md:aspect-[16/9]"
-              />
+              <div className="relative mb-[clamp(18px,3vw,28px)]">
+                <ScreenFrame
+                  src={cover.src}
+                  alt={cover.alt}
+                  priority
+                  sizes="(max-width: 1200px) 92vw, 1040px"
+                  className="aspect-[16/10] w-full md:aspect-[16/9]"
+                />
+                {project.link && (
+                  <a
+                    href={project.link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("visit", { label: project.link.label })}
+                    className="absolute right-3 bottom-3 inline-flex min-h-11 max-w-[calc(100%-24px)] items-center gap-2.5 rounded-chip border border-line bg-surface px-4 font-mono text-[13.5px] font-medium text-ink shadow-[0_14px_30px_-14px_var(--shadow)] transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-blue hover:bg-blue hover:text-on-dark"
+                  >
+                    <span aria-hidden="true" className="size-2 flex-none rounded-full bg-ok shadow-[0_0_0_4px_var(--ok-ring)]" />
+                    <span className="truncate">{project.link.label}</span>
+                    <ExternalIcon size={14} className="flex-none" />
+                  </a>
+                )}
+              </div>
             )}
             <dl className="relative m-0 grid grid-cols-2 gap-3 md:grid-cols-4">
               {meta.map((m) => (

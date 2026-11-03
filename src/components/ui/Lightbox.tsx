@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { CloseIcon, ExternalIcon } from "./icons";
 
@@ -40,7 +41,8 @@ export function Lightbox({ item, onClose, openFileLabel }: { item: LightboxItem 
   if (!item) return null;
   const src = item.file ?? item.image;
 
-  return (
+  // Portal ke body: <main> adalah stacking context (z-2), sehingga tanpa portal navbar (z-30) menimpa dialog ini.
+  return createPortal(
     <div className="animate-fade-in fixed inset-0 z-[80] flex items-center justify-center p-3 sm:p-6">
       <div className="absolute inset-0 bg-(--scrim) backdrop-blur-[6px]" onClick={handleClose} aria-hidden="true" />
       <div
@@ -81,12 +83,13 @@ export function Lightbox({ item, onClose, openFileLabel }: { item: LightboxItem 
           </div>
         </div>
         <div className="min-h-0 flex-1 overflow-auto bg-surface-2">
-          {item.file ? (
-            <iframe src={`${item.file}#view=FitH`} title={item.title} className="block h-[75svh] w-full border-0" />
-          ) : item.image ? (
+          {/* Gambar didahulukan: iframe PDF tidak tampil di banyak browser (terutama HP). PDF asli tetap lewat tombol "buka file". */}
+          {item.image ? (
             <div className="relative h-[75svh] w-full">
               <Image src={item.image} alt={item.title} fill sizes="(max-width: 1000px) 100vw, 1000px" className="object-contain" />
             </div>
+          ) : item.file ? (
+            <iframe src={`${item.file}#view=FitH`} title={item.title} className="block h-[75svh] w-full border-0" />
           ) : null}
         </div>
         {(item.extra || (src && openFileLabel)) && (
@@ -100,6 +103,7 @@ export function Lightbox({ item, onClose, openFileLabel }: { item: LightboxItem 
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

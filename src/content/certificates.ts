@@ -11,7 +11,9 @@ export interface Certificate {
   category?: CertificateCategory;
   result?: Record<Locale, string>;
   desc?: Record<Locale, string>;
+  /** Gambar untuk kartu dan lightbox. Untuk sertifikat PDF: render halaman pertama ke JPG (pdftoppm). */
   image?: string;
+  /** PDF asli; dibuka di tab baru lewat tombol di lightbox. */
   file?: string;
   credentialUrl?: string;
 }
@@ -28,6 +30,7 @@ export const certificates: Certificate[] = [
       id: "Kualifikasi dari Google for Education yang menunjukkan pengetahuan, keterampilan, dan kompetensi dasar dalam menggunakan AI Google di lingkungan pendidikan.",
       en: "A Google for Education qualification demonstrating foundational knowledge, skills, and competence in using Google AI in educational settings.",
     },
+    image: "/certificates/gemini-certified-student-2026.jpg",
     file: "/certificates/gemini-certified-student-2026.pdf",
   },
   {
@@ -44,6 +47,7 @@ export const certificates: Certificate[] = [
       id: "Meraih Harapan 1 pada kategori Lomba Essay dalam Indonesian Counseling Competition, periode 2026/2027.",
       en: "Won 1st Runner-Up in the Essay Competition category of the Indonesian Counseling Competition, 2026/2027 period.",
     },
+    image: "/certificates/uad-indonesian-counseling-competition-2026.jpg",
     file: "/certificates/uad-indonesian-counseling-competition-2026.pdf",
   },
   {
@@ -57,6 +61,7 @@ export const certificates: Certificate[] = [
       id: "Penghargaan atas kontribusi sebagai Website Developer dalam mengembangkan dan mengelola website resmi Tax Center SV IPB.",
       en: "Recognition for contributions as a Website Developer in building and maintaining the official Tax Center SV IPB website.",
     },
+    image: "/certificates/tax-center-sv-ipb-2026.jpg",
     file: "/certificates/tax-center-sv-ipb-2026.pdf",
   },
   {
@@ -70,6 +75,7 @@ export const certificates: Certificate[] = [
       id: 'Penghargaan atas penciptaan aplikasi web "Direktori Anggota Perhimpunan Dokter Paru Indonesia" yang membantu masyarakat mengakses profil dokter spesialis paru di seluruh Indonesia.',
       en: 'Recognition for creating the "Indonesian Pulmonology Association Member Directory" web app, which helps the public look up pulmonologist profiles across Indonesia.',
     },
+    image: "/certificates/pdpi-direktori-2025.jpg",
     file: "/certificates/pdpi-direktori-2025.pdf",
   },
   {

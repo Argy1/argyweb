@@ -1,4 +1,4 @@
-// Perjalanan: 4 item dari prototipe + pendidikan dari web lama (Academic.tsx).
+// Perjalanan: PDPI + pendidikan dari web lama (Academic.tsx). Item lomba (UINIC 8.0, EPIC 2026) dihapus atas permintaan Argy.
 // "[tahun]" / "[year]" = belum diketahui, jangan ditebak.
 import type { Locale } from "./projects";
 
@@ -15,21 +15,7 @@ export interface TimelineItem {
 export const timeline: Record<Locale, TimelineItem[]> = {
   id: [
     {
-      when: "2026",
-      title: "UINIC 8.0 Web Development",
-      role: "Ketua tim · Mindra",
-      desc: "Lomba pengembangan web oleh HMPS Informatika UIN Sunan Kalijaga.",
-      tone: "gold",
-    },
-    {
-      when: "2026",
-      title: "EPIC 2026 Business Plan",
-      role: "Anggota tim · MAGPAD",
-      desc: "Sampai ke tahap presentasi final Business Plan Competition.",
-      tone: "lilac",
-    },
-    {
-      when: "[tahun]",
+      when: "2025 – 2026",
       title: "PDPI",
       role: "Full-stack developer",
       desc: "Membangun Klik PDPI dan direktori anggota yang mengelola 1.800+ profil dokter.",
@@ -59,21 +45,7 @@ export const timeline: Record<Locale, TimelineItem[]> = {
   ],
   en: [
     {
-      when: "2026",
-      title: "UINIC 8.0 Web Development",
-      role: "Team lead · Mindra",
-      desc: "Web development competition by HMPS Informatika, UIN Sunan Kalijaga.",
-      tone: "gold",
-    },
-    {
-      when: "2026",
-      title: "EPIC 2026 Business Plan",
-      role: "Team member · MAGPAD",
-      desc: "Reached the final presentation stage of the Business Plan Competition.",
-      tone: "lilac",
-    },
-    {
-      when: "[year]",
+      when: "2025 – 2026",
       title: "PDPI",
       role: "Full-stack developer",
       desc: "Built Klik PDPI and the member directory that manages 1,800+ doctor profiles.",

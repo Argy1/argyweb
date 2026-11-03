@@ -1,6 +1,7 @@
+import { useTranslations } from "next-intl";
 import { NavLink } from "@/components/ui/NavLink";
 import type { ProjectCategory, TileTone } from "@/content/projects";
-import { ArrowRightIcon } from "@/components/ui/icons";
+import { ArrowRightIcon, ExternalIcon } from "@/components/ui/icons";
 import { ScreenFrame } from "@/components/ui/ScreenFrame";
 
 export interface WorkCardData {
@@ -15,14 +16,18 @@ export interface WorkCardData {
   category: ProjectCategory;
   stack: string[];
   cover?: { src: string; alt: string };
+  /** Situs yang sudah live: tampil sebagai tombol terpisah di kartu (bukti proyek benar-benar jalan). */
+  link?: { href: string; label: string };
 }
 
+/**
+ * Kartu proyek. Seluruh kartu bisa diklik lewat tautan nama (stretched link), sedangkan tombol situs live
+ * berdiri sendiri di atasnya (z-10) supaya tidak ada tautan di dalam tautan.
+ */
 export function WorkCard({ p }: { p: WorkCardData }) {
+  const t = useTranslations("project");
   return (
-    <NavLink
-      href={{ pathname: "/work/[slug]", params: { slug: p.slug } }}
-      className="group animate-fade-in flex flex-col overflow-hidden rounded-lg border border-line bg-surface text-left hover-glow"
-    >
+    <article className="group animate-fade-in relative flex flex-col overflow-hidden rounded-lg border border-line bg-surface text-left hover-glow has-[:focus-visible]:shadow-[0_0_0_3px_var(--glow)]">
       <span
         className={`tone-${p.tone} relative flex ${p.cover ? "h-[220px]" : "h-[170px]"} items-start justify-between overflow-hidden p-[18px]`}
       >
@@ -39,10 +44,28 @@ export function WorkCard({ p }: { p: WorkCardData }) {
         )}
       </span>
       <span className="flex flex-1 flex-col gap-2.5 px-5 pt-5 pb-[22px]">
-        <span className="font-display text-2xl font-extrabold tracking-[-0.025em]">{p.name}</span>
+        <NavLink
+          href={{ pathname: "/work/[slug]", params: { slug: p.slug } }}
+          className="font-display text-2xl font-extrabold tracking-[-0.025em] outline-none after:absolute after:inset-0 after:content-['']"
+        >
+          {p.name}
+        </NavLink>
         <span className="text-sm font-semibold text-muted">
           {p.kind} · {p.year}
         </span>
+        {p.link && (
+          <a
+            href={p.link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t("visit", { label: p.link.label })}
+            className="relative z-10 mt-1 inline-flex min-h-11 w-fit max-w-full items-center gap-2.5 rounded-chip border border-line bg-surface-2 py-1 pr-3.5 pl-3.5 font-mono text-[13px] font-medium text-ink transition-[transform,border-color,background-color,color] duration-200 hover:-translate-y-0.5 hover:border-blue hover:bg-blue hover:text-on-dark"
+          >
+            <span aria-hidden="true" className="size-2 flex-none rounded-full bg-ok shadow-[0_0_0_4px_var(--ok-ring)]" />
+            <span className="truncate">{p.link.label}</span>
+            <ExternalIcon size={14} className="flex-none" />
+          </a>
+        )}
         <span className="mt-auto flex items-center justify-between gap-2.5 pt-2">
           <span className="chips">
             {p.stack.slice(0, 3).map((s) => (
@@ -54,6 +77,6 @@ export function WorkCard({ p }: { p: WorkCardData }) {
           </span>
         </span>
       </span>
-    </NavLink>
+    </article>
   );
 }

@@ -75,14 +75,19 @@ Sumber: `src/content/projects.ts` (data + `projectGallery` untuk screenshot). Sc
 
 | Slug | Catatan |
 |---|---|
-| `klik-pdpi` | Live (klikpdpi.com). Screenshot dari web lama. |
-| `kopaseba` | Dalam pengembangan, **belum ada tautan live**. Screenshot diambil dari repo lokal `D:\Projekan\Kopaseba` (halaman publik; katalog/pembiayaan dilewati karena gambar produk kosong; foto pengurus tidak dipakai). |
-| `confindant` | Dalam pengembangan (Flutter + Next.js + Laravel 12 + Gemini). Screenshot dari web lokal dengan **akun & data demo** (bukan data nyata). Konten dari studi kasus web lama. |
-| `direktori-pdpi` | Live (direktoripdpi.com). |
-| `direktori-ppds` | Sedang dibangun; satu screenshot lokal. |
-| `agrivision`, `smart-city-traffic` | Proyek kuliah; screenshot dari proyek lokal di `D:\Semester 5\...`. |
-| `mindra` | Lomba UINIC 8.0; screenshot dari `D:\Projekan\Mindra\web`. |
-| `kontraku` | Konsep & desain; screenshot dari web lama. |
+Proyek dengan `link` di `projects.ts` otomatis mendapat tombol situs live (pill domain di kartu Karya, tombol di panel intip, pill di cover halaman detail). Pembaruan 2026-11-03: tahun Klik PDPI dan Direktori PDPI = 2025; semua tautan di bawah diberikan Argy.
+
+| Slug | Status | Tautan live | Catatan |
+|---|---|---|---|
+| `klik-pdpi` | Live | klikpdpi.com | 2025. Screenshot dari web lama. |
+| `kopaseba` | Live | kopaseba.vercel.app | Screenshot dari repo lokal `D:\Projekan\Kopaseba` (halaman publik; katalog/pembiayaan dilewati karena gambar produk kosong; foto pengurus tidak dipakai). |
+| `confindant` | Proyek kuliah | confindant.vercel.app | Flutter + Next.js + Laravel 12 + Gemini. Screenshot dari web lokal dengan **akun & data demo** (bukan data nyata). Konten dari studi kasus web lama. |
+| `direktori-pdpi` | Live | direktoripdpi.com | 2025. |
+| `direktori-ppds` | Live | direktori-ppds.vercel.app | Satu screenshot lokal. |
+| `agrivision` | Proyek kuliah | agrivision-blond-nine.vercel.app | Screenshot dari proyek lokal di `D:\Semester 5\...`. |
+| `smart-city-traffic` | Proyek kuliah | (belum ada) | Screenshot dari proyek lokal di `D:\Semester 5\...`. |
+| `mindra` | Proyek kuliah | web-omega-one-69.vercel.app/beranda | Pernah ikut lomba UINIC 8.0 (masih tertulis di ringkasan dan sorotan proyek, sudah tidak di timeline); screenshot dari `D:\Projekan\Mindra\web`. |
+| `kontraku` | Live | kontraku.vercel.app | Screenshot dari web lama. |
 
 Riwayat perubahan daftar: TradeMatrix AI, MAGPAD, Logic Gates 3D, argyweb v1, Driving Events dihapus atas permintaan Argy; DigitalPMO diganti Kopaseba; Confindant ditambah. **Daftar di `docs/05-CONTENT.md` (13 proyek) adalah daftar awal dan sudah usang.**
 
@@ -92,8 +97,9 @@ Cara menambah proyek baru: tambah objek di `projects.ts` (teks `id` dan `en`), t
 
 - `RESEND_API_KEY` (daftar di resend.com dengan email yang sama dengan `profile.email`) dan uji kirim sungguhan.
 - Deploy Vercel + `NEXT_PUBLIC_SITE_URL` final.
-- Statistik "8 gerbang logika 3D" (`src/content/profile.ts`, `stats.logicGates`), fakta "sedang dibangun: TradeMatrix AI", dan item timeline MAGPAD: apakah ikut dihapus karena proyeknya sudah tidak ada di Karya.
-- Tahun yang masih `[tahun]`: Klik PDPI, Direktori PDPI, dan beberapa item timeline.
+- Statistik "8 gerbang logika 3D" (`src/content/profile.ts`, `stats.logicGates`) dan fakta "sedang dibangun: TradeMatrix AI dan Direktori PPDS" di `messages/*.json` (`about.facts`): apakah ikut dihapus/diperbarui karena TradeMatrix AI dan Logic Gates 3D sudah tidak ada di Karya dan Direktori PPDS sudah Live.
+- Tidak ada lagi tahun `[tahun]` yang tersisa. Timeline "Jejak sejauh ini" kini: PDPI (2025 – 2026), IPB University, Universitas Indonesia, SMA Negeri 2 Tambun Selatan (item UINIC 8.0 dan EPIC 2026 dihapus atas permintaan Argy, 2026-11-03).
+- Smart City Traffic belum punya tautan live.
 - Apakah proyek web lama lain (mis. ARIS PDPI) ditampilkan.
 - Nomor WhatsApp dan akun TikTok (belum dipasang).
 - CV saat ini hanya satu gambar JPG (`public/cv/`); belum ada PDF.

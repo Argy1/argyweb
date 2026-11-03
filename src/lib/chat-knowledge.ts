@@ -145,13 +145,15 @@ export function keywordAnswer(question: string, locale: Locale): string {
       : `Email Argy di ${profile.email}, atau temukan di ${profile.socials.map((s) => s.label).join(", ")} (tautannya ada di bagian Kontak di bawah setiap halaman).`;
   if (has("kuliah", "kampus", "ipb", "study", "studi", "pendidikan", "education", "universit", "sekolah", "school"))
     return timeline[locale]
-      .slice(3)
+      .filter((x) => x.title !== "PDPI") // item pertama = pengalaman; sisanya pendidikan
       .map((x) => `• ${x.when} · ${x.title} · ${x.role}`)
       .join("\n");
-  if (has("lomba", "competition", "uinic", "epic"))
-    return en
-      ? "In 2026 he led the Mindra team at UINIC 8.0 Web Development and reached the final presentation of EPIC 2026 BPC with MAGPAD."
-      : "Di 2026 ia memimpin tim Mindra di UINIC 8.0 Web Development dan sampai ke presentasi final EPIC 2026 BPC dengan MAGPAD.";
+  if (has("lomba", "competition", "uinic", "epic")) {
+    const list = certificates
+      .filter((c) => c.category === "competition")
+      .map((c) => `• ${c.title[locale]} (${c.date})${c.result ? ` · ${c.result[locale]}` : ""}`);
+    return `${en ? "Competitions Argy has joined" : "Lomba yang pernah diikuti Argy"}:\n${list.join("\n")}`;
+  }
   if (has("halo", "hai ", " hi ", "hello", "hey")) return m.chat.greeting;
   return en
     ? `I don't have an answer for that yet. Try asking about a project by name, his tech stack, or how to contact him. You can also email Argy at ${profile.email}.`
