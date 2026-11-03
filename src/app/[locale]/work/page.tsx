@@ -9,6 +9,7 @@ import type { WorkCardData } from "@/components/work/WorkCard";
 import { projectCover, projects } from "@/content/projects";
 import type { AppLocale } from "@/i18n/routing";
 import { alternatesFor } from "@/lib/seo";
+import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
@@ -55,10 +56,10 @@ export default async function WorkPage({ params }: Props) {
         labelledBy="work-page-title"
         crumbs={<Breadcrumbs items={[{ label: tNav("home"), href: "/" }, { label: tNav("work") }]} />}
       >
-        <h1 id="work-page-title" className="h-page">
+        <Scramble as="h1" id="work-page-title" className="h-page">
           {t("pageA")}
           <span className="mark">{t("pageB")}</span>
-        </h1>
+        </Scramble>
         <p className="lead">{t("pageSub")}</p>
       </PageHero>
       <section data-chip-section="work-grid" aria-label={t("filterLabel")} className="pt-2.5 pb-5">

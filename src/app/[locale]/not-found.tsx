@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { PageShell } from "@/components/layout/PageShell";
 import { NavLink } from "@/components/ui/NavLink";
 import { ChipAnchor } from "@/components/ui/ChipAnchor";
+import { Scramble } from "@/components/ui/Scramble";
 
 export default function NotFound() {
   const t = useTranslations("notFound");
@@ -12,7 +13,9 @@ export default function NotFound() {
         <ChipAnchor id="work-head" fallback className="mx-auto md:order-2 md:mx-0" />
         <div className="flex max-w-[640px] flex-col gap-[22px]">
           <span className="eyebrow">{t("eyebrow")}</span>
-          <h1 className="h-page">{t("title")}</h1>
+          <Scramble as="h1" className="h-page">
+            {t("title")}
+          </Scramble>
           <p className="lead">{t("sub")}</p>
           <div>
             <NavLink href="/" direction="back" className="btn btn-blue">

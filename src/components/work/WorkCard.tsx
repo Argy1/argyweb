@@ -3,6 +3,7 @@ import { NavLink } from "@/components/ui/NavLink";
 import type { ProjectCategory, TileTone } from "@/content/projects";
 import { ArrowRightIcon, ExternalIcon } from "@/components/ui/icons";
 import { ScreenFrame } from "@/components/ui/ScreenFrame";
+import { Scramble } from "@/components/ui/Scramble";
 
 export interface WorkCardData {
   slug: string;
@@ -48,7 +49,7 @@ export function WorkCard({ p }: { p: WorkCardData }) {
           href={{ pathname: "/work/[slug]", params: { slug: p.slug } }}
           className="font-display text-2xl font-extrabold tracking-[-0.025em] outline-none after:absolute after:inset-0 after:content-['']"
         >
-          {p.name}
+          <Scramble as="span">{p.name}</Scramble>
         </NavLink>
         <span className="text-sm font-semibold text-muted">
           {p.kind} · {p.year}

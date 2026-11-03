@@ -10,7 +10,7 @@ Terakhir diperbarui: 2026-11-03.
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
 - 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
 - Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
-- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **102 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan.
+- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **112 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan.
 
 ## 2. Tumpukan teknologi (versi saat ini)
 
@@ -23,7 +23,7 @@ pnpm install
 cp .env.example .env.local     # isi key sesuai §4
 pnpm dev                        # http://localhost:3000 → /id
 pnpm lint && pnpm typecheck && pnpm build
-pnpm test:e2e                   # 102 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10)
+pnpm test:e2e                   # 112 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10 + scramble 10)
 ```
 
 Catatan penting untuk pengujian:
@@ -69,6 +69,8 @@ Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkas
 
 - **Header satu kapsul di semua lebar** (2026-11-03): ≥768px link langsung di kapsul (di 768–899px tombol Tanya AI hanya ikon); < 768px link pindah ke menu ☰ (`MobileMenu.tsx`: `MenuButton` di kapsul + `MenuPanel` di luar kapsul, karena `backdrop-filter` kapsul memotong elemen `fixed` di dalamnya). Panel solid (`bg-surface`), focus trap + Esc via `useFocusTrap`, tutup saat rute berganti (state turunan `openAt === pathname`), scrim diketuk. Item navigasi dipakai bersama lewat `navItems.ts`. Breakpoint token `nav` (900px) tetap untuk grid halaman; navbar memakai `md:` (768px). Di ≤400px tombol bahasa/tema/AI dikompres supaya muat di 360px.
 - **Chip ikut turun di < 1024px (mode "stage")** (2026-11-03): menggantikan `docs/03` §7 ("chip hanya di hero"). Section penting punya anchor kosong rata tengah di alur layout (`<ChipAnchor stage />`, kelas `chip-stage`, ditarik 48px ke atas ke dalam padding section); chip meluncur anchor ke anchor seperti desktop dan tetap tidak menutup teks. Satu section boleh punya dua anchor dengan id sama (stage < 1024px, gutter ≥ 1024px); `anchorTracker.pickAnchor` memakai yang pertama terlihat. Garis aktivasi section di < 1024px = 72% tinggi viewport (desktop 55%) supaya chip mendarat saat anchor mulai masuk layar. **Mode Ringan/`prefers-reduced-motion` di HP (< 768px) = chip hanya di hero** (CSS `html[data-fx="lite"]` menyembunyikan anchor stage dan anchor satu-elemen `home-about`, `contact`, `work-grid`, `project-body`). Ukuran: `--stage-w` = `min(40vw, 22svh)` (HP) / `min(30vw, 28svh)` (tablet); `work-grid`/`project-body` `min(30vw, 18svh)`.
+
+- **Animasi teks "scramble / decode" pada judul** (2026-11-03): huruf mulai sebagai karakter acak (kode dan simbol: `0 1 < > / # $ % & * + = ? A–F`) lalu mengunci satu per satu dari kiri ke kanan. Dipasang lewat `<Scramble as="h1|h2|h3|span">` (`src/components/ui/Scramble.tsx`) di hero, semua H1 dan H2 halaman, dan judul card (kartu proyek, tile unggulan, panel intip, sertifikat, stack, timeline, kartu info Detail/Kontak). **Teks asli tidak pernah diubah** (tetap di HTML untuk SEO/pembaca layar/LCP dan menentukan layout); mesin `src/lib/scrambleEngine.ts` hanya membuat teks asli transparan (`.scr-run`) dan menggambar lapisan `aria-hidden` (`.scr-layer`, anak elemen) di posisi tiap huruf yang diukur dengan `Range.getBoundingClientRect()`, jadi tidak ada layout shift dan latar `.mark` tetap tampil. Aturan: satu `IntersectionObserver` + satu loop rAF; mulai saat ≥60% terlihat; **putar ulang tiap masuk layar lagi, hanya bila elemen sempat sepenuhnya keluar layar ≥ 800 ms**; maksimal 6 animasi bersamaan (sisanya langsung final); menunggu `document.fonts.ready`; hero menunggu intro selesai (`html[data-intro]` / `introGone`); mode Ringan dan `prefers-reduced-motion` = tanpa animasi (animasi yang berjalan diselesaikan seketika saat mode berubah); resize hanya menghentikan animasi bila **lebar** berubah (di HP `resize` juga menyala saat bilah URL bergerak). Durasi `min(1100, 520 + 28·n)` ms; karakter acak diganti tiap 50 ms. Untuk judul di dalam tautan kartu pakai `<Scramble as="span">` DI DALAM tautan, jangan menjadikan tautannya `relative` (stretched link `after:absolute after:inset-0` bergantung pada kartu sebagai induk berposisi). Warna karakter acak ditulis `!important` inline karena `.scr-run *` memakai `!important`.
 
 ## 6. Deploy ke Vercel (belum dilakukan)
 
@@ -139,6 +141,13 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 5. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
 
 ## 11. Catatan perubahan
+
+**2026-11-03 (animasi teks judul)**:
+- Animasi scramble/decode pada judul (lihat §5). Berkas baru: `src/lib/scrambleEngine.ts`, `src/components/ui/Scramble.tsx`, `tests/scramble.spec.ts` (10 tes: teks akhir identik, tanpa layout shift, `aria-hidden`, nama aksesibel utuh, putar ulang, mode Ringan, reduced-motion, menunggu intro, tautan kartu utuh).
+- Catatan uji: durasi animasi nyata di sandbox tanpa GPU 2–3 detik (rAF lambat karena WebGL software); di perangkat dengan GPU mengikuti rumus di §5. Tes memakai timeout longgar. Jam palsu Playwright (`page.clock`) menahan hidrasi React, jadi untuk membekukan frame majukan jam dulu sampai halaman terhidrasi.
+- Jebakan: bila `.next` lama dipakai ulang, CSS baru bisa tidak ikut ke build (CSS `.scr-*` sempat tidak tersaji); `rm -rf .next` lalu build ulang.
+- Verifikasi: typecheck, lint, build bersih; 112 tes Playwright lolos pada build produksi; tampilan diperiksa di 390px dan 1280px.
+- Belum diukur: Lighthouse mobile pada preview (acuan Performance ±73–77), dan rasa animasi di HP/GPU asli.
 
 **2026-11-03 (judul hero)**:
 - Kata sorotan emas judul hero diganti atas permintaan Argy karena "effortless" bisa terbaca "tanpa usaha": EN "effortless" → "delightful", ID "enak dipakai" → "memukau" (`messages/*.json`, `hero.h1b`). Kata biru "alive" / "terasa hidup" tetap. `reference/content/messages.*.json` (spesifikasi awal) sengaja tidak diubah.

@@ -7,6 +7,7 @@ import { ChipAnchor } from "@/components/ui/ChipAnchor";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { ScreenFrame } from "@/components/ui/ScreenFrame";
 import { PeekLink } from "./PeekLink";
+import { Scramble } from "@/components/ui/Scramble";
 
 const tileBase =
   "group relative flex flex-col justify-between overflow-hidden rounded-[30px] border border-tile-edge p-6 text-left shadow-[0_18px_40px_-26px_var(--shadow)] hover-glow";
@@ -28,9 +29,9 @@ export async function FeaturedBento() {
         <div className="mb-9 grid items-end gap-x-[30px] gap-y-4 md:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <span className="eyebrow">{t("workEyebrow")}</span>
-            <h2 id="work-title" className="h-section">
+            <Scramble as="h2" id="work-title" className="h-section">
               {t("workTitle")}
-            </h2>
+            </Scramble>
           </div>
           <div className="flex items-end gap-6">
             <p className="m-0 max-w-[36ch] text-[17px] leading-[1.6] text-muted">{t("workSub")}</p>
@@ -67,11 +68,12 @@ export async function FeaturedBento() {
                 )}
                 <span className="relative flex items-end justify-between gap-3.5">
                   <span className={`block min-w-0 ${cover ? "sm:max-w-[44%] lg:max-w-[42%]" : ""}`}>
-                    <span
+                    <Scramble
+                      as="span"
                       className={`block font-display leading-[1.05] font-extrabold tracking-[-0.03em] ${big ? "text-[clamp(36px,4.4vw,58px)]" : "text-[28px]"}`}
                     >
                       {p.name}
-                    </span>
+                    </Scramble>
                     <span className="mt-1.5 block text-[14.5px] font-semibold">{c.kind}</span>
                     {big && (
                       <span className="mt-3.5 block max-w-[44ch] text-[17px] leading-[1.55]">{c.overview}</span>

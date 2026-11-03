@@ -10,6 +10,7 @@ import { ArrowRightIcon, CloseIcon, ExternalIcon } from "@/components/ui/icons";
 import { signalNavigation } from "@/components/ui/NavLink";
 import { runNavTransition } from "@/lib/pageTransition";
 import { ScreenFrame } from "@/components/ui/ScreenFrame";
+import { Scramble } from "@/components/ui/Scramble";
 
 /**
  * Drawer "panel intip" di Beranda. URL sudah diganti ke /karya/[slug] oleh PeekLink (pushState);
@@ -89,12 +90,13 @@ export function ProjectPeek() {
           <span className="idx relative">
             {String(index).padStart(2, "0")} · {c.kind}
           </span>
-          <h2
+          <Scramble
+            as="h2"
             id="peek-title"
-            className="relative mt-2 font-display text-[40px] leading-[1.05] font-extrabold tracking-[-0.03em]"
+            className="mt-2 font-display text-[40px] leading-[1.05] font-extrabold tracking-[-0.03em]"
           >
             {project.name}
-          </h2>
+          </Scramble>
         </div>
         <div className="flex flex-1 flex-col gap-[18px] p-6">
           {cover && (
