@@ -70,7 +70,7 @@ export function ContactSection() {
                 <ExternalIcon />
               </a>
             ))}
-            <a href={profile.cv[locale]} download={profile.cvDownloadName} className={pillLink}>
+            <a href={profile.cv[locale]} download={profile.cvDownloadName[locale]} className={pillLink}>
               {t("cv")}
             </a>
             <button type="button" onClick={(e) => openChat({ returnFocus: e.currentTarget })} className={pillLink}>

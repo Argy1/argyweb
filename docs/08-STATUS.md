@@ -11,7 +11,7 @@ Terakhir diperbarui: 2026-11-03.
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
 - 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
 - Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
-- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **136 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8 + SEO 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
+- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **137 tes Playwright lolos** (visual 80 + efek 6 + alur 7 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8 + SEO 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
 
 ## 2. Tumpukan teknologi (versi saat ini)
 
@@ -24,7 +24,7 @@ pnpm install
 cp .env.example .env.local     # isi key sesuai §4
 pnpm dev                        # http://localhost:3000 → /id
 pnpm lint && pnpm typecheck && pnpm build
-pnpm test:e2e                   # 136 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8 + SEO 10)
+pnpm test:e2e                   # 137 tes (visual 80 + efek 6 + alur tombol 7 + mobile 10 + scramble 16 (termasuk penjaga cakupan judul) + putar chip 8 + SEO 10)
 ```
 
 Catatan penting untuk pengujian:
@@ -122,11 +122,11 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 - **Lighthouse mobile** pada URL produksi setelah fitur baru (acuan Performance ±73–77; jangan lebih buruk).
 - **Hapus branch remote** `claude/pahami-projek-dokumentasi-sbq21x` (sudah tergabung): proxy git sesi cloud menolak penghapusan branch. Lewat GitHub: Branches → ikon tempat sampah, atau `git push origin --delete claude/pahami-projek-dokumentasi-sbq21x`. Agar otomatis ke depannya: Settings → General → *Automatically delete head branches*.
 - Repo `Argy1/pdpi-member` (di luar argyweb) punya berkas `.env` yang ter-commit (repo private); cek isinya dan pastikan tidak ada rahasia selain key publik.
-- Tidak ada lagi tahun `[tahun]` yang tersisa. Timeline "Jejak sejauh ini" kini: PDPI (2025 – 2026), IPB University, Universitas Indonesia, SMA Negeri 2 Tambun Selatan (item UINIC 8.0 dan EPIC 2026 dihapus atas permintaan Argy, 2026-11-03).
+- Tidak ada lagi tahun `[tahun]` yang tersisa. Timeline "Jejak sejauh ini" kini: PDPI (2025 – 2026), IPB University (2024 – 2028, IPK 3,69), Universitas Indonesia (2022 – 2024, Fisika FMIPA), SMA Negeri 2 Tambun Selatan (2019 – 2022); tahun dan jurusan mengikuti CV terbaru (item UINIC 8.0 dan EPIC 2026 dihapus atas permintaan Argy, 2026-11-03).
 - Smart City Traffic belum punya tautan live.
 - Apakah proyek web lama lain (mis. ARIS PDPI) ditampilkan.
 - Nomor WhatsApp dan akun TikTok (belum dipasang).
-- CV saat ini hanya satu gambar JPG (`public/cv/`); belum ada PDF.
+- CV: dua PDF di `public/cv/` (`cv-argy-fawwaz-akbar-id.pdf`, `…-en.pdf`); tombol unduh mengikuti bahasa halaman dan menyimpan sebagai `CV-Argy-Fawwaz-Akbar-ID.pdf` / `…-EN.pdf`. Untuk memperbarui CV: ganti kedua berkas dengan nama yang sama, lalu deploy.
 - Opsional: Upstash (rate limit terdistribusi), penundaan 3D untuk menaikkan skor Performance Lighthouse, `RenderPump` berhenti render saat chip di luar layar (hemat baterai HP), dan animasi scramble "sekali per judul" bila "setiap masuk layar" terasa ramai (satu konstanta di `scrambleEngine.ts`).
 
 ## 9. Peringatan dan jebakan yang sudah ditemui
@@ -157,6 +157,12 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 6. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
 
 ## 11. Catatan perubahan
+
+**2026-11-03 (CV baru + timeline pendidikan)**:
+- CV lama (satu gambar JPG) diganti dua PDF, satu per bahasa; tombol unduh di Tentang, Kontak, dan footer memakai `profile.cv[locale]` dan nama berkas `profile.cvDownloadName[locale]` (`-ID` / `-EN`). Chatbot memberi tautan CV sesuai bahasa.
+- Timeline pendidikan disesuaikan dengan CV: IPB 2024 – 2028 (IPK 3,69 / 4,00), Universitas Indonesia 2022 – 2024 (Program Studi Fisika, FMIPA), SMA 2019 – 2022. Sebelumnya 2024 – sekarang / 2023 – 2024 / 2020 – 2023.
+- Tes baru: unduh CV per bahasa (href, nama unduhan, berkas PDF valid dan berbeda).
+- Nomor telepon di CV **tidak** dipasang di situs (hanya ada di PDF).
 
 **2026-11-03 (SEO untuk pencarian nama)** — lihat `docs/09-SEO.md`:
 - Kode: JSON-LD `WebSite` + `Person` (`@graph`, `@id`, `alternateName`, `knowsAbout`, `sameAs`) di Beranda dan `ProfilePage` di Tentang; judul beranda memuat "Portofolio/Portfolio"; nama lengkap ada di lead hero (teks terlihat); deskripsi proyek dipotong ≤160 (`trimDescription`); Open Graph lengkap (siteName, locale, gambar) di Karya/Tentang/Kontak yang sebelumnya **tanpa gambar OG** karena menimpa `openGraph` layout (`openGraphFor` di `seo.ts`); `lastmod` di sitemap; meta robots `max-image-preview: large`; tag verifikasi lewat env `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION`.

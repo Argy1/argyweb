@@ -53,7 +53,7 @@ export default async function AboutPage({ params }: Props) {
         </Scramble>
         <p className="lead">{t("lead")}</p>
         <div className="flex flex-wrap gap-3">
-          <a href={profile.cv[locale]} download={profile.cvDownloadName} className="btn btn-blue">
+          <a href={profile.cv[locale]} download={profile.cvDownloadName[locale]} className="btn btn-blue">
             <DownloadIcon />
             {t("cv")}
           </a>

@@ -19,9 +19,10 @@ export const profile = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/argy-fawwaz-akbar-177217247/" },
     { label: "Instagram", href: "https://www.instagram.com/argy.py/" },
   ] satisfies Social[],
-  // Web lama hanya punya satu CV (gambar JPG) untuk kedua bahasa.
-  cv: { id: "/cv/cv-argy-fawwaz-akbar.jpg", en: "/cv/cv-argy-fawwaz-akbar.jpg" } satisfies Record<Locale, string>,
-  cvDownloadName: "CV-Argy-Fawwaz-Akbar.jpg",
+  // Dua CV PDF, satu per bahasa (public/cv/).
+  cv: { id: "/cv/cv-argy-fawwaz-akbar-id.pdf", en: "/cv/cv-argy-fawwaz-akbar-en.pdf" } satisfies Record<Locale, string>,
+  // Nama berkas hasil unduhan dibedakan per bahasa supaya dua CV tidak tertukar di folder Unduhan.
+  cvDownloadName: { id: "CV-Argy-Fawwaz-Akbar-ID.pdf", en: "CV-Argy-Fawwaz-Akbar-EN.pdf" } satisfies Record<Locale, string>,
   photo: "/profile/argy-fawwaz-akbar.jpg",
   university: "IPB University",
   // Token verifikasi Google Search Console (properti Awalan URL https://argyweb.vercel.app/). Bukan rahasia:

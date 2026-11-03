@@ -31,10 +31,27 @@ test("Kopaseba dan Confindant ada di Karya, DigitalPMO tidak", async ({ page }) 
   expect(broken).toEqual([]);
 });
 
+test("unduh CV mengikuti bahasa: ID → CV Indonesia, EN → CV Inggris", async ({ page, request }) => {
+  for (const [path, name, file] of [
+    ["/id/tentang", "CV-Argy-Fawwaz-Akbar-ID.pdf", "/cv/cv-argy-fawwaz-akbar-id.pdf"],
+    ["/en/about", "CV-Argy-Fawwaz-Akbar-EN.pdf", "/cv/cv-argy-fawwaz-akbar-en.pdf"],
+  ]) {
+    await page.goto(path, { waitUntil: "networkidle" });
+    const link = page.locator("main a[download]").first();
+    await expect(link).toHaveAttribute("href", file);
+    await expect(link).toHaveAttribute("download", name);
+    const res = await request.get(file);
+    expect(res.status()).toBe(200);
+    expect((await res.body()).subarray(0, 4).toString()).toBe("%PDF");
+  }
+  const [id, en] = await Promise.all([request.get("/cv/cv-argy-fawwaz-akbar-id.pdf"), request.get("/cv/cv-argy-fawwaz-akbar-en.pdf")]);
+  expect((await id.body()).equals(await en.body())).toBe(false);
+});
+
 test("unduh CV memberi berkas", async ({ page }) => {
   await page.goto("/id/tentang", { waitUntil: "networkidle" });
   const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("link", { name: /Unduh CV/i }).first().click()]);
-  expect(download.suggestedFilename()).toBe("CV-Argy-Fawwaz-Akbar.jpg");
+  expect(download.suggestedFilename()).toBe("CV-Argy-Fawwaz-Akbar-ID.pdf");
 });
 
 test("formulir kontak: validasi, kirim sukses, batas laju, dan jatuh ke mailto", async ({ page }) => {

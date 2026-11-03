@@ -111,12 +111,12 @@ export default async function ContactPage({ params }: Props) {
               </li>
             ))}
             <li>
-              <a href={profile.cv[locale]} download={profile.cvDownloadName} className={cardCls}>
+              <a href={profile.cv[locale]} download={profile.cvDownloadName[locale]} className={cardCls}>
                 <span className="flex items-center justify-between">
                   <span className="font-display text-xl font-extrabold">{t("cvLabel")}</span>
                   <DownloadIcon size={17} className="text-muted" />
                 </span>
-                <span className="font-mono text-[13px] text-accent">{profile.cvDownloadName}</span>
+                <span className="font-mono text-[13px] text-accent">{profile.cvDownloadName[locale]}</span>
                 <span className="text-[15px] leading-normal text-muted">{t("channels.cv")}</span>
               </a>
             </li>
