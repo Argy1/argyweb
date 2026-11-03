@@ -109,7 +109,6 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 
 - `RESEND_API_KEY` (daftar di resend.com dengan email yang sama dengan `profile.email`) dan uji kirim sungguhan.
 - Deploy Vercel + `NEXT_PUBLIC_SITE_URL` final.
-- Stack **Direktori PDPI** (`Web app`, `Database`) dan **Direktori PPDS** (`Web app`, `Data per kabupaten`) di `projects.ts` bukan nama teknologi; teknologi aslinya belum diketahui (jangan ditebak). Menunggu Argy. Selama belum diganti, keduanya ikut tampil di indeks teknologi chatbot.
 - Tidak ada lagi tahun `[tahun]` yang tersisa. Timeline "Jejak sejauh ini" kini: PDPI (2025 – 2026), IPB University, Universitas Indonesia, SMA Negeri 2 Tambun Selatan (item UINIC 8.0 dan EPIC 2026 dihapus atas permintaan Argy, 2026-11-03).
 - Smart City Traffic belum punya tautan live.
 - Apakah proyek web lama lain (mis. ARIS PDPI) ditampilkan.
@@ -140,7 +139,7 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 
 **2026-11-03 (pembersihan konten usang + chatbot)**:
 - Dihapus atas permintaan Argy: statistik "8 gerbang logika 3D" (`stats.logicGates`, kartu di `Stats.tsx`, `stats.gates` di messages) dan fakta "Sedang dibangun / Building now: TradeMatrix AI dan Direktori PPDS" (`about.facts`). Beranda kini 2 kartu statistik, Tentang 3.
-- Stack dirapikan: "Dashboard web" dibuang dari Smart City Traffic, "Mobile" dibuang dari Kontraku (bukan teknologi). Stack Direktori PDPI/PPDS belum diubah (lihat §8).
+- Stack dirapikan: "Dashboard web" dibuang dari Smart City Traffic, "Mobile" dibuang dari Kontraku (bukan teknologi). Stack Direktori PDPI dan Direktori PPDS diganti dengan teknologi asli yang dibaca dari `package.json`/README repo `Argy1/pdpi-member` (React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Supabase) dan `Argy1/Direktori-PPDS` (Next.js, TypeScript, Tailwind CSS, shadcn/ui, Supabase, Three.js).
 - Chatbot: panduan situs + indeks proyek + aturan penalaran di prompt (lihat §5 "Pengetahuan chatbot").
 - Verifikasi: typecheck, lint, build bersih; 80 tes visual Playwright lolos terhadap build produksi (tes efek/alur tombol tidak dijalankan ulang).
 
