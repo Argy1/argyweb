@@ -28,10 +28,10 @@ Web lama berisi konten yang tidak ada di prototipe. Di **Fase 0**, telusuri repo
 | **Kontak** (email, nomor WA bila ada, lokasi) | `src/content/profile.ts` | Ganti placeholder `[email kamu]` di prototipe. Tampilkan email sebagai teks yang bisa disalin. |
 | **Sosial media** (GitHub, LinkedIn, Instagram, dll.) | `src/content/profile.ts` | GitHub yang sudah diketahui: `github.com/Argy1`. |
 | **Foto profil** | `public/profile/` | Ganti placeholder foto di Tentang. |
-| **Pengalaman kerja/organisasi & pendidikan** | `src/content/timeline.ts` | Lengkapi `[tahun]` di item PDPI dan tambah item yang belum ada. |
+| **Pengalaman kerja/organisasi & pendidikan** | `src/content/timeline.ts` | Lengkapi `[tahun]` di item PDPI dan tambah item yang belum ada. *(Selesai 2026-11-03: PDPI = 2025 – 2026; item UINIC 8.0 dan EPIC 2026 dihapus atas permintaan Argy.)* |
 | **Proyek yang tidak ada di daftar 13** | tambahkan ke `projects.ts` | Tanyakan Argy apakah ditampilkan. |
 | **Screenshot proyek** | `public/projects/[slug]/` | Ganti placeholder galeri di detail proyek. |
-| **Tahun proyek** yang masih `[tahun]` | `projects.ts` | Klik PDPI, Direktori PDPI, Logic Gates 3D, argyweb v1. |
+| **Tahun proyek** yang masih `[tahun]` | `projects.ts` | Klik PDPI, Direktori PDPI, Logic Gates 3D, argyweb v1. *(Selesai 2026-11-03: Klik PDPI dan Direktori PDPI = 2025; dua lainnya sudah dihapus dari Karya. Lihat `docs/08` §7.)* |
 | **Skill / tools tambahan** | `stackGroups` | Hanya yang benar-benar dipakai. |
 | **Teks bio/tentang** yang lebih lengkap | `messages/*.json` | Boleh dipakai bila lebih tepat dari versi prototipe. |
 

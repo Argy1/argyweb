@@ -8,7 +8,8 @@ Terakhir diperbarui: 2026-11-03.
 
 - Semua fase `docs/07` selesai **kecuali deploy ke Vercel** (belum dilakukan; lihat §6).
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
-- 9 proyek di Karya. Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI.
+- 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
+- Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
 - Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **92 tes Playwright lolos**; Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan.
 
 ## 2. Tumpukan teknologi (versi saat ini)
@@ -60,6 +61,9 @@ Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkas
 - **Formulir Kontak**: `POST /api/contact` → Resend (REST, tanpa SDK), honeypot + rate limit + validasi; fallback `mailto:`. **Jalur kirim dengan key asli belum pernah diuji** (hanya tampilan, validasi, respons tiruan, dan fallback 501).
 - **Konten tidak dikarang**: nilai `[...]` di `src/content/*` dibiarkan sebagai placeholder.
 - **Tata letak halaman proyek**: kartu "Sorotan" dan "Stack" sejajar atas-bawah; anchor chip `project-body` ada di bawah grid (bukan di dalam kolom kanan, supaya Stack tidak turun).
+- **Tombol situs live** (2026-11-03): field `link` di `projects.ts` memunculkan tombol di tiga tempat: pill domain + titik hijau (`--ok`) di kartu Karya (`WorkCard.tsx`), tombol "Kunjungi" di panel intip (`ProjectPeek.tsx`), dan pill mengambang di pojok kanan bawah cover halaman detail (tombol biru di hero detail sudah ada sebelumnya). Kartu Karya memakai pola *stretched link*: tautan nama proyek meliput seluruh kartu (`after:absolute after:inset-0`), tombol live berdiri sendiri di atasnya (`z-10`), sehingga tidak ada `<a>` di dalam `<a>`. Kartu kini `<article>`, bukan satu `<a>`.
+- **Sertifikat PDF punya pratinjau gambar** (2026-11-03): iframe PDF tidak andal (terutama di HP), jadi tiap sertifikat PDF punya JPG halaman pertama (`image`) selain PDF asli (`file`). Kartu dan lightbox memakai `image`; `file` hanya untuk tombol "Buka file di tab baru". Lightbox mendahulukan gambar dan jatuh ke iframe hanya bila tidak ada gambar.
+- **Modal dirender lewat portal ke `document.body`** (`Lightbox.tsx`): `<main>` adalah stacking context (`z-[2]`), jadi dialog di dalamnya tidak bisa menembus navbar (`z-30`) walau `z-[80]`. Modal baru di dalam halaman harus memakai portal juga.
 
 ## 6. Deploy ke Vercel (belum dilakukan)
 
@@ -73,8 +77,6 @@ Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkas
 
 Sumber: `src/content/projects.ts` (data + `projectGallery` untuk screenshot). Screenshot di `public/projects/<slug>/`.
 
-| Slug | Catatan |
-|---|---|
 Proyek dengan `link` di `projects.ts` otomatis mendapat tombol situs live (pill domain di kartu Karya, tombol di panel intip, pill di cover halaman detail). Pembaruan 2026-11-03: tahun Klik PDPI dan Direktori PDPI = 2025; semua tautan di bawah diberikan Argy.
 
 | Slug | Status | Tautan live | Catatan |
@@ -92,6 +94,14 @@ Proyek dengan `link` di `projects.ts` otomatis mendapat tombol situs live (pill 
 Riwayat perubahan daftar: TradeMatrix AI, MAGPAD, Logic Gates 3D, argyweb v1, Driving Events dihapus atas permintaan Argy; DigitalPMO diganti Kopaseba; Confindant ditambah. **Daftar di `docs/05-CONTENT.md` (13 proyek) adalah daftar awal dan sudah usang.**
 
 Cara menambah proyek baru: tambah objek di `projects.ts` (teks `id` dan `en`), tambah entri di `projectGallery` (gambar JPG ±100 KB di `public/projects/<slug>/`), lalu `pnpm build` — halaman detail, OG image, sitemap, dan pengetahuan chatbot ikut otomatis. Jumlah proyek di statistik/tautan "Lihat semua N proyek" dihitung otomatis.
+
+Cara menambah sertifikat: taruh berkas di `public/certificates/` (nama kebab-case), tambah entri di `src/content/certificates.ts`. Untuk PDF, render dulu halaman pertamanya ke JPG dengan poppler (di mesin Argy: `C:\Users\argyf\.claude\poppler\...\Library\bin`, sudah ada di PATH):
+
+```bash
+pdftoppm -jpeg -jpegopt quality=82 -r 130 -singlefile nama.pdf nama   # → nama.jpg
+```
+
+lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`. Gambar langsung (PNG/JPG) cukup memakai `image`.
 
 ## 8. Yang masih terbuka (menunggu Argy)
 
@@ -112,6 +122,9 @@ Cara menambah proyek baru: tambah objek di `projects.ts` (teks `id` dan `en`), t
 - `networkidle` di Playwright tidak pernah tercapai untuk dev server Next (HMR); pakai `load` + jeda.
 - Peringatan konsol `KHR_parallel_shader_compile` dari three.js tidak berbahaya (sudah ditangani: `compileAsync` hanya bila ekstensi ada). Peringatan `THREE.Clock deprecated` berasal dari internal R3F.
 - Proyek eksternal untuk screenshot (Kopaseba, Confindant) dijalankan lokal **tanpa mengubah repo mereka**; Confindant memakai SQLite sementara lewat variabel env, bukan Postgres aslinya.
+- `pnpm start --port 3250` yang lama bisa tetap hidup dan membuat start berikutnya gagal `EADDRINUSE`. Cari PID-nya (`netstat -ano | findstr 3250`), pastikan itu `next start` milik sendiri (bukan dev server di 3000), lalu hentikan. Jangan `pnpm build` saat server produksi atau suite Playwright sedang memakai `.next`; hentikan dulu.
+- Pane browser pratinjau kadang menampilkan halaman setengah transparan saat animasi masuk; tunggu ~2 detik sebelum screenshot. Lewati intro dengan `sessionStorage.setItem("argy-intro-seen","1")` lalu muat ulang.
+- Tautan Mindra memakai path `/beranda`; label domain di pill tanpa path (`label` terpisah dari `href` di `projects.ts`).
 
 ## 10. Panduan untuk sesi Claude Code berikutnya (termasuk lewat cloud)
 
@@ -120,3 +133,15 @@ Cara menambah proyek baru: tambah objek di `projects.ts` (teks `id` dan `en`), t
 3. Ubah kode lalu `pnpm lint && pnpm typecheck && pnpm build`; untuk perubahan UI jalankan juga `pnpm test:e2e` terhadap build produksi (lihat §3).
 4. Aturan proyek tetap berlaku: tanpa hex literal di komponen (pakai token), semua teks UI lewat `messages/*.json`, konten tidak dikarang, aksesibilitas (focus terlihat, `prefers-reduced-motion`, Esc menutup panel).
 5. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
+
+## 11. Catatan perubahan
+
+**2026-11-03 (sesi lanjutan)** — commit `70d381e` dan setelahnya:
+- Sertifikat: 4 PDF kini punya pratinjau JPG; kartu menampilkan gambar (ikon dokumen kecil menandai yang berasal dari PDF), klik membuka lightbox berisi gambar, PDF asli lewat tombol "Buka file di tab baru". Sebelumnya kartu hanya placeholder "PDF" dan lightbox memakai iframe PDF yang tidak tampil.
+- Lightbox dipindah ke portal `document.body` (sebelumnya tertimpa navbar). Berlaku juga untuk galeri screenshot proyek.
+- Tombol situs live di kartu Karya, panel intip, dan cover detail (lihat §5).
+- Konten proyek: tahun Klik PDPI dan Direktori PDPI = 2025; tautan live Kopaseba, Confindant, Direktori PPDS, Mindra, Kontraku, AgriVision; status PPDS, Kopaseba, Kontraku → Live; Confindant dan Mindra → Proyek kuliah.
+- Timeline: PDPI = 2025 – 2026; item UINIC 8.0 dan EPIC 2026 dihapus. Jawaban demo chatbot disesuaikan (pendidikan = timeline selain PDPI; "lomba" = sertifikat kategori competition).
+- Verifikasi: `pnpm lint` dan `pnpm typecheck` bersih setelah semua perubahan; 92 tes Playwright lolos pada build setelah perubahan sertifikat/tombol live. Build setelah perubahan konten terakhir (tautan, status, timeline) sudah dibuat dan diperiksa manual di browser; suite Playwright penuh untuk build itu belum tercatat selesai.
+
+**2026-11-02/03 (sesi pembangunan)** — lihat §5, §7, dan README untuk keputusan teknis, penghapusan/penambahan proyek, formulir kontak, latar sirkuit hidup, mode efek, dan transisi halaman.
