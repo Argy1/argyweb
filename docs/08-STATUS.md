@@ -6,11 +6,12 @@ Terakhir diperbarui: 2026-11-03.
 
 ## 1. Ringkasan kondisi
 
-- Semua fase `docs/07` selesai **kecuali deploy ke Vercel** (belum dilakukan; lihat §6).
+- Semua fase `docs/07` selesai, **termasuk deploy**: situs live di Vercel (`https://argyweb.vercel.app`); merge ke `main` = deploy produksi otomatis, tiap PR dapat preview (lihat §6).
+- Fitur utama saat ini: chip CPU 3D persisten yang berpindah antar section dan halaman (di HP/tablet lewat anchor "stage"), intro "chip dirakit", 5 halaman × 2 bahasa × 2 tema, navbar satu kapsul (menu ☰ di HP), animasi teks scramble/decode pada judul, latar sirkuit hidup + efek kursor + transisi halaman (semua bisa dimatikan lewat mode Ringan), chatbot Gemini dengan konteks panduan situs + indeks proyek, formulir kontak (Resend, fallback `mailto:`), sertifikat dengan lightbox, SEO (metadata, hreflang, OG image, sitemap, JSON-LD).
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
 - 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
 - Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
-- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **112 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan.
+- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **112 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10 + scramble 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan. **Lighthouse belum diukur ulang** setelah fitur header ☰, chip stage, dan animasi scramble.
 
 ## 2. Tumpukan teknologi (versi saat ini)
 
@@ -46,6 +47,8 @@ Semua ada di `.env.example` (templat kosong, aman di-commit). **`.env.local` tid
 
 Di Vercel, isi variabel di Settings → Environment Variables lalu **deploy ulang**.
 
+Status di Vercel (dicek 2026-11-03): `GOOGLE_GENERATIVE_AI_API_KEY`, `RESEND_API_KEY`, dan `NEXT_PUBLIC_SITE_URL` **ada** di Production dan Preview. Ketiganya bertipe *sensitive*, jadi nilainya tidak bisa dibaca lewat API/MCP; **validitasnya belum terverifikasi** (uji lewat perilaku: chatbot tanpa catatan "Mode demo", kirim pesan uji di Kontak, tautan di jawaban chatbot).
+
 ## 5. Keputusan teknis yang sudah diambil (jangan diulang tanpa alasan)
 
 Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkasnya:
@@ -72,13 +75,13 @@ Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkas
 
 - **Animasi teks "scramble / decode" pada judul** (2026-11-03): huruf mulai sebagai karakter acak (kode dan simbol: `0 1 < > / # $ % & * + = ? A–F`) lalu mengunci satu per satu dari kiri ke kanan. Dipasang lewat `<Scramble as="h1|h2|h3|span">` (`src/components/ui/Scramble.tsx`) di hero, semua H1 dan H2 halaman, dan judul card (kartu proyek, tile unggulan, panel intip, sertifikat, stack, timeline, kartu info Detail/Kontak). **Teks asli tidak pernah diubah** (tetap di HTML untuk SEO/pembaca layar/LCP dan menentukan layout); mesin `src/lib/scrambleEngine.ts` hanya membuat teks asli transparan (`.scr-run`) dan menggambar lapisan `aria-hidden` (`.scr-layer`, anak elemen) di posisi tiap huruf yang diukur dengan `Range.getBoundingClientRect()`, jadi tidak ada layout shift dan latar `.mark` tetap tampil. Aturan: satu `IntersectionObserver` + satu loop rAF; mulai saat ≥60% terlihat; **putar ulang tiap masuk layar lagi, hanya bila elemen sempat sepenuhnya keluar layar ≥ 800 ms**; maksimal 6 animasi bersamaan (sisanya langsung final); menunggu `document.fonts.ready`; hero menunggu intro selesai (`html[data-intro]` / `introGone`); mode Ringan dan `prefers-reduced-motion` = tanpa animasi (animasi yang berjalan diselesaikan seketika saat mode berubah); resize hanya menghentikan animasi bila **lebar** berubah (di HP `resize` juga menyala saat bilah URL bergerak). Durasi `min(1100, 520 + 28·n)` ms; karakter acak diganti tiap 50 ms. Untuk judul di dalam tautan kartu pakai `<Scramble as="span">` DI DALAM tautan, jangan menjadikan tautannya `relative` (stretched link `after:absolute after:inset-0` bergantung pada kartu sebagai induk berposisi). Warna karakter acak ditulis `!important` inline karena `.scr-run *` memakai `!important`.
 
-## 6. Deploy ke Vercel (belum dilakukan)
+## 6. Deploy ke Vercel (aktif)
 
-1. Impor repo `Argy1/argyweb` di Vercel (framework Next.js terdeteksi otomatis, pnpm).
-2. Isi env di §4 (minimal `NEXT_PUBLIC_SITE_URL`, `GOOGLE_GENERATIVE_AI_API_KEY`, `RESEND_API_KEY`).
-3. Deploy, lalu perbarui `NEXT_PUBLIC_SITE_URL` bila alamat final berbeda, dan deploy ulang.
-4. Uji: `/id`, `/id/kontak` (kirim pesan uji, cek inbox & spam), chatbot, bagikan tautan untuk cek OG image.
-5. Jalankan Lighthouse mobile pada URL produksi.
+- Proyek Vercel `argyweb` (tim `argy-fawwazs-projects`) terhubung ke repo `Argy1/argyweb`. **Push/merge ke `main` = deploy produksi otomatis**; alias produksi `argyweb.vercel.app`. Tiap PR otomatis dibuatkan preview dan bot Vercel mengomentari statusnya (Building → Ready). Build tipikal ±30 detik.
+- Env Production + Preview sudah ada (lihat §4). Mengubah env butuh deploy ulang.
+- Alur kerja: branch dari `main` → PR → tinjau preview → **squash merge** (riwayat `main` bersih) → hapus branch. Jangan `git push --force` (diblokir di sesi cloud; bila branch sudah di-squash/rebase-merge, mulai branch baru dari `main`).
+- Pemantauan setelah deploy: status deployment `READY` dan tanpa error runtime (Vercel MCP: `get_deployment`, `get_runtime_errors`).
+- **Masih perlu diuji manual di produksi**: chatbot dengan Gemini asli, kirim pesan uji di `/id/kontak` (cek inbox dan spam), `NEXT_PUBLIC_SITE_URL` = alamat final, bagikan tautan untuk cek OG image, Lighthouse mobile pada URL produksi.
 
 ## 7. Konten proyek (Karya)
 
@@ -91,8 +94,8 @@ Proyek dengan `link` di `projects.ts` otomatis mendapat tombol situs live (pill 
 | `klik-pdpi` | Live | klikpdpi.com | 2025. Screenshot dari web lama. |
 | `kopaseba` | Live | kopaseba.vercel.app | Screenshot dari repo lokal `D:\Projekan\Kopaseba` (halaman publik; katalog/pembiayaan dilewati karena gambar produk kosong; foto pengurus tidak dipakai). |
 | `confindant` | Proyek kuliah | confindant.vercel.app | Flutter + Next.js + Laravel 12 + Gemini. Screenshot dari web lokal dengan **akun & data demo** (bukan data nyata). Konten dari studi kasus web lama. |
-| `direktori-pdpi` | Live | direktoripdpi.com | 2025. |
-| `direktori-ppds` | Live | direktori-ppds.vercel.app | Satu screenshot lokal. |
+| `direktori-pdpi` | Live | direktoripdpi.com | 2025. Stack dibaca dari repo `Argy1/pdpi-member` (React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Supabase). |
+| `direktori-ppds` | Live | direktori-ppds.vercel.app | Satu screenshot lokal. Stack dibaca dari repo `Argy1/Direktori-PPDS` (Next.js, TypeScript, Tailwind CSS, shadcn/ui, Supabase, Three.js). |
 | `agrivision` | Proyek kuliah | agrivision-blond-nine.vercel.app | Screenshot dari proyek lokal di `D:\Semester 5\...`. |
 | `smart-city-traffic` | Proyek kuliah | (belum ada) | Screenshot dari proyek lokal di `D:\Semester 5\...`. |
 | `mindra` | Proyek kuliah | web-omega-one-69.vercel.app/beranda | Pernah ikut lomba UINIC 8.0 (masih tertulis di ringkasan dan sorotan proyek, sudah tidak di timeline); screenshot dari `D:\Projekan\Mindra\web`. |
@@ -112,14 +115,16 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 
 ## 8. Yang masih terbuka (menunggu Argy)
 
-- `RESEND_API_KEY` (daftar di resend.com dengan email yang sama dengan `profile.email`) dan uji kirim sungguhan.
-- Deploy Vercel + `NEXT_PUBLIC_SITE_URL` final.
+- **Uji sungguhan di produksi** (env sudah ada, nilainya belum terverifikasi): chatbot Gemini (tidak ada catatan "Mode demo"; coba pertanyaan di luar template), formulir Kontak (Resend tanpa domain terverifikasi hanya boleh mengirim ke email pemilik akun Resend), dan `NEXT_PUBLIC_SITE_URL` = alamat produksi final.
+- **Uji di HP asli**: menu ☰, gerak chip antar section, dan animasi scramble (kecepatan ±1 detik hanya perkiraan; di sandbox tanpa GPU terukur 2–3 detik).
+- **Lighthouse mobile** pada URL produksi setelah fitur baru (acuan Performance ±73–77; jangan lebih buruk).
+- Repo `Argy1/pdpi-member` (di luar argyweb) punya berkas `.env` yang ter-commit (repo private); cek isinya dan pastikan tidak ada rahasia selain key publik.
 - Tidak ada lagi tahun `[tahun]` yang tersisa. Timeline "Jejak sejauh ini" kini: PDPI (2025 – 2026), IPB University, Universitas Indonesia, SMA Negeri 2 Tambun Selatan (item UINIC 8.0 dan EPIC 2026 dihapus atas permintaan Argy, 2026-11-03).
 - Smart City Traffic belum punya tautan live.
 - Apakah proyek web lama lain (mis. ARIS PDPI) ditampilkan.
 - Nomor WhatsApp dan akun TikTok (belum dipasang).
 - CV saat ini hanya satu gambar JPG (`public/cv/`); belum ada PDF.
-- Opsional: Upstash (rate limit terdistribusi), penundaan 3D untuk menaikkan skor Performance Lighthouse.
+- Opsional: Upstash (rate limit terdistribusi), penundaan 3D untuk menaikkan skor Performance Lighthouse, `RenderPump` berhenti render saat chip di luar layar (hemat baterai HP), dan animasi scramble "sekali per judul" bila "setiap masuk layar" terasa ramai (satu konstanta di `scrambleEngine.ts`).
 
 ## 9. Peringatan dan jebakan yang sudah ditemui
 
@@ -131,6 +136,12 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 - `pnpm start --port 3250` yang lama bisa tetap hidup dan membuat start berikutnya gagal `EADDRINUSE`. Cari PID-nya (`netstat -ano | findstr 3250`), pastikan itu `next start` milik sendiri (bukan dev server di 3000), lalu hentikan. Jangan `pnpm build` saat server produksi atau suite Playwright sedang memakai `.next`; hentikan dulu.
 - Pane browser pratinjau kadang menampilkan halaman setengah transparan saat animasi masuk; tunggu ~2 detik sebelum screenshot. Lewati intro dengan `sessionStorage.setItem("argy-intro-seen","1")` lalu muat ulang.
 - Tautan Mindra memakai path `/beranda`; label domain di pill tanpa path (`label` terpisah dari `href` di `projects.ts`).
+- **`.next` lama dipakai ulang** bisa membuat CSS baru tidak ikut ke build (CSS `.scr-*` sempat tidak tersaji). Bila perubahan CSS tidak tampak: `rm -rf .next` lalu build ulang.
+- **Sandbox cloud**: jaringan hanya mengizinkan host tertentu (situs referensi seperti al.is-a.dev dan `*.vercel.app` ditolak). Host baru harus diizinkan di pengaturan jaringan lingkungan. Jangan memakai `pkill -f "next dev"` (pola ikut cocok dengan perintah shell sendiri dan mematikannya); pakai `fuser -k 3250/tcp`.
+- **Variabel Vercel bertipe sensitive** tidak bisa dibaca lewat API; verifikasi lewat perilaku situs.
+- **Playwright `page.clock`** menahan hidrasi React (timer palsu): majukan jam dulu sampai halaman terhidrasi sebelum membekukan frame animasi. Kartu Karya di-render ulang sesaat setelah hidrasi (kunci kartu mengikuti filter): beri jeda di tes sebelum memegang elemen kartu. Playwright menolak `.click()` pada teks di kartu karena tautan kartu (stretched link) menutupinya; klik koordinat.
+- Lint React 19 melarang melewatkan `ref` objek saat render (`react-hooks/refs`); pakai callback ref yang stabil (`useCallback`, boleh mengembalikan fungsi pembersih).
+- `tests/__screenshots__/` diabaikan git (hasil tes visual hanya untuk tinjauan lokal).
 
 ## 10. Panduan untuk sesi Claude Code berikutnya (termasuk lewat cloud)
 
@@ -138,9 +149,15 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 2. Jalankan `pnpm install`, salin `.env.example` ke `.env.local` (key tidak ada di repo; minta Argy bila perlu mencoba chatbot/email nyata).
 3. Ubah kode lalu `pnpm lint && pnpm typecheck && pnpm build`; untuk perubahan UI jalankan juga `pnpm test:e2e` terhadap build produksi (lihat §3).
 4. Aturan proyek tetap berlaku: tanpa hex literal di komponen (pakai token), semua teks UI lewat `messages/*.json`, konten tidak dikarang, aksesibilitas (focus terlihat, `prefers-reduced-motion`, Esc menutup panel).
-5. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
+5. Alur git: branch dari `main` terbaru → commit → PR (draft) → tinjau preview Vercel → squash merge → hapus branch. Merge ke `main` memicu deploy produksi, jadi pastikan `pnpm lint && pnpm typecheck && pnpm build` bersih dan tes relevan lolos sebelum menggabungkan.
+6. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
 
 ## 11. Catatan perubahan
+
+**2026-11-03 (penutupan: gabung ke `main`, pembersihan branch, dokumentasi)**:
+- Seluruh pekerjaan hari ini digabung ke `main` lewat PR #1 (chatbot, konten, stack, header ☰ + chip stage; rebase-merge), #2 (judul hero; squash), dan #3 (animasi scramble + pembaruan dokumentasi; squash). Branch kerja dihapus setelah merge.
+- Dokumentasi diperbarui: `docs/08` (status, deploy aktif, yang terbuka, jebakan, alur git), `README.md`, `CLAUDE.md`, dan banner status di `docs/01`–`07` (spesifikasi awal tidak ditulis ulang; banner menunjuk ke dokumen ini).
+- Verifikasi sebelum merge: `pnpm typecheck`, `pnpm lint`, `pnpm build` bersih; 112 tes Playwright lolos terhadap build produksi.
 
 **2026-11-03 (animasi teks judul)**:
 - Animasi scramble/decode pada judul (lihat §5). Berkas baru: `src/lib/scrambleEngine.ts`, `src/components/ui/Scramble.tsx`, `tests/scramble.spec.ts` (10 tes: teks akhir identik, tanpa layout shift, `aria-hidden`, nama aksesibel utuh, putar ulang, mode Ringan, reduced-motion, menunggu intro, tautan kartu utuh).

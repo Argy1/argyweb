@@ -1,5 +1,7 @@
 # 03 — Spesifikasi 3D: Chip CPU
 
+> **Status implementasi (2026-11-03):** chip dibangun sesuai dokumen ini dengan perubahan (ikuti `docs/08` §5): (1) **tanpa `@react-three/drei`**: RoundedBox, environment panel cahaya, dan bayangan dibuat sendiri; (2) **§5 dan §7 digantikan** untuk < 1024px: chip ikut turun antar section lewat anchor "stage" di alur layout (bukan hanya di hero); garis aktivasi section 72% tinggi viewport di < 1024px; (3) Mode Ringan (dan reduced-motion) di HP: chip hanya di hero; (4) fallback tanpa WebGL memakai `public/chip-fallback.webp`.
+
 Referensi visual dan perilaku: `reference/prototype/portfolio-prototype.dc.html` dan shader `reference/shaders/cpu-chip.frag.glsl`. Prototipe memakai raymarching layar penuh; **versi produksi memakai mesh asli di React Three Fiber**, karena:
 
 - raymarching per-piksel terlalu berat di HP (penyebab utama prototipe tidak nyaman di mobile),

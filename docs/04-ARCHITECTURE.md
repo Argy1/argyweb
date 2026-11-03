@@ -1,5 +1,7 @@
 # 04 — Arsitektur
 
+> **Status implementasi (2026-11-03):** struktur aktual ada di `src/` dan berbeda dari target di bawah (ikuti `docs/08` dan `README.md`): `src/proxy.ts` menggantikan `middleware.ts` (Next 16); panel intip memakai `history.pushState` tanpa slot `@modal`; ada halaman `contact`; komponen tambahan `background/`, `layout/MobileMenu`, `ui/Scramble`, `lib/scrambleEngine`, `lib/fxStore`, `lib/pageTransition`. Deploy: Vercel, `main` → produksi, PR → preview.
+
 ## Struktur folder (target)
 
 ```

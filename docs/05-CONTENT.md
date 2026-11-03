@@ -1,5 +1,7 @@
 # 05 — Konten
 
+> **Status implementasi (2026-11-03):** konten yang berlaku ada di `src/content/*` (9 proyek, 6 sertifikat, timeline 4 item) dan dijelaskan di `docs/08` §7; daftar proyek di dokumen ini adalah rencana awal. Stack Direktori PDPI dan Direktori PPDS dibaca dari repo aslinya. Statistik "8 gerbang logika" dan fakta "Sedang dibangun" sudah dihapus.
+
 ## Prinsip
 
 - Semua konten bertipe di `src/content/*.ts`, bilingual (`id`, `en`).

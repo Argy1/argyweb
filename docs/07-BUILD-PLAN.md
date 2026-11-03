@@ -1,6 +1,6 @@
 # 07 — Rencana Build (untuk Claude Code)
 
-> **Status:** semua fase di bawah sudah dikerjakan kecuali deploy ke Vercel (Fase 7). Kotak centang tidak diperbarui satu per satu; lihat `docs/08-STATUS.md` untuk kondisi terkini.
+> **Status (2026-11-03):** semua fase di bawah sudah dikerjakan, termasuk deploy ke Vercel (Fase 7; `main` → produksi). Kotak centang tidak diperbarui satu per satu. Pekerjaan tambahan setelah rencana ini: latar sirkuit hidup, mode efek, transisi halaman, efek kursor, halaman Kontak + formulir, navbar ☰ di HP, chip stage di HP/tablet, animasi teks judul. Lihat `docs/08-STATUS.md` untuk kondisi terkini.
 
 Kerjakan berurutan. Setiap fase diakhiri verifikasi dan laporan singkat ke Argy (apa yang selesai, keputusan yang diambil, placeholder yang masih ada). Jangan lompat fase.
 
