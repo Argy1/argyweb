@@ -143,7 +143,7 @@ export const projects: Project[] = [
     year: "2025",
     featured: true,
     link: { href: "https://direktoripdpi.com", label: "direktoripdpi.com" },
-    stack: ["Web app", "Database"],
+    stack: ["React", "Vite", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase"],
     i18n: {
       id: {
         kind: "Direktori anggota",
@@ -178,7 +178,7 @@ export const projects: Project[] = [
     year: "2026",
     featured: false,
     link: { href: "https://direktori-ppds.vercel.app", label: "direktori-ppds.vercel.app" },
-    stack: ["Web app", "Data per kabupaten"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase", "Three.js"],
     i18n: {
       id: {
         kind: "Direktori nasional",
