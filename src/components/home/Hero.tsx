@@ -4,6 +4,7 @@ import { AskAIButton } from "@/components/ui/AskAIButton";
 import { ChipAnchor } from "@/components/ui/ChipAnchor";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { LiveClock } from "./LiveClock";
+import { Scramble } from "@/components/ui/Scramble";
 
 const sticker =
   "inline-flex min-h-[38px] items-center gap-2 rounded-[12px] px-3.5 font-mono text-[13px] font-medium shadow-[0_10px_22px_-16px_var(--shadow)] transition-[transform,box-shadow] duration-250 hover:-translate-y-0.5 hover:shadow-[0_0_0_1.5px_var(--glow),0_12px_24px_-14px_var(--blue-shadow)]";
@@ -34,13 +35,13 @@ export async function Hero() {
             {t("hello")}
             <span aria-hidden="true" className="size-2 rounded-full bg-ok shadow-[0_0_0_4px_var(--ok-ring)]" />
           </span>
-          <h1 id="hero-title" className="h-display">
+          <Scramble as="h1" id="hero-title" className="h-display">
             {t("h1a")}
             <span className="mark">{t("h1b")}</span>
             {t("h1c")}
             <span className="text-accent">{t("h1d")}</span>
             {t("h1e")}
-          </h1>
+          </Scramble>
           <p className="lead">{t("lead")}</p>
           <div className="flex flex-wrap gap-3">
             <NavLink href="/work" className="btn btn-blue">

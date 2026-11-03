@@ -1,5 +1,7 @@
 # 06 — Chatbot AI "Asisten Argy"
 
+> **Status implementasi (2026-11-03):** chatbot Gemini sudah live (`src/app/api/chat/route.ts`). Konteks (`src/lib/chat-knowledge.ts`) ditambah **indeks proyek** (per kategori/status/teknologi, otomatis dari `projects.ts`) dan **panduan situs** (halaman, URL, fitur); prompt sistem memuat aturan menafsirkan pertanyaan di luar template dan kapan mengaku tidak tahu. Mode demo kata kunci tetap ada tanpa key. Belum diuji dengan key Gemini asli di produksi (lihat `docs/08` §8).
+
 ## Tujuan
 
 Menjawab pertanyaan pengunjung **hanya tentang isi portofolio**: proyek, stack, pengalaman, pendidikan, sertifikat, lomba, cara menghubungi, dan CV. Bukan asisten umum.

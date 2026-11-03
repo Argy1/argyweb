@@ -1,5 +1,7 @@
 # 01 — Product Requirements (PRD)
 
+> **Status implementasi (2026-11-03):** F1–F11 sudah dibangun dan live. Perbedaan dari dokumen ini (ikuti `docs/08`): ada halaman **Kontak** terpisah (`/id/kontak`, `/en/contact`) selain bagian kontak di footer; navbar < 768px memakai menu ☰ (F3); panel intip memakai `history.pushState`, bukan intercepting route (F4); daftar proyek kini 9 (F5); angka "8 gerbang logika" dihapus (F7). Fitur di luar PRD awal: latar sirkuit hidup, mode efek Penuh/Ringan, transisi halaman, efek kursor, formulir kontak (Resend), animasi teks judul scramble/decode.
+
 ## Tujuan
 
 1. Membuat rekruter, klien, dan juri lomba **langsung paham** Argy adalah full-stack developer yang kuat di web, mobile, AI, dan 3D, dalam 10 detik pertama.

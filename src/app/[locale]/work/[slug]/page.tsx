@@ -15,6 +15,7 @@ import { NavLink } from "@/components/ui/NavLink";
 import type { AppLocale } from "@/i18n/routing";
 import { projectJsonLd } from "@/lib/jsonld";
 import { alternatesFor } from "@/lib/seo";
+import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale; slug: string }> };
 
@@ -77,9 +78,9 @@ export default async function ProjectPage({ params }: Props) {
         }
       >
         <span className="eyebrow">{c.kind}</span>
-        <h1 id="project-title" className="h-page">
+        <Scramble as="h1" id="project-title" className="h-page">
           {project.name}
-        </h1>
+        </Scramble>
         <p className="lead">{c.overview}</p>
         <div className="flex flex-wrap gap-3">
           {project.link && (
@@ -137,9 +138,9 @@ export default async function ProjectPage({ params }: Props) {
           <div data-chip-section="project-body">
             <div className="mt-7 grid items-stretch gap-7 nav:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
               <div className="card h-full">
-                <h2 id="highlights-title" className="h-card">
+                <Scramble as="h2" id="highlights-title" className="h-card">
                   {t("highlights")}
-                </h2>
+                </Scramble>
                 <ol className="m-0 flex list-none flex-col gap-3 p-0">
                   {c.highlights.map((h, i) => (
                     <li key={h} className="grid grid-cols-[30px_minmax(0,1fr)] items-start gap-3 text-[16.5px] leading-[1.55] font-medium">
@@ -156,7 +157,9 @@ export default async function ProjectPage({ params }: Props) {
               </div>
               <aside className="flex flex-col gap-4">
                 <div className="card flex-1">
-                  <h2 className="h-card">{t("stack")}</h2>
+                  <Scramble as="h2" className="h-card">
+                    {t("stack")}
+                  </Scramble>
                   <ul className="chips m-0 list-none p-0">
                     {project.stack.map((s) => (
                       <li key={s}>{s}</li>

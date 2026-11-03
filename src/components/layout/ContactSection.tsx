@@ -10,6 +10,7 @@ import { ChipAnchor } from "@/components/ui/ChipAnchor";
 import { CopyEmail } from "@/components/ui/CopyEmail";
 import { FxToggle } from "@/components/layout/FxToggle";
 import { ArrowRightIcon, ExternalIcon, SparkIcon } from "@/components/ui/icons";
+import { Scramble } from "@/components/ui/Scramble";
 
 const pillLink =
   "inline-flex min-h-[58px] items-center gap-2 rounded-chip border-[1.5px] border-veil-35 bg-transparent px-[22px] text-[15.5px] font-bold text-on-dark transition-colors hover:border-on-dark hover:bg-on-dark hover:text-tile-ink";
@@ -53,12 +54,13 @@ export function ContactSection() {
         <ChipAnchor id="contact" className="mx-auto -mt-12 mb-2 md:absolute md:right-[max(16px,40px)] md:bottom-[calc(100%+14px)] md:mx-0 md:mt-0 md:mb-0" />
         <div className="relative overflow-hidden rounded-xl border border-tile-edge bg-navy bg-[linear-gradient(var(--glow-faint)_1px,transparent_1px),linear-gradient(90deg,var(--glow-faint)_1px,transparent_1px)] bg-size-[48px_48px] p-[clamp(22px,6vw,80px)] text-on-dark">
           <span className="eyebrow text-on-dark-muted before:bg-gold">{t("eyebrow")}</span>
-          <h2
+          <Scramble
+            as="h2"
             id="kontak-title"
             className="my-[18px] max-w-[11ch] font-display text-[clamp(46px,8vw,120px)] leading-[0.92] font-black tracking-[-0.05em] text-balance"
           >
             {t("title")}
-          </h2>
+          </Scramble>
           <p className="mt-0 mb-[30px] max-w-[46ch] text-[18px] leading-[1.6] font-medium">{t("sub")}</p>
           <div className="flex flex-wrap items-center gap-3">
             <CopyEmail />

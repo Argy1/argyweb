@@ -8,7 +8,8 @@ Portofolio pribadi **Argy Fawwaz Akbar** (full-stack developer, mahasiswa D4 TRP
 
 - **Satu objek 3D chip CPU** yang hidup di canvas persisten dan **berpindah posisi setiap scroll ke section lain dan setiap pindah halaman**.
 - **Intro "chip dirakit"**: papan → pin → die → tutup, mengikuti progres loading, lalu chip meluncur ke hero.
-- **Multi-halaman**: Beranda, Karya, Detail Proyek (studi kasus), Tentang. Detail proyek bisa dibuka sebagai **panel intip** dari Beranda (intercepting route).
+- **Multi-halaman**: Beranda, Karya, Detail Proyek (studi kasus), Tentang, Kontak. Detail proyek bisa dibuka sebagai **panel intip** dari Beranda (`history.pushState`, bukan intercepting route; lihat `docs/08` §5).
+- **Navbar satu kapsul** (menu ☰ di HP), **animasi teks judul** scramble/decode, latar sirkuit hidup, mode efek Penuh/Ringan, dan transisi halaman (lihat `docs/08`).
 - **Dark/light mode**, **dua bahasa (ID default, EN)** dengan URL terlokalisasi.
 - **Chatbot AI** yang menjawab pertanyaan tentang isi portofolio.
 - Gaya visual **"Silicon"**: putih keperakan + grid sirkuit tipis, biru kobalt, navy, emas, perak, ungu. Elegan, bukan seperti mainan.
@@ -22,7 +23,7 @@ Portofolio pribadi **Argy Fawwaz Akbar** (full-stack developer, mahasiswa D4 TRP
 
 Kalau dokumen dan prototipe berbeda, ikuti **dokumen**. Prototipe punya 3 masalah yang sudah diketahui dan HARUS diperbaiki (lihat di bawah).
 
-## Masalah dari prototipe yang WAJIB diselesaikan
+## Masalah dari prototipe yang WAJIB diselesaikan (sudah diselesaikan; jangan dilanggar lagi)
 
 1. **Ukuran CPU belum pas** di beberapa section/halaman. Ikuti tabel ukuran dan posisi di `docs/03-3D-CPU-SPEC.md`.
 2. **Teks tertutup CPU.** Aturan keras: chip tidak boleh berada di belakang teks yang sedang dibaca. Pakai "zona aman" per section (`docs/03`, bagian Legibility).
@@ -32,12 +33,12 @@ Kalau dokumen dan prototipe berbeda, ikuti **dokumen**. Prototipe punya 3 masala
 
 - **Next.js (App Router, versi stabil terbaru) + TypeScript (strict)**
 - **Tailwind CSS v4** dengan token dari `tokens.css` dipetakan lewat `@theme`
-- **React Three Fiber + @react-three/drei** untuk 3D (mesh asli, bukan raymarching layar penuh; alasan di `docs/03`)
-- **GSAP** (atau `motion`) untuk timeline intro dan transisi chip; **Lenis** opsional untuk smooth scroll
+- **React Three Fiber** untuk 3D (mesh asli, bukan raymarching layar penuh; alasan di `docs/03`). **Tanpa `@react-three/drei`**: rounded box, environment, dan bayangan dibuat sendiri.
+- Animasi memakai kode sendiri (R3F `useFrame`, CSS, View Transitions API, mesin scramble); **tanpa GSAP/Lenis**
 - **next-intl** untuk i18n dan pathname terlokalisasi
 - **next-themes** untuk tema
 - **Zustand** untuk state global ringan (section aktif, status intro, panel chat)
-- **Vercel AI SDK** untuk chatbot (provider lewat env, lihat `docs/06`)
+- **Vercel AI SDK** untuk chatbot (hanya Gemini lewat `@ai-sdk/google`; lihat `docs/06`)
 - Deploy: **Vercel**
 
 Cek versi terbaru paket sebelum install; jangan menebak API yang sudah berubah, baca dokumentasi resminya.
@@ -65,6 +66,7 @@ Cek versi terbaru paket sebelum install; jangan menebak API yang sudah berubah, 
 - **Aksesibilitas**: elemen interaktif pakai `<button>`/`<a>` asli, focus terlihat, kontras ≥ 4.5:1, `prefers-reduced-motion` dihormati, panel/drawer punya focus trap dan bisa ditutup dengan Esc.
 - **Jangan menyalin desain al.is-a.dev.** Situs itu hanya inspirasi untuk ide "objek 3D yang berpindah saat scroll". Layout, warna, tipografi, dan komponen argyweb harus mengikuti dokumen ini.
 - Jangan commit secret. API key hanya di `.env.local` (lihat `.env.example`). Sebelum push, pastikan nilai key tidak ada di berkas yang di-stage.
+- **Git dan deploy**: branch dari `main` → PR → tinjau preview Vercel → squash merge → hapus branch. **Merge ke `main` = deploy produksi otomatis.** Jangan `git push --force`. Bersihkan `.next` (`rm -rf .next`) bila perubahan CSS tidak tampak di build.
 
 ## Perintah
 
@@ -73,7 +75,7 @@ pnpm dev          # dev server
 pnpm lint         # ESLint
 pnpm typecheck    # tsc --noEmit
 pnpm build        # build produksi
-pnpm test:e2e     # Playwright: 102 tes (responsif, efek, alur tombol); lihat docs/08 §3 untuk menjalankan terhadap build produksi
+pnpm test:e2e     # Playwright: 112 tes (responsif, efek, alur tombol, mobile, scramble); lihat docs/08 §3 untuk menjalankan terhadap build produksi
 ```
 
 ## Definition of Done (seluruh proyek)

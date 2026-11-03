@@ -1,5 +1,7 @@
 # 02 — Design System "Silicon"
 
+> **Status implementasi (2026-11-03):** desain dan token dipakai apa adanya. Perubahan: navbar HP = satu kapsul + menu ☰ (bukan baris link kedua); judul beranimasi scramble/decode (teks asli tidak diubah); stiker/kartu tetap tanpa rotasi. Detail di `docs/08` §5.
+
 Token resmi: `reference/styles/tokens.css`. Salin ke `src/styles/tokens.css` dan petakan ke Tailwind v4 lewat `@theme` (mis. `--color-ink: var(--ink)`), supaya kelas seperti `bg-surface`, `text-muted`, `border-line` tersedia. **Tidak ada hex literal di komponen.**
 
 ## Konsep

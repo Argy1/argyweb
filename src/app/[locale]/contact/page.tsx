@@ -14,6 +14,7 @@ import { profile } from "@/content/profile";
 import type { AppLocale } from "@/i18n/routing";
 import { personJsonLd } from "@/lib/jsonld";
 import { alternatesFor } from "@/lib/seo";
+import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
@@ -55,11 +56,11 @@ export default async function ContactPage({ params }: Props) {
         crumbs={<Breadcrumbs items={[{ label: tNav("home"), href: "/" }, { label: tNav("contact") }]} />}
       >
         <span className="eyebrow">{t("eyebrow")}</span>
-        <h1 id="contact-title" className="h-page">
+        <Scramble as="h1" id="contact-title" className="h-page">
           {t("titleA")}
           <span className="mark">{t("titleB")}</span>
           {t("titleC")}
-        </h1>
+        </Scramble>
         <p className="lead">{tc("sub")}</p>
         <div className="flex flex-wrap items-center gap-3">
           <a href={`mailto:${profile.email}`} className="btn btn-blue">
@@ -80,9 +81,9 @@ export default async function ContactPage({ params }: Props) {
         <div className="wrap">
           <div className="mb-8">
             <span className="eyebrow">{t("channelsEyebrow")}</span>
-            <h2 id="channels-title" className="h-section">
+            <Scramble as="h2" id="channels-title" className="h-section">
               {t("channelsTitle")}
-            </h2>
+            </Scramble>
           </div>
           <ul className="m-0 grid list-none grid-cols-1 gap-[18px] p-0 sm:grid-cols-2 lg:grid-cols-3">
             <li>
@@ -142,16 +143,18 @@ export default async function ContactPage({ params }: Props) {
           <ChipAnchor id="contact-form" stage className="nav:col-span-2" />
           <div className="card">
             <span className="eyebrow">{t("formEyebrow")}</span>
-            <h2 id="form-title" className="h-card mt-3">
+            <Scramble as="h2" id="form-title" className="h-card mt-3">
               {t("formTitle")}
-            </h2>
+            </Scramble>
             <p className="mt-0 mb-6 max-w-[56ch] text-[15.5px] leading-[1.65] text-muted">{t("formSub")}</p>
             <ContactForm />
           </div>
           <aside className="flex flex-col gap-4">
             <ChipAnchor id="contact-form" className="self-end" />
             <div className="card">
-              <h2 className="h-card">{t("infoTitle")}</h2>
+              <Scramble as="h2" className="h-card">
+                {t("infoTitle")}
+              </Scramble>
               <dl className="m-0 flex flex-col">
                 <div className="flex flex-col gap-[3px] border-b border-line py-3">
                   <dt className="text-xs font-bold tracking-[0.06em] text-muted uppercase">{t("location")}</dt>

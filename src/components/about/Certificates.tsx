@@ -7,6 +7,7 @@ import { certificates, type Certificate } from "@/content/certificates";
 import type { Locale } from "@/content/projects";
 import { FileIcon } from "@/components/ui/icons";
 import { Lightbox, type LightboxItem } from "@/components/ui/Lightbox";
+import { Scramble } from "@/components/ui/Scramble";
 
 const fileTones = ["tone-navy", "tone-blue", "tone-violet", "tone-steel"];
 
@@ -76,9 +77,9 @@ export function Certificates() {
                     </span>
                   )}
                 </span>
-                <span className="font-display text-[19px] leading-[1.2] font-extrabold tracking-[-0.02em]">
+                <Scramble as="span" className="block font-display text-[19px] leading-[1.2] font-extrabold tracking-[-0.02em]">
                   {c.title[locale]}
-                </span>
+                </Scramble>
                 <span className="text-sm leading-normal text-muted">{c.issuer}</span>
               </span>
             </button>

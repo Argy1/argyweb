@@ -16,6 +16,7 @@ import { NavLink } from "@/components/ui/NavLink";
 import type { AppLocale } from "@/i18n/routing";
 import { personJsonLd } from "@/lib/jsonld";
 import { alternatesFor } from "@/lib/seo";
+import { Scramble } from "@/components/ui/Scramble";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
@@ -102,9 +103,9 @@ export default async function AboutPage({ params }: Props) {
             <ChipAnchor id="about-stack" className="-ml-[5vw]" />
             <div className="ml-auto text-right">
               <span className="eyebrow">{t("stackEyebrow")}</span>
-              <h2 id="stack-title" className="h-section ml-auto">
+              <Scramble as="h2" id="stack-title" className="h-section ml-auto">
                 {t("stackTitle")}
-              </h2>
+              </Scramble>
             </div>
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(250px,100%),1fr))] gap-[18px]">
@@ -117,7 +118,9 @@ export default async function AboutPage({ params }: Props) {
                   >
                     {g.code}
                   </span>
-                  <h3 className="m-0 font-display text-xl font-extrabold tracking-[-0.02em]">{g.title}</h3>
+                  <Scramble as="h3" className="m-0 font-display text-xl font-extrabold tracking-[-0.02em]">
+                    {g.title}
+                  </Scramble>
                 </div>
                 <ul className="chips m-0 list-none p-0">
                   {g.items.map((it) => (
@@ -136,9 +139,9 @@ export default async function AboutPage({ params }: Props) {
           <div className="mb-9 flex items-end justify-between gap-6">
             <div>
               <span className="eyebrow">{t("journeyEyebrow")}</span>
-              <h2 id="journey-title" className="h-section">
+              <Scramble as="h2" id="journey-title" className="h-section">
                 {t("journeyTitle")}
-              </h2>
+              </Scramble>
             </div>
             <ChipAnchor id="about-journey" className="-mr-[5vw]" />
           </div>
@@ -150,9 +153,9 @@ export default async function AboutPage({ params }: Props) {
                 >
                   {e.when}
                 </span>
-                <h3 className="mt-1 mb-0 font-display text-[21px] leading-[1.15] font-extrabold tracking-[-0.02em]">
+                <Scramble as="h3" className="mt-1 mb-0 font-display text-[21px] leading-[1.15] font-extrabold tracking-[-0.02em]">
                   {e.title}
-                </h3>
+                </Scramble>
                 <p className="m-0 text-sm font-bold text-accent">{e.role}</p>
                 <p className="m-0 text-[15px] leading-[1.6] text-muted">{e.desc}</p>
               </li>
@@ -166,9 +169,9 @@ export default async function AboutPage({ params }: Props) {
           <div className="mb-9 flex flex-wrap items-end justify-between gap-x-[30px] gap-y-4">
             <div>
               <span className="eyebrow">{t("certEyebrow")}</span>
-              <h2 id="cert-title" className="h-section">
+              <Scramble as="h2" id="cert-title" className="h-section">
                 {t("certTitle")}
-              </h2>
+              </Scramble>
             </div>
             <p className="m-0 max-w-[40ch] text-[17px] leading-[1.6] text-muted">{t("certSub")}</p>
           </div>
