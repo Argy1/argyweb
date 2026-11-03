@@ -14,7 +14,7 @@ export async function Hero() {
     <section
       data-chip-section="home-hero"
       aria-labelledby="hero-title"
-      className="flex min-h-svh items-center pt-[150px] pb-[70px] nav:pt-[120px]"
+      className="flex min-h-svh items-center pt-[112px] pb-[70px] md:pt-[120px]"
     >
       <div className="wrap grid w-full items-center gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
         {/* Di layar lebar anchor boleh masuk ke gutter kanan supaya judul cukup lebar untuk 3 baris. */}

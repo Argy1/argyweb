@@ -50,7 +50,7 @@ export function ContactSection() {
       className="relative scroll-mt-24 pt-20 md:pt-[max(120px,calc(14vw+28px))] lg:pt-[max(120px,calc(min(11vw,170px)+28px))]"
     >
       <div className="wrap">
-        <ChipAnchor id="contact" className="absolute right-[max(16px,40px)] bottom-[calc(100%+14px)]" />
+        <ChipAnchor id="contact" className="mx-auto -mt-12 mb-2 md:absolute md:right-[max(16px,40px)] md:bottom-[calc(100%+14px)] md:mx-0 md:mt-0 md:mb-0" />
         <div className="relative overflow-hidden rounded-xl border border-tile-edge bg-navy bg-[linear-gradient(var(--glow-faint)_1px,transparent_1px),linear-gradient(90deg,var(--glow-faint)_1px,transparent_1px)] bg-size-[48px_48px] p-[clamp(22px,6vw,80px)] text-on-dark">
           <span className="eyebrow text-on-dark-muted before:bg-gold">{t("eyebrow")}</span>
           <h2

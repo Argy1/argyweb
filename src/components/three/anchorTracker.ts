@@ -77,14 +77,26 @@ function pickAnchor(): { el: HTMLElement | null; id: string | null } {
 
   const sections = document.querySelectorAll<HTMLElement>("[data-chip-section]");
   if (sections.length === 0) return { el: null, id: null };
-  const line = window.innerHeight * 0.55;
+  // Di < 1024px anchor stage berada di awal section (di bawah garis 55% ia masih di luar/tepi layar),
+  // jadi garis dinaikkan: chip mendarat saat anchor mulai masuk layar, bukan sesudah ia hampir lewat.
+  const line = window.innerHeight * (window.innerWidth < 1024 ? 0.72 : 0.55);
   let active: HTMLElement = sections[0];
   for (const section of sections) {
     if (section.getBoundingClientRect().top < line) active = section;
   }
   const id = active.dataset.chipSection ?? null;
   if (!id) return { el: null, id: null };
-  return { el: document.querySelector<HTMLElement>(`[data-chip-anchor="${id}"]`), id };
+  // Satu section boleh punya dua anchor dengan id sama (stage untuk < 1024px, gutter untuk desktop;
+  // CSS menyembunyikan salah satunya). Pakai yang pertama terlihat; kalau semuanya tersembunyi, chip fade out.
+  const candidates = document.querySelectorAll<HTMLElement>(`[data-chip-anchor="${id}"]`);
+  let el: HTMLElement | null = candidates[0] ?? null;
+  for (const c of candidates) {
+    if (c.offsetWidth > 1) {
+      el = c;
+      break;
+    }
+  }
+  return { el, id };
 }
 
 let frame = 0;

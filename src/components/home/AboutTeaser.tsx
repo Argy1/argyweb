@@ -9,7 +9,7 @@ export async function AboutTeaser() {
   return (
     <section data-chip-section="home-about" aria-labelledby="about-teaser" className="pt-20 pb-5 lg:pt-[120px]">
       <div className="wrap grid items-center gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-14">
-        <ChipAnchor id="home-about" className="mx-auto lg:mx-0" />
+        <ChipAnchor id="home-about" className="mx-auto -mt-12 lg:mx-0 lg:mt-0" />
         <div>
           <span className="eyebrow" id="about-teaser">
             {t("aboutEyebrow")}

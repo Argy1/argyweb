@@ -139,6 +139,7 @@ export default async function ContactPage({ params }: Props) {
         className="pt-20 pb-5 lg:pt-[120px]"
       >
         <div className="wrap grid items-start gap-7 nav:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+          <ChipAnchor id="contact-form" stage className="nav:col-span-2" />
           <div className="card">
             <span className="eyebrow">{t("formEyebrow")}</span>
             <h2 id="form-title" className="h-card mt-3">

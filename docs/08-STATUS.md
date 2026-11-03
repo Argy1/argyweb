@@ -10,7 +10,7 @@ Terakhir diperbarui: 2026-11-03.
 - Halaman: Beranda `/id`, Karya `/id/karya` (+ detail `/id/karya/[slug]`), Tentang `/id/tentang`, Kontak `/id/kontak`; versi Inggris `/en`, `/en/work`, `/en/work/[slug]`, `/en/about`, `/en/contact`.
 - 9 proyek di Karya; 8 punya tautan live (hanya Smart City Traffic yang belum). Unggulan di Beranda: Klik PDPI, Kopaseba, Direktori PDPI. Status Live: Klik PDPI, Kopaseba, Direktori PDPI, Direktori PPDS, Kontraku; Proyek kuliah: Confindant, AgriVision, Smart City Traffic, Mindra.
 - Halaman Tentang: sertifikat (6) tampil dengan pratinjau gambar dan bisa dibuka di lightbox; timeline "Jejak sejauh ini" berisi PDPI (2025 – 2026), IPB, UI, SMA.
-- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **92 tes Playwright lolos**; Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan.
+- Kualitas terakhir terukur: `pnpm lint`, `pnpm typecheck`, `pnpm build` bersih; **102 tes Playwright lolos** (visual 80 + efek 6 + alur 6 + mobile 10); Lighthouse mobile (simulasi): Accessibility/Best Practices/SEO 100, Performance ~73–77 (turun dari target 85 karena inisialisasi WebGL; tanpa WebGL ~93). Opsi menunda 3D lebih lama belum diputuskan.
 
 ## 2. Tumpukan teknologi (versi saat ini)
 
@@ -23,7 +23,7 @@ pnpm install
 cp .env.example .env.local     # isi key sesuai §4
 pnpm dev                        # http://localhost:3000 → /id
 pnpm lint && pnpm typecheck && pnpm build
-pnpm test:e2e                   # 92 tes (visual 80 + efek 6 + alur tombol 6)
+pnpm test:e2e                   # 102 tes (visual 80 + efek 6 + alur tombol 6 + mobile 10)
 ```
 
 Catatan penting untuk pengujian:
@@ -66,6 +66,9 @@ Lihat juga bagian "Keputusan teknis" di `README.md` (detail tiap fitur). Ringkas
 - **Modal dirender lewat portal ke `document.body`** (`Lightbox.tsx`): `<main>` adalah stacking context (`z-[2]`), jadi dialog di dalamnya tidak bisa menembus navbar (`z-30`) walau `z-[80]`. Modal baru di dalam halaman harus memakai portal juga.
 
 - **Pengetahuan chatbot** (2026-11-03, `src/lib/chat-knowledge.ts`): "melatih" Gemini = melengkapi konteks dan aturan penalaran di prompt; tidak ada fine-tuning. Konteks kini berisi: profil, proyek, stack, perjalanan, sertifikat, **Indeks proyek** (per kategori, status, teknologi, tautan live; disusun otomatis dari `projects.ts` supaya model tidak salah menyaring), dan **panduan situs** (halaman + URL, fitur chip 3D/intro/tema/bahasa/panel intip/efek/formulir kontak). Prompt mengatur cara menafsirkan pertanyaan di luar template (sinonim, typo, campuran ID-EN, pertanyaan lanjutan), kapan menalar vs mengaku tidak tahu, dan penolakan topik di luar portofolio. **Panduan situs ditulis manual di `buildSiteGuide()`; bila fitur situs berubah, perbarui di sana.** Model default `gemini-2.5-flash-lite`; bila jawaban kurang akurat, coba `AI_MODEL=gemini-2.5-flash`. Belum diuji dengan key Gemini asli (hanya isi konteks yang diperiksa).
+
+- **Header satu kapsul di semua lebar** (2026-11-03): ≥768px link langsung di kapsul (di 768–899px tombol Tanya AI hanya ikon); < 768px link pindah ke menu ☰ (`MobileMenu.tsx`: `MenuButton` di kapsul + `MenuPanel` di luar kapsul, karena `backdrop-filter` kapsul memotong elemen `fixed` di dalamnya). Panel solid (`bg-surface`), focus trap + Esc via `useFocusTrap`, tutup saat rute berganti (state turunan `openAt === pathname`), scrim diketuk. Item navigasi dipakai bersama lewat `navItems.ts`. Breakpoint token `nav` (900px) tetap untuk grid halaman; navbar memakai `md:` (768px). Di ≤400px tombol bahasa/tema/AI dikompres supaya muat di 360px.
+- **Chip ikut turun di < 1024px (mode "stage")** (2026-11-03): menggantikan `docs/03` §7 ("chip hanya di hero"). Section penting punya anchor kosong rata tengah di alur layout (`<ChipAnchor stage />`, kelas `chip-stage`, ditarik 48px ke atas ke dalam padding section); chip meluncur anchor ke anchor seperti desktop dan tetap tidak menutup teks. Satu section boleh punya dua anchor dengan id sama (stage < 1024px, gutter ≥ 1024px); `anchorTracker.pickAnchor` memakai yang pertama terlihat. Garis aktivasi section di < 1024px = 72% tinggi viewport (desktop 55%) supaya chip mendarat saat anchor mulai masuk layar. **Mode Ringan/`prefers-reduced-motion` di HP (< 768px) = chip hanya di hero** (CSS `html[data-fx="lite"]` menyembunyikan anchor stage dan anchor satu-elemen `home-about`, `contact`, `work-grid`, `project-body`). Ukuran: `--stage-w` = `min(40vw, 22svh)` (HP) / `min(30vw, 28svh)` (tablet); `work-grid`/`project-body` `min(30vw, 18svh)`.
 
 ## 6. Deploy ke Vercel (belum dilakukan)
 
@@ -136,6 +139,12 @@ lalu isi `image: "/certificates/nama.jpg"` dan `file: "/certificates/nama.pdf"`.
 5. Perbarui dokumen ini setiap ada keputusan atau perubahan status yang berarti.
 
 ## 11. Catatan perubahan
+
+**2026-11-03 (header HP/tablet + chip ikut turun)**:
+- Header: baris link kedua di < 900px dihapus; kini satu kapsul (menu ☰ di HP, link inline di ≥768px). Offset atas halaman `pt-[150px]` → `pt-[112px] md:pt-[120px]`.
+- Chip: anchor stage di Beranda (karya, tentang, kontak), Karya (grid), Detail (isi), Tentang (stack, perjalanan), Kontak (formulir). Lihat §5.
+- Verifikasi: typecheck, lint, build bersih; 102 tes Playwright lolos terhadap build produksi.
+- Tes baru `tests/mobile.spec.ts` (10 tes: menu ☰, Esc/fokus, kapsul tidak melimpah di 360/390/768, label Tanya AI di 900px, anchor stage dan mode Ringan).
 
 **2026-11-03 (pembersihan konten usang + chatbot)**:
 - Dihapus atas permintaan Argy: statistik "8 gerbang logika 3D" (`stats.logicGates`, kartu di `Stats.tsx`, `stats.gates` di messages) dan fakta "Sedang dibangun / Building now: TradeMatrix AI dan Direktori PPDS" (`about.facts`). Beranda kini 2 kartu statistik, Tentang 3.

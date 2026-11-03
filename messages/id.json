@@ -24,6 +24,9 @@
     "langLabel": "Bahasa",
     "themeLabel": "Ganti tema terang/gelap",
     "askLabel": "Tanya AI",
+    "menuOpen": "Buka menu",
+    "menuClose": "Tutup menu",
+    "menuLabel": "Menu navigasi",
     "logoLabel": "argy · Beranda"
   },
   "hero": {

@@ -3,36 +3,22 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useParams } from "next/navigation";
-import { useTransition } from "react";
+import { useCallback, useRef, useState, useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { NavLink } from "@/components/ui/NavLink";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { useUI } from "@/lib/uiStore";
 import { SparkIcon } from "@/components/ui/icons";
-
-type NavKey = "home" | "work" | "about" | "contact";
-
-function activeKey(pathname: string): NavKey | null {
-  if (pathname === "/") return "home";
-  if (pathname.startsWith("/work")) return "work";
-  if (pathname.startsWith("/about")) return "about";
-  if (pathname.startsWith("/contact")) return "contact";
-  return null;
-}
+import { MenuButton, MenuPanel } from "./MobileMenu";
+import { activeKey, navItems } from "./navItems";
 
 function NavLinks({ className }: { className: string }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const active = activeKey(pathname);
-  const items = [
-    { key: "home", href: "/" },
-    { key: "work", href: "/work" },
-    { key: "about", href: "/about" },
-    { key: "contact", href: "/contact" },
-  ] as const;
   return (
     <nav aria-label={t("label")} className={className}>
-      {items.map((item) => (
+      {navItems.map((item) => (
         <NavLink
           key={item.key}
           href={item.href}
@@ -75,7 +61,7 @@ function LangSwitch() {
           onClick={() => switchTo(l)}
           aria-pressed={l === locale}
           lang={l}
-          className="min-h-[38px] min-w-[42px] rounded-chip text-[13px] font-bold text-muted uppercase aria-pressed:bg-surface aria-pressed:text-ink aria-pressed:shadow-[0_2px_6px_var(--shadow)]"
+          className="min-h-[38px] min-w-[42px] rounded-chip text-[13px] max-[400px]:min-h-[34px] max-[400px]:min-w-[36px] font-bold text-muted uppercase aria-pressed:bg-surface aria-pressed:text-ink aria-pressed:shadow-[0_2px_6px_var(--shadow)]"
         >
           {l}
         </button>
@@ -92,7 +78,7 @@ function ThemeToggle() {
       type="button"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label={t("themeLabel")}
-      className="grid size-11 flex-none place-items-center rounded-full border border-line bg-surface transition-transform duration-200 hover:-rotate-12"
+      className="grid size-11 flex-none place-items-center rounded-full border border-line bg-surface transition-transform duration-200 hover:-rotate-12 max-[400px]:size-10"
     >
       <svg
         className="dark:hidden"
@@ -129,11 +115,21 @@ export function Navbar() {
   const t = useTranslations("nav");
   const openChat = useUI((s) => s.openChat);
   const chatOpen = useUI((s) => s.chatOpen);
+  const pathname = usePathname();
+  const menuButton = useRef<HTMLButtonElement>(null);
+  // Menu ☰ hanya terbuka untuk rute tempat ia dibuka: pindah halaman otomatis menutupnya.
+  const [openAt, setOpenAt] = useState<string | null>(null);
+  const menuOpen = openAt === pathname;
+  const closeMenu = useCallback(() => setOpenAt(null), []);
+  const closeMenuAndFocus = useCallback(() => {
+    setOpenAt(null);
+    menuButton.current?.focus();
+  }, []);
 
   return (
     <header className="site-header pointer-events-none fixed inset-x-0 top-[calc(env(safe-area-inset-top,0px)+14px)] z-30">
       <div className="wrap">
-        <div className="pointer-events-auto flex h-[62px] items-center justify-between gap-2.5 rounded-chip border border-line bg-nav-bg pr-2 pl-3.5 shadow-[0_10px_30px_-14px_var(--shadow)] backdrop-blur-[14px] sm:pl-[18px]">
+        <div className="pointer-events-auto relative z-10 flex h-[62px] items-center justify-between gap-2.5 rounded-chip border border-line bg-nav-bg pr-2 pl-3.5 shadow-[0_10px_30px_-14px_var(--shadow)] backdrop-blur-[14px] sm:pl-[18px]">
           <NavLink
             href="/"
             aria-label={t("logoLabel")}
@@ -141,7 +137,7 @@ export function Navbar() {
           >
             argy<span className="text-blue">.</span>
           </NavLink>
-          <NavLinks className="hidden gap-1 nav:flex" />
+          <NavLinks className="hidden gap-1 md:flex" />
           <div className="flex items-center gap-1.5">
             <LangSwitch />
             <ThemeToggle />
@@ -150,14 +146,19 @@ export function Navbar() {
               onClick={(e) => openChat({ returnFocus: e.currentTarget })}
               aria-expanded={chatOpen}
               aria-label={t("askLabel")}
-              className="flex h-[46px] w-[46px] items-center justify-center gap-2 rounded-chip bg-gold text-[14.5px] font-bold text-tile-ink transition-transform duration-200 hover:-translate-y-0.5 min-[480px]:w-auto min-[480px]:px-[18px]"
+              className="flex h-[46px] w-[46px] items-center justify-center gap-2 rounded-chip bg-gold text-[14.5px] font-bold text-tile-ink transition-transform duration-200 hover:-translate-y-0.5 max-[400px]:h-10 max-[400px]:w-10 min-[480px]:max-[767px]:w-auto min-[480px]:max-[767px]:px-[18px] nav:w-auto nav:px-[18px]"
             >
               <SparkIcon />
-              <span className="hidden min-[480px]:inline">{t("askLabel")}</span>
+              <span className="hidden min-[480px]:max-[767px]:inline nav:inline">{t("askLabel")}</span>
             </button>
+            <MenuButton
+              open={menuOpen}
+              onToggle={() => setOpenAt(menuOpen ? null : pathname)}
+              buttonRef={menuButton}
+            />
           </div>
         </div>
-        <NavLinks className="pointer-events-auto mt-2 flex justify-center gap-1.5 nav:hidden [&_.nav-link]:border [&_.nav-link]:border-line [&_.nav-link]:bg-nav-bg [&_.nav-link]:px-3.5 [&_.nav-link]:backdrop-blur-[10px] [&_.nav-link[aria-current=page]]:bg-ink" />
+        {menuOpen && <MenuPanel onClose={closeMenu} onEscape={closeMenuAndFocus} />}
       </div>
     </header>
   );
