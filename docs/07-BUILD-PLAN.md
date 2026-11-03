@@ -1,5 +1,7 @@
 # 07 — Rencana Build (untuk Claude Code)
 
+> **Status:** semua fase di bawah sudah dikerjakan kecuali deploy ke Vercel (Fase 7). Kotak centang tidak diperbarui satu per satu; lihat `docs/08-STATUS.md` untuk kondisi terkini.
+
 Kerjakan berurutan. Setiap fase diakhiri verifikasi dan laporan singkat ke Argy (apa yang selesai, keputusan yang diambil, placeholder yang masih ada). Jangan lompat fase.
 
 ## Fase 0 — Persiapan

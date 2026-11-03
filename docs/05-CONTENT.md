@@ -13,7 +13,9 @@
 | `reference/content/projects.ts` | 13 proyek lengkap: slug, nama, glyph, kategori, tone warna, tahun, link, stack, dan teks ID/EN (jenis, status, peran, ringkasan, 3 sorotan). 3 pertama = unggulan Beranda. Juga `timeline` dan `stackGroups`. |
 | `reference/content/messages.id.json` / `.en.json` | Semua teks UI dari prototipe (navbar, hero, section, intro, chat, dsb.) |
 
-Urutan proyek: Klik PDPI, TradeMatrix AI, DigitalPMO, Direktori PDPI, Direktori PPDS, AgriVision, Smart City Traffic, Mindra, Kontraku, Driving Events, MAGPAD, Logic Gates 3D, argyweb v1.
+> **Usang:** daftar 13 proyek di bawah adalah rencana awal. Daftar yang berlaku sekarang (9 proyek: Klik PDPI, Kopaseba, Confindant, Direktori PDPI, Direktori PPDS, AgriVision, Smart City Traffic, Mindra, Kontraku) ada di `src/content/projects.ts` dan dijelaskan di `docs/08-STATUS.md` §7.
+
+Urutan proyek awal: Klik PDPI, TradeMatrix AI, DigitalPMO, Direktori PDPI, Direktori PPDS, AgriVision, Smart City Traffic, Mindra, Kontraku, Driving Events, MAGPAD, Logic Gates 3D, argyweb v1.
 
 ## WAJIB diambil dari web lama (`D:\Projekan\argy-web-main`)
 

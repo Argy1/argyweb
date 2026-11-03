@@ -1,6 +1,6 @@
 # CLAUDE.md — argyweb (Portofolio 3D Argy Fawwaz Akbar)
 
-Baca file ini dulu, lalu dokumen di `docs/` sesuai urutan nomor. Jangan mulai coding sebelum membaca `docs/01` sampai `docs/04`.
+Baca file ini dulu, lalu **`docs/08-STATUS.md`** (kondisi terkini, keputusan, env, yang masih terbuka), lalu dokumen lain di `docs/` sesuai kebutuhan. Proyek sudah dibangun penuh: kerjakan perubahan di atas kode yang ada, jangan membangun ulang dari awal. Spesifikasi awal `docs/01`–`07` tidak diubah; bila berbeda dengan `docs/08`, ikuti `docs/08`.
 
 ## Ringkasan proyek
 
@@ -52,7 +52,8 @@ Cek versi terbaru paket sebelum install; jangan menebak API yang sudah berubah, 
 | `docs/04-ARCHITECTURE.md` | Struktur folder, routing, i18n, intercepting route, canvas persisten, state |
 | `docs/05-CONTENT.md` | Model konten, daftar proyek, migrasi konten dari web lama (sertifikat, CV, kontak) |
 | `docs/06-CHATBOT.md` | Chatbot: prompt sistem, sumber pengetahuan, batasan, UI |
-| `docs/07-BUILD-PLAN.md` | Tahapan kerja + checklist + cara verifikasi |
+| `docs/07-BUILD-PLAN.md` | Tahapan kerja + checklist + cara verifikasi (rencana awal; semua fase selesai kecuali deploy) |
+| `docs/08-STATUS.md` | **Status terkini**: progres, keputusan teknis, variabel env, cara deploy, daftar yang masih terbuka, jebakan yang pernah ditemui |
 | `reference/` | Token, data konten siap pakai, shader & prototipe acuan |
 
 ## Aturan kerja
@@ -63,16 +64,16 @@ Cek versi terbaru paket sebelum install; jangan menebak API yang sudah berubah, 
 - **Semua teks UI lewat next-intl** (`messages/id.json`, `messages/en.json`). Tidak ada string hardcode di JSX.
 - **Aksesibilitas**: elemen interaktif pakai `<button>`/`<a>` asli, focus terlihat, kontras ≥ 4.5:1, `prefers-reduced-motion` dihormati, panel/drawer punya focus trap dan bisa ditutup dengan Esc.
 - **Jangan menyalin desain al.is-a.dev.** Situs itu hanya inspirasi untuk ide "objek 3D yang berpindah saat scroll". Layout, warna, tipografi, dan komponen argyweb harus mengikuti dokumen ini.
-- Jangan commit secret. API key hanya di `.env.local` (lihat `.env.example`).
+- Jangan commit secret. API key hanya di `.env.local` (lihat `.env.example`). Sebelum push, pastikan nilai key tidak ada di berkas yang di-stage.
 
-## Perintah (isi setelah scaffold)
+## Perintah
 
 ```bash
 pnpm dev          # dev server
 pnpm lint         # ESLint
 pnpm typecheck    # tsc --noEmit
 pnpm build        # build produksi
-pnpm test:e2e     # Playwright (cek responsif & screenshot)
+pnpm test:e2e     # Playwright: 92 tes (responsif, efek, alur tombol); lihat docs/08 §3 untuk menjalankan terhadap build produksi
 ```
 
 ## Definition of Done (seluruh proyek)
